@@ -32,7 +32,7 @@ namespace WebApplication1
             // EntityFramework DbContext で PostgreSQL を使うように設定。
             services.AddDbContext<ApplicationContext>(opt =>
             {
-                opt.UseNpgsql("Host=localhost; Database=webapp1; Username=postgres; Password=password");
+                opt.UseNpgsql("Host=localhost; Database=webapp1; Username=postgres; Password=postgres");
             });
 
 
