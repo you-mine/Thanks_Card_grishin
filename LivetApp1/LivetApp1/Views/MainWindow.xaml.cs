@@ -35,7 +35,7 @@ namespace LivetApp1.Views
 
         public void Deletecont()
         {
-            stack.Children.Clear();
+
         }
     }
 }

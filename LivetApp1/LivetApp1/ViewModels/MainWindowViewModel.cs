@@ -17,89 +17,23 @@ namespace LivetApp1.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        #region MyMessageProperty
-        private string _MyMessage;
 
-        public string MyMessage
+
+
+
+
+        #region UserProparty
+        private User _User;
+
+        public User User
         {
             get
-            { return _MyMessage; }
-            set
-            {
-                if (_MyMessage == value)
-                    return;
-                _MyMessage = value;
-                RaisePropertyChanged();
-                System.Diagnostics.Debug.WriteLine("MyMessage: " + this.MyMessage); //動作確認用。本来はこの行は必要ありません。
-
-            }
-        }
-        #endregion
-        　
-        #region Mydate Property
-        private DateTime _MyDate;
-
-        public DateTime MyDate
-        {
-            get
-            { return _MyDate; }
+            { return _User; }
             set
             { 
-                if (_MyDate == value)
+                if (_User == value)
                     return;
-                _MyDate = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-
-        #region Text1Property
-        private string _Text1;
-
-        public string Text1
-        {
-            get
-            { return _Text1; }
-            set
-            { 
-                if (_Text1 == value)
-                    return;
-                _Text1 = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        #region Text2Property
-        private string _Text2;
-
-        public string Text2
-        {
-            get
-            { return _Text2; }
-            set
-            { 
-                if (_Text2 == value)
-                    return;
-                _Text2 = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        #region Text3Property
-        private string _Text3;
-
-        public string Text3
-        {
-            get
-            { return _Text3; }
-            set
-            { 
-                if (_Text3 == value)
-                    return;
-                _Text3 = value;
+                _User = value;
                 RaisePropertyChanged();
             }
         }
@@ -107,56 +41,40 @@ namespace LivetApp1.ViewModels
 
 
 
+        #region LogonCommand
+        private ViewModelCommand _LogonCommand;
 
-        #region TestCommand
-        private ViewModelCommand _TestCommand;
-
-        public ViewModelCommand TestCommand
+        public ViewModelCommand LogonCommand
         {
             get
             {
-                if (_TestCommand == null)
+                if (_LogonCommand == null)
                 {
-                    _TestCommand = new ViewModelCommand(Test);
+                    _LogonCommand = new ViewModelCommand(LogonAsync);
                 }
-                return _TestCommand;
+                return _LogonCommand;
             }
         }
 
-        public void Test()
+        public async void LogonAsync()
         {
-            Text3 = Text1 + Text2;
-        }
-        #endregion
+            User Authrized =await this.User.LogonAsync();
 
-        
-        #region Test2Command
-        private ListenerCommand<string> _Test2Command;
-
-        public ListenerCommand<string> Test2Command
-        {
-            get
+            if(Authrized != null)
             {
-                if (_Test2Command == null)
-                {
-                    _Test2Command = new ListenerCommand<string>(Test2);
-                }
-                return _Test2Command;
+                System.Diagnostics.Debug.WriteLine("ログインに成功しました");
             }
-        }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("ログインに失敗しました");
+            }
 
-        public void Test2(string parameter)
-        {
-            System.Diagnostics.Debug.WriteLine("Test2Command が呼ばれました。パラメータは「" + parameter + "」です。");
         }
         #endregion
 
         public void Initialize()
         {
-            //var message = new TransitionMessage(typeof(Views.Logon), new LogonViewModel(), TransitionMode.Modal, "ShowLogon");
-            //var message = new TransitionMessage(typeof(Views.ShowUser), new ShowUserViewModel(), TransitionMode.Modal, "ShowUsers");
-            //Messenger.Raise(message);
-            this.MyMessage = "こんにちは";
+            this.User = new User();
         }
 
         #region なんかテンプレ

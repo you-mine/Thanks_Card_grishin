@@ -41,20 +41,11 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        <StackPanel Name ="stack">
-            <TextBox Text="{Binding Text1}"/>
-            <TextBox Text="{Binding Text2}"/>
-            <Button Content="Test" Command="{Binding TestCommand}"/>
-            <TextBox Text="{Binding Text3}"/>
-            <ComboBox Name="list1"  >
-                <ListBoxItem Content="item1" Width="505" HorizontalContentAlignment="Center" />
-                <Button Content="item2" Width="505"/>
-                <ListBoxItem Content="item3" Width="505" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="96" Foreground="Black" >
-                </ListBoxItem>
-                <Button Content="item4" Width="505"/>
-                <ListBoxItem Content="item5" Width="505" HorizontalContentAlignment="Center" Name="Target" />
-            </ComboBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,57,0,0" TextWrapping="Wrap" Text="{Binding User.UserName}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,125,0,0" TextWrapping="Wrap" Text="{Binding User.Password}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="ID" HorizontalAlignment="Left" Margin="149,54,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="127,125,0,0" VerticalAlignment="Top"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="201,234,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LogonCommand}"/>
 
-        </StackPanel>
     </Grid>
 </Window>
