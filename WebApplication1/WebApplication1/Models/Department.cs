@@ -8,7 +8,7 @@ namespace WebApplication1.Models
 {
     public class Department
     {
-        [MaxLength(4)]
+
         public int Id { get; set; }
         [MaxLength(6)]
         public string CD { get; set; }

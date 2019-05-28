@@ -30,7 +30,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
-            var authorizedUser = _context.Users.SingleOrDefault(x => x.Name == user.Name && x.Password == user.Password);
+            var authorizedUser = _context.Users.SingleOrDefault(x => x.UserName == user.UserName && x.Password == user.Password);
             if (authorizedUser == null)
             {
                 return NotFound();
