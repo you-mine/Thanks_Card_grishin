@@ -82,7 +82,7 @@ namespace LivetApp1.Models
         }
         #endregion
 
-        #region UserNameProperty
+        #region UsernameProperty
         private string _UserName;
 
         public string UserName
