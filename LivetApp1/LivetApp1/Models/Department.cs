@@ -22,7 +22,7 @@ namespace LivetApp1.Models
             get
             { return _Id; }
             set
-            { 
+            {
                 if (_Id == value)
                     return;
                 _Id = value;
@@ -39,7 +39,7 @@ namespace LivetApp1.Models
             get
             { return _CD; }
             set
-            { 
+            {
                 if (_CD == value)
                     return;
                 _CD = value;
@@ -56,7 +56,7 @@ namespace LivetApp1.Models
             get
             { return _DepartmentName; }
             set
-            { 
+            {
                 if (_DepartmentName == value)
                     return;
                 _DepartmentName = value;
@@ -73,7 +73,7 @@ namespace LivetApp1.Models
             get
             { return _SectionName; }
             set
-            { 
+            {
                 if (_SectionName == value)
                     return;
                 _SectionName = value;
