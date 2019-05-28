@@ -15,7 +15,7 @@ namespace WebApplication1.Models
         public string CD { get; set; }
 
         [MaxLength(4)]
-        public string DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
 
         [MaxLength(20)]
         public string Password { get; set; }
