@@ -31,18 +31,35 @@ namespace LivetApp1.Models
         }
         #endregion
 
-        #region NameProperty
-        private string _Name;
+        #region CDProperty
+        private string _CD;
 
-        public string Name
+        public string CD
         {
             get
-            { return _Name; }
+            { return _CD; }
             set
             { 
-                if (_Name == value)
+                if (_CD == value)
                     return;
-                _Name = value;
+                _CD = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region DepartmentId
+        private Department _Department;
+
+        public Department Department
+        {
+            get
+            { return _Department; }
+            set
+            { 
+                if (_Department == value)
+                    return;
+                _Department = value;
                 RaisePropertyChanged();
             }
         }
@@ -63,6 +80,61 @@ namespace LivetApp1.Models
                 RaisePropertyChanged();
             }
         }
+        #endregion
+
+        #region UserNameProperty
+        private string _UserName;
+
+        public string UserName
+        {
+            get
+            { return _UserName; }
+            set
+            { 
+                if (_UserName == value)
+                    return;
+                _UserName = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region NameProperty
+        private string _Name;
+
+        public string Name
+        {
+            get
+            { return _Name; }
+            set
+            {
+                if (_Name == value)
+                    return;
+                _Name = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region HuriganaProperty
+
+
+        private string _Hurigana;
+
+        public string Hurigana
+        {
+            get
+            { return _Hurigana; }
+            set
+            { 
+                if (_Hurigana == value)
+                    return;
+                _Hurigana = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
         #endregion
 
         #region IsAdminProperty
