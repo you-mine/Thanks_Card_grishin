@@ -12,6 +12,7 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
+using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
@@ -61,6 +62,7 @@ namespace LivetApp1.ViewModels
 
             if (authorizedUser != null) // Logon 成功
             {
+                SessionService session = SessionService.Instance;
                 Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
             }
             else // Logon 失敗
@@ -70,5 +72,7 @@ namespace LivetApp1.ViewModels
 
         }
         #endregion
+
+
     }
 }

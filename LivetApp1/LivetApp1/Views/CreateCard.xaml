@@ -46,7 +46,6 @@
         <TextBox HorizontalAlignment="Left" Height="20" Margin="54,38,0,0" TextWrapping="Wrap" Text="タイトル" VerticalAlignment="Top" Width="46" TextChanged="TextBox_TextChanged"/>
         <Label Content="誰に送りますか？" HorizontalAlignment="Left" Height="25" Margin="360,38,0,0" VerticalAlignment="Top" Width="180"/>
         <Label Content="From/" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,270,0,0" />
-        <Label Content="{Binding ThanksCard.From}" HorizontalAlignment="Left" Margin="125,270,0,0" VerticalAlignment="Top"/>
 
         <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="360,70,10,44"
             Height="232" VerticalAlignment="Top" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="322">
@@ -65,6 +64,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="{Binding ThanksCard.From.Name}" HorizontalAlignment="Left" Margin="76,270,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 
