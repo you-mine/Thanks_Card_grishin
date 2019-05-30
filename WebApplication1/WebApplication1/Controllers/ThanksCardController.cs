@@ -39,7 +39,8 @@ namespace WebApplication1.Controllers
         {
             // From, To には既に存在しているユーザが入るため、更新の対象から外す。
 
-
+            _context.Department.Attach(thanksCard.From.Department);
+            _context.Department.Attach(thanksCard.To.Department);
             _context.Users.Attach(thanksCard.From);
             _context.Users.Attach(thanksCard.To);
 
