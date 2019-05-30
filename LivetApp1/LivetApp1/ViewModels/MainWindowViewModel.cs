@@ -81,11 +81,12 @@ namespace LivetApp1.ViewModels
 
         public void Initialize()
         {
-            var message = new TransitionMessage(typeof(Views.CreateCard), new CreateCardViewModel(), TransitionMode.Modal, "CreateCard");
+            var message = new TransitionMessage(typeof(Views.Cardview), new CardviewViewModel(), TransitionMode.Modal, "CreateCard");
             Messenger.Raise(message);
             this.User = new User();
             //var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
             //Messenger.Raise(message);
+
         }
 
         #region なんかテンプレ

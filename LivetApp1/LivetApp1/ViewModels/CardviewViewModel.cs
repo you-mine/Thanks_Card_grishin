@@ -12,6 +12,7 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
+using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
@@ -32,6 +33,32 @@ namespace LivetApp1.ViewModels
                 RaisePropertyChanged();
             }
         }
+        #region Close
+
+
+        private ViewModelCommand _CloseCommand;
+
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+
+        public void Close()
+        {
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+        }
+
+
+
+        #endregion
+
 
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -75,8 +102,11 @@ namespace LivetApp1.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-        public void Initialize()
+        public async void Initialize()
         {
+            IRestService service = new RestService();
+            this.thanksCards =await service.GetCardsAsync();
+
         }
     }
 }
