@@ -59,15 +59,23 @@
     <Compile Include="Services\IShowUserService.cs" />
     <Compile Include="Services\RestService.cs" />
     <Compile Include="Services\ShowUserService.cs" />
+    <Compile Include="ViewModels\CreateCardViewModel.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
     <Compile Include="ViewModels\LogonViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\CreateCard.xaml.cs">
+      <DependentUpon>CreateCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditUser.xaml.cs">
       <DependentUpon>EditUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowUser.xaml.cs">
       <DependentUpon>ShowUser.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\CreateCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,7 +106,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\ThanksCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
