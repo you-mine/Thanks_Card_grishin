@@ -75,5 +75,34 @@ namespace LivetApp1.Services
             }
             return "failed";
         }
+
+
+        public async Task<ThanksCard> CreateCardAsync(ThanksCard thanksCard)
+        {
+            var jObject = JsonConvert.SerializeObject(thanksCard);
+
+            //Make Json object into content type
+            var content = new StringContent(jObject);
+            //Adding header of the contenttype
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            ThanksCard responseThanksCard = null;
+            try
+            {
+                var response = await Client.PostAsync(this.BaseUrl + "/api/ThanksCard", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    responseThanksCard = JsonConvert.DeserializeObject<ThanksCard>(responseContent);
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
+            }
+            return responseThanksCard;
+        }
     }
 }

@@ -12,86 +12,21 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
+using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
-    public class MainWindowViewModel : ViewModel
+    public class CreateCardViewModel : ViewModel
     {
 
-
-
-
-
-        #region UserProparty
-        private User _User;
-
-        public User User
-        {
-            get
-            { return _User; }
-            set
-            { 
-                if (_User == value)
-                    return;
-                _User = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-
-
-        #region LogonCommand
-        private ViewModelCommand _LogonCommand;
-
-        public ViewModelCommand LogonCommand
-        {
-            get
-            {
-                if (_LogonCommand == null)
-                {
-                    _LogonCommand = new ViewModelCommand(LogonAsync);
-                }
-                return _LogonCommand;
-            }
-        }
-
-        public async void LogonAsync()
-        {
-            User Authrized =await this.User.LogonAsync();
-
-            if(Authrized != null)
-            {
-                var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
-                Messenger.Raise(message);
-                System.Diagnostics.Debug.WriteLine("ログインに成功しました");
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("ログインに失敗しました");
-            }
-
-        }
-        #endregion
-
-        public void Initialize()
-        {
-            var message = new TransitionMessage(typeof(Views.CreateCard), new CreateCardViewModel(), TransitionMode.Modal, "CreateCard");
-            Messenger.Raise(message);
-            this.User = new User();
-            var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
-            Messenger.Raise(message);
-        }
-
-        #region なんかテンプレ
+        #region プロパティのテンプレ
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
-         *  lvcom    : ViewModelCommand
-         *  lvcomn   : ViewModelCommand(CanExecute無)
-         *  llcom    : ListenerCommand(パラメータ有のコマンド)
-         *  llcomn   : ListenerCommand(パラメータ有のコマンド・CanExecute無)
-         *  lprop    : 変更通知プロパティ
-         *  lsprop   : 変更通知プロパティ(ショートバージョン)
+         *  lvcom   : ViewModelCommand
+         *  lvcomn  : ViewModelCommand(CanExecute無)
+         *  llcom   : ListenerCommand(パラメータ有のコマンド)
+         *  llcomn  : ListenerCommand(パラメータ有のコマンド・CanExecute無)
+         *  lprop   : 変更通知プロパティ(.NET4.5ではlpropn)
          *  
          * を使用してください。
          * 
@@ -127,5 +62,102 @@ namespace LivetApp1.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
         #endregion
+
+        #region ThanksCard
+
+        private ThanksCard _ThanksCard;
+
+        public ThanksCard ThanksCard
+        {
+            get
+            { return _ThanksCard; }
+            set
+            { 
+                if (_ThanksCard == value)
+                    return;
+                _ThanksCard = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+
+        public void Close()
+        {
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
+        }
+        #endregion
+
+
+        #region SendCommand
+        private ViewModelCommand _SendCommand;
+
+        public ViewModelCommand SendCommand
+        {
+            get
+            {
+                if (_SendCommand == null)
+                {
+                    _SendCommand = new ViewModelCommand(SendAsync);
+                }
+                return _SendCommand;
+            }
+        }
+
+        public async void SendAsync()
+        {
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
+            var AuthrizedThanksCard = await this.ThanksCard.CreateCardAsync();
+        }
+        #endregion
+
+        #region UsersProperty
+        private List<User> _Users;
+
+        public List<User> Users
+        {
+            get
+            { return _Users; }
+            set
+            { 
+                if (_Users == value)
+                    return;
+                _Users = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        public void Initialize()
+        {
+            this.UpdateData();
+        }
+
+        private async void UpdateData()
+        {
+            //this.Users = new List<User>();
+            ShowUserService service = new ShowUserService();
+            List<User> users = await service.ShowUserAsync();
+            this.Users = users; //プロパティに入れる。
+            var message = new TransitionMessage(typeof(Views.Logon), new CreateCardViewModel(), TransitionMode.Modal, "");
+            Messenger.Raise(message);
+            this.ThanksCard = new ThanksCard();
+        }
     }
 }

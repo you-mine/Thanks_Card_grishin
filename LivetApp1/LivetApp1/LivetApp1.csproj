@@ -59,6 +59,7 @@
     <Compile Include="Services\IShowUserService.cs" />
     <Compile Include="Services\RestService.cs" />
     <Compile Include="Services\ShowUserService.cs" />
+    <Compile Include="ViewModels\CreateCardViewModel.cs" />
     <Compile Include="ViewModels\AdminMenuViewModel.cs" />
     <Compile Include="ViewModels\AnalyzeViewModel.cs" />
     <Compile Include="ViewModels\CardsViewForAdminViewModel.cs" />
@@ -71,6 +72,8 @@
     <Compile Include="ViewModels\HomemenuViewModel.cs" />
     <Compile Include="ViewModels\LogonViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\CreateCard.xaml.cs">
+      <DependentUpon>CreateCard.xaml</DependentUpon>
     <Compile Include="ViewModels\RankingViewModel.cs" />
     <Compile Include="Views\AdminMenu.xaml.cs">
       <DependentUpon>AdminMenu.xaml</DependentUpon>
@@ -105,6 +108,7 @@
     <Compile Include="Views\ShowUser.xaml.cs">
       <DependentUpon>ShowUser.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\CreateCard.xaml">
     <Page Include="Views\AdminMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,7 +175,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\ThanksCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
