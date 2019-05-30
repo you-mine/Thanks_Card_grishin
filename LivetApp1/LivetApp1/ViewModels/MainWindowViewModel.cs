@@ -12,6 +12,7 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
+using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
@@ -62,6 +63,9 @@ namespace LivetApp1.ViewModels
 
             if(Authrized != null)
             {
+                SessionService session = SessionService.Instance;
+                session.IsAuthorized = true;
+                session.AuthorizedUser = Authrized;
                 var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
                 Messenger.Raise(message);
                 System.Diagnostics.Debug.WriteLine("ログインに成功しました");
@@ -74,13 +78,14 @@ namespace LivetApp1.ViewModels
         }
         #endregion
 
+
         public void Initialize()
         {
             var message = new TransitionMessage(typeof(Views.CreateCard), new CreateCardViewModel(), TransitionMode.Modal, "CreateCard");
             Messenger.Raise(message);
             this.User = new User();
-            var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
-            Messenger.Raise(message);
+            //var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
+            //Messenger.Raise(message);
         }
 
         #region なんかテンプレ

@@ -12,15 +12,13 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
+using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
     public class HomemenuViewModel : ViewModel
     {
         
-
-
-
          
         #region Ranking
 
@@ -81,7 +79,6 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-
         #region AdminMenu
 
 
@@ -132,6 +129,9 @@ namespace LivetApp1.ViewModels
 
         public void Logout()
         {
+            SessionService session = SessionService.Instance;
+            session.IsAuthorized = false;
+            session.AuthorizedUser = null;
             var message = new TransitionMessage(typeof(Views.MainWindow), new MainWindowViewModel(), TransitionMode.Modal, "Logout");
             Messenger.Raise(message);
         }

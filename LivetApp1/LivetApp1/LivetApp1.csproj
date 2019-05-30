@@ -58,6 +58,7 @@
     <Compile Include="Services\IRestService.cs" />
     <Compile Include="Services\IShowUserService.cs" />
     <Compile Include="Services\RestService.cs" />
+    <Compile Include="Services\SessionService.cs" />
     <Compile Include="Services\ShowUserService.cs" />
     <Compile Include="ViewModels\CreateCardViewModel.cs" />
     <Compile Include="ViewModels\AdminMenuViewModel.cs" />
@@ -72,9 +73,9 @@
     <Compile Include="ViewModels\HomemenuViewModel.cs" />
     <Compile Include="ViewModels\LogonViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-	  <Compile Include="Views\CreateCard.xaml.cs">
-		  <DependentUpon>CreateCard.xaml</DependentUpon>
-	  </Compile>
+    <Compile Include="Views\CreateCard.xaml.cs">
+      <DependentUpon>CreateCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\RankingViewModel.cs" />
     <Compile Include="Views\AdminMenu.xaml.cs">
       <DependentUpon>AdminMenu.xaml</DependentUpon>

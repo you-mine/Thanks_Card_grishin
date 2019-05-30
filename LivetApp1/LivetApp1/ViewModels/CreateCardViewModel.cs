@@ -158,6 +158,8 @@ namespace LivetApp1.ViewModels
             var message = new TransitionMessage(typeof(Views.Logon), new CreateCardViewModel(), TransitionMode.Modal, "");
             Messenger.Raise(message);
             this.ThanksCard = new ThanksCard();
+            SessionService session = SessionService.Instance;
+            this.ThanksCard.From = session.AuthorizedUser;
         }
     }
 }
