@@ -17,6 +17,22 @@ namespace LivetApp1.ViewModels
 {
     public class CardviewViewModel : ViewModel
     {
+
+        private List<ThanksCard> _thanksCards;
+
+        public List<ThanksCard> thanksCards
+        {
+            get
+            { return _thanksCards; }
+            set
+            { 
+                if (_thanksCards == value)
+                    return;
+                _thanksCards = value;
+                RaisePropertyChanged();
+            }
+        }
+
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
          *  lvcom   : ViewModelCommand
