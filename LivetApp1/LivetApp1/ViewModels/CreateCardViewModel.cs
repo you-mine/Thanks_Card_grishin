@@ -82,7 +82,6 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-
         #region CloseCommand
         private ViewModelCommand _CloseCommand;
 
@@ -104,7 +103,6 @@ namespace LivetApp1.ViewModels
         }
         #endregion
 
-
         #region SendCommand
         private ViewModelCommand _SendCommand;
 
@@ -122,8 +120,8 @@ namespace LivetApp1.ViewModels
 
         public async void SendAsync()
         {
+            var PostedThanksCard = await this.ThanksCard.CreateCardAsync();
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
-            var AuthrizedThanksCard = await this.ThanksCard.CreateCardAsync();
         }
         #endregion
 
@@ -142,6 +140,29 @@ namespace LivetApp1.ViewModels
                 RaisePropertyChanged();
             }
         }
+        #endregion
+
+        #region SelectCommand
+        private ListenerCommand<User> _SelectCommand;
+
+        public ListenerCommand<User> SelectCommand
+        {
+            get
+            {
+                if (_SelectCommand == null)
+                {
+                    _SelectCommand = new ListenerCommand<User>(Select);
+                }
+                return _SelectCommand;
+            }
+        }
+
+        public void Select(User parameter)
+        {
+            this.ThanksCard.To = parameter;
+        }
+
+
         #endregion
 
         public void Initialize()

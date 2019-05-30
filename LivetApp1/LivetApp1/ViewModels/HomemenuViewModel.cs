@@ -132,12 +132,35 @@ namespace LivetApp1.ViewModels
             SessionService session = SessionService.Instance;
             session.IsAuthorized = false;
             session.AuthorizedUser = null;
-            var message = new TransitionMessage(typeof(Views.MainWindow), new MainWindowViewModel(), TransitionMode.Modal, "Logout");
-            Messenger.Raise(message);
+            //var message = new TransitionMessage(typeof(Views.MainWindow), new MainWindowViewModel(), TransitionMode.Modal, "Logout");
+            //Messenger.Raise(message);
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Logout"));
         }
 
 
 
+        #endregion
+
+        #region CreateCard
+        private ViewModelCommand _CreateCradCommand;
+
+        public ViewModelCommand CreateCradCommand
+        {
+            get
+            {
+                if (_CreateCradCommand == null)
+                {
+                    _CreateCradCommand = new ViewModelCommand(CreateCrad);
+                }
+                return _CreateCradCommand;
+            }
+        }
+
+        public void CreateCrad()
+        {
+            var message = new TransitionMessage(typeof(Views.CreateCard), new CreateCardViewModel(), TransitionMode.Modal, "CreateCard");
+            Messenger.Raise(message);
+        }
         #endregion
 
         public void Initialize()

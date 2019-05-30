@@ -46,7 +46,12 @@
             <l:TransitionInteractionMessageAction/>
         </l:InteractionMessageTrigger>
 
-        
+
+        <l:InteractionMessageTrigger MessageKey="CloseMainWindow" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
+
     </i:Interaction.Triggers>
 
     <Grid>
