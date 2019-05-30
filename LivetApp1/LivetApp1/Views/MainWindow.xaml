@@ -38,6 +38,15 @@
             <l:TransitionInteractionMessageAction/>
         </l:InteractionMessageTrigger>
 
+        <l:InteractionMessageTrigger MessageKey="Homemenu" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
+        <l:InteractionMessageTrigger MessageKey="AdminMenu" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
+        
     </i:Interaction.Triggers>
 
     <Grid>

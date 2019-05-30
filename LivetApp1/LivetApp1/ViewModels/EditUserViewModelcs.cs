@@ -15,81 +15,15 @@ using LivetApp1.Models;
 
 namespace LivetApp1.ViewModels
 {
-    public class MainWindowViewModel : ViewModel
+    public class EditUserViewModelcs : ViewModel
     {
-
-
-
-
-
-        #region UserProparty
-        private User _User;
-
-        public User User
-        {
-            get
-            { return _User; }
-            set
-            { 
-                if (_User == value)
-                    return;
-                _User = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-
-
-        #region LogonCommand
-        private ViewModelCommand _LogonCommand;
-
-        public ViewModelCommand LogonCommand
-        {
-            get
-            {
-                if (_LogonCommand == null)
-                {
-                    _LogonCommand = new ViewModelCommand(LogonAsync);
-                }
-                return _LogonCommand;
-            }
-        }
-
-        public async void LogonAsync()
-        {
-            User Authrized =await this.User.LogonAsync();
-
-            if(Authrized != null)
-            {
-                var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
-                Messenger.Raise(message);
-                System.Diagnostics.Debug.WriteLine("ログインに成功しました");
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("ログインに失敗しました");
-            }
-
-        }
-        #endregion
-
-        public void Initialize()
-        {
-            this.User = new User();
-            var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
-            Messenger.Raise(message);
-        }
-
-        #region なんかテンプレ
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
-         *  lvcom    : ViewModelCommand
-         *  lvcomn   : ViewModelCommand(CanExecute無)
-         *  llcom    : ListenerCommand(パラメータ有のコマンド)
-         *  llcomn   : ListenerCommand(パラメータ有のコマンド・CanExecute無)
-         *  lprop    : 変更通知プロパティ
-         *  lsprop   : 変更通知プロパティ(ショートバージョン)
+         *  lvcom   : ViewModelCommand
+         *  lvcomn  : ViewModelCommand(CanExecute無)
+         *  llcom   : ListenerCommand(パラメータ有のコマンド)
+         *  llcomn  : ListenerCommand(パラメータ有のコマンド・CanExecute無)
+         *  lprop   : 変更通知プロパティ(.NET4.5ではlpropn)
          *  
          * を使用してください。
          * 
@@ -124,6 +58,9 @@ namespace LivetApp1.ViewModels
          * LivetのViewModelではプロパティ変更通知(RaisePropertyChanged)やDispatcherCollectionを使ったコレクション変更通知は
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
-        #endregion
+
+        public void Initialize()
+        {
+        }
     }
 }
