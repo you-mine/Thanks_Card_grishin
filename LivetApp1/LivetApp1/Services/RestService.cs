@@ -104,5 +104,26 @@ namespace LivetApp1.Services
             }
             return responseThanksCard;
         }
+        public async Task<List<ThanksCard>> GetCardsAsync()
+        {
+            
+           List<ThanksCard> responseCards = null;
+            try
+            {
+                var response = await Client.GetAsync(this.BaseUrl + "/api/ThanksCard");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    responseCards = JsonConvert.DeserializeObject<List<ThanksCard>>(responseContent);
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
+            }
+            return responseCards;
+        }
     }
 }

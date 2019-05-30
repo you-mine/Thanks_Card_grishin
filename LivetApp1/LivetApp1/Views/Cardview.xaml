@@ -14,6 +14,10 @@
 
     <i:Interaction.Triggers>
 
+        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
         <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
         <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
@@ -33,7 +37,7 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        <DataGrid ItemsSource="{Binding thanksCards}" AutoGenerateColumns="False" CanUserAddRows="False">
+        <DataGrid ItemsSource="{Binding thanksCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
                 <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
@@ -44,7 +48,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                            <CheckBox IsChecked="{Binding}" IsEnabled="False"></CheckBox>
+                            <CheckBox IsChecked="{Binding IsReaded}" IsEnabled="False"></CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -60,6 +64,7 @@
                
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="閉じる" HorizontalAlignment="Left" Margin="431,285,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
 
     </Grid>
 </Window>
