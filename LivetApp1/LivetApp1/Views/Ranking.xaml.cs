@@ -23,18 +23,13 @@ namespace LivetApp1.Views
      */
 
     /// <summary>
-    /// Homemenu.xaml の相互作用ロジック
+    /// Ranking.xaml の相互作用ロジック
     /// </summary>
-    public partial class Homemenu : Window
+    public partial class Ranking : Window
     {
-        public Homemenu()
+        public Ranking()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

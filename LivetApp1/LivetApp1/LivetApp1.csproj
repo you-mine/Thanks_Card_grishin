@@ -62,6 +62,7 @@
     <Compile Include="ViewModels\AdminMenuViewModel.cs" />
     <Compile Include="ViewModels\AnalyzeViewModel.cs" />
     <Compile Include="ViewModels\CardsViewForAdminViewModel.cs" />
+    <Compile Include="ViewModels\CardviewViewModel.cs" />
     <Compile Include="ViewModels\CloseViewModel.cs" />
     <Compile Include="ViewModels\EditDepartmentViewModel.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="ViewModels\HomemenuViewModel.cs" />
     <Compile Include="ViewModels\LogonViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\RankingViewModel.cs" />
     <Compile Include="Views\AdminMenu.xaml.cs">
       <DependentUpon>AdminMenu.xaml</DependentUpon>
     </Compile>
@@ -78,6 +80,9 @@
     </Compile>
     <Compile Include="Views\CardsViewForAdmin.xaml.cs">
       <DependentUpon>CardsViewForAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cardview.xaml.cs">
+      <DependentUpon>Cardview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Close.xaml.cs">
       <DependentUpon>Close.xaml</DependentUpon>
@@ -94,6 +99,9 @@
     <Compile Include="Views\Homemenu.xaml.cs">
       <DependentUpon>Homemenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Ranking.xaml.cs">
+      <DependentUpon>Ranking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShowUser.xaml.cs">
       <DependentUpon>ShowUser.xaml</DependentUpon>
     </Compile>
@@ -106,6 +114,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CardsViewForAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Cardview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,6 +161,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Ranking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShowUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

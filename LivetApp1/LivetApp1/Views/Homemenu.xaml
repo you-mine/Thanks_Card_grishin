@@ -7,17 +7,34 @@
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
         Title="Homemenu" Height="350" Width="525">
-    
+
     <Window.DataContext>
         <vm:HomemenuViewModel/>
     </Window.DataContext>
-    
-     <i:Interaction.Triggers>
-     
-     	<!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
-    	<!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
-    	<!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています --> 
-        
+
+    <i:Interaction.Triggers>
+
+        <l:InteractionMessageTrigger MessageKey="Ranking" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
+        <l:InteractionMessageTrigger MessageKey="Cardview" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
+        <l:InteractionMessageTrigger MessageKey="AdminMenu" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
+        <l:InteractionMessageTrigger MessageKey="Logout" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
         <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
         <i:EventTrigger EventName="ContentRendered">
             <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
@@ -30,9 +47,16 @@
 
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
-    </i:Interaction.Triggers>
-    
-    <Grid>
         
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Button Content="カード作成" HorizontalAlignment="Left" Margin="55,39,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,0.6"/>
+        <Button Content="カード作成（簡易）" HorizontalAlignment="Left" Margin="55,84,0,0" VerticalAlignment="Top" Width="124"/>
+        <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="55,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.32,-0.8" Command="{Binding CardviewCommand}"/>
+        <Button Content="管理者向けメニュー" HorizontalAlignment="Left" Margin="55,179,0,0" VerticalAlignment="Top" Width="145"  Command="{Binding AdminMenuCommand}"/>
+        <Button Content="ログアウト" HorizontalAlignment="Left" Margin="55,229,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LogoutCommand }"/>
+        <Button Content="ランキング" HorizontalAlignment="Left" Margin="55,109,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding RankingCommand}"/>
+
     </Grid>
 </Window>

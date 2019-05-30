@@ -23,18 +23,13 @@ namespace LivetApp1.Views
      */
 
     /// <summary>
-    /// Homemenu.xaml の相互作用ロジック
+    /// Cardview.xaml の相互作用ロジック
     /// </summary>
-    public partial class Homemenu : Window
+    public partial class Cardview : Window
     {
-        public Homemenu()
+        public Cardview()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
