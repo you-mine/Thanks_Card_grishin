@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="ShowUser" Height="385.526" Width="452.632">
+        Title="ShowUser" Height="385.526" Width="470">
     
     <Window.DataContext>
         <vm:ShowUserViewModel/>
@@ -37,39 +37,44 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        
-        <ScrollViewer>
+        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="CD" Binding="{Binding CD}" />
+                <DataGridTextColumn Header="部" Binding="{Binding Department.DepartmentName}" />
+                <DataGridTextColumn Header="課" Binding="{Binding Department.SectionName}" />
+                <DataGridTextColumn Header="ユーザー名" Binding="{Binding UserName}"  />
+                <DataGridTextColumn Header="パスワード" Binding="{Binding Password}" />
+                <DataGridTextColumn Header="氏名" Binding="{Binding Name}"  />
+                <DataGridTextColumn Header="ふりがな" Binding="{Binding Hurigana}"  />
+                <DataGridTemplateColumn Header="管理者フラグ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                            <CheckBox IsChecked="{Binding IsAdmin}" IsEnabled="False"></CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-            <Grid>
-                <StackPanel>
-                    <Button Content="+ユーザ情報取得" Command="{Binding ShowUserCommand}" Width="100" HorizontalAlignment="Left"/>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                            <Button Content="編集" Command="{Binding DataContext.EditUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <!-- ユーザ一覧(Userモデルのリスト)である MainWindowViewModel.Users をグリッド表示する。-->
-                    <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
-                            <DataGridTextColumn Header="名前" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="パスワード" Binding="{Binding Password}" />
-                            <DataGridTextColumn Header="管理者" Binding="{Binding IsAdmin}"  />
-                            <DataGridTemplateColumn Header="">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                                        <Button Content="編集" Command="{Binding DataContext.EditUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="削除" Command="{Binding DataContext.UserDeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </Grid>
-        </ScrollViewer>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                            <Button Content="削除" Command="{Binding DataContext.EditUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>
