@@ -12,8 +12,11 @@
         <vm:CardviewViewModel/>
     </Window.DataContext>
 
-    <i:Interaction.Triggers>
-
+    <i:Interaction.Triggers>             <!--ここ！ここ！ここ！ここ！-->
+        <l:InteractionMessageTrigger MessageKey="MessageView" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+        
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
             <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
@@ -56,8 +59,9 @@
                 <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                            <Button Content="選択" Command="{Binding DataContext.EditUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->        <!--ここに選択ボタンが押されたらcommandで
+                            　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　MessageViewに遷移するようにする？-->
+                            <Button Content="選択" Command="{Binding DataContext.MessageViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
