@@ -120,8 +120,11 @@ namespace LivetApp1.ViewModels
 
         public async void SendAsync()
         {
-            this.ThanksCard.To = null;
-            this.ThanksCard.From = null;
+            //外部キーのみをエンティティに持たせる。
+            ThanksCard.FromId = ThanksCard.From.Id;
+            ThanksCard.ToId = ThanksCard.To.Id;
+            ThanksCard.From = null;
+            ThanksCard.To = null;
             var PostedThanksCard = await this.ThanksCard.CreateCardAsync();
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
         }
