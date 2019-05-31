@@ -120,6 +120,8 @@ namespace LivetApp1.ViewModels
 
         public async void SendAsync()
         {
+            this.ThanksCard.To = null;
+            this.ThanksCard.From = null;
             var PostedThanksCard = await this.ThanksCard.CreateCardAsync();
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
         }

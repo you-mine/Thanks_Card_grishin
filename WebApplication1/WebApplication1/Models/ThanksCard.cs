@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
@@ -7,7 +8,10 @@ namespace WebApplication1.Models
     {
         public int Id { get; set; }
 
+
+        public int FromId { get; set; }
         public virtual User From { get; set; }
+        public int ToId { get; set; }
         public virtual User To { get; set; }
         public DateTime PostDate { get; set; }
 

@@ -15,9 +15,9 @@ namespace LivetApp1.Models
          */
         
         #region IdProperty
-        private long _Id;
+        private int _Id;
 
-        public long Id
+        public int Id
         {
             get
             { return _Id; }
@@ -48,7 +48,24 @@ namespace LivetApp1.Models
         }
         #endregion
 
-        #region DepartmentId
+        #region DepartmentIdProparty
+        private int _DepartmentId;
+
+        public int DepartmentId
+        {
+            get
+            { return _DepartmentId; }
+            set
+            { 
+                if (_DepartmentId == value)
+                    return;
+                _DepartmentId = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region DepartmentProparty
         private Department _Department;
 
         public Department Department
@@ -59,6 +76,7 @@ namespace LivetApp1.Models
             { 
                 if (_Department == value)
                     return;
+
                 _Department = value;
                 RaisePropertyChanged();
             }
