@@ -68,6 +68,7 @@
     <Compile Include="ViewModels\CloseViewModel.cs" />
     <Compile Include="ViewModels\EditDepartmentViewModel.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
+    <Compile Include="ViewModels\EditUserViewModelcs.cs" />
     <Compile Include="ViewModels\ExceloutputViewModel.cs" />
     <Compile Include="ViewModels\HomemenuViewModel.cs" />
     <Compile Include="ViewModels\LogonViewModel.cs" />
