@@ -121,6 +121,7 @@ namespace LivetApp1.ViewModels
         public async void SendAsync()
         {
             //外部キーのみをエンティティに持たせる。
+            ThanksCard.ThanksCount = 1;
             ThanksCard.FromId = ThanksCard.From.Id;
             ThanksCard.ToId = ThanksCard.To.Id;
             ThanksCard.From = null;
