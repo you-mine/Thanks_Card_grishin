@@ -18,9 +18,10 @@ namespace LivetApp1.ViewModels
     public class ShowUserViewModel : ViewModel
     {
 
-        public void Initialize()
+        public async void Initialize()
         {
-            _Users = new List<User>();
+            IShowUserService service = new ShowUserService();
+            Users = await service.ShowUserAsync();
         }
 
         #region UsersProperty
@@ -43,41 +44,7 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-        #region ShowUserCommand
-
-        private ViewModelCommand _ShowUserCommand;
-
-        public ViewModelCommand ShowUserCommand
-        {
-            get
-            {
-                if (_ShowUserCommand == null)
-                {
-                    _ShowUserCommand = new ViewModelCommand(ShowUser);
-                }
-                return _ShowUserCommand;
-            }
-        }
-
-        async public void ShowUser()
-        {
-            ShowUserService service = new ShowUserService();
-            List<User> users = await service.ShowUserAsync();
-
-
-            if (users != null) // 全件取得成功
-            {
-                this.Users = users; //プロパティに入れる。
-            }
-            else // Logon 失敗
-            {
-                System.Diagnostics.Debug.WriteLine("データの取得に失敗しました");
-            }
-
-        }
-
-        #endregion
-
+        
         #region EditUserCommand
 
         private ListenerCommand<User> _EditUserCommand;
