@@ -16,73 +16,8 @@ using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
-    public class CardviewViewModel : ViewModel
+    public class MessageViewViewModel : ViewModel
     {
-
-        private List<ThanksCard> _thanksCards;
-
-        public List<ThanksCard> thanksCards
-        {
-            get
-            { return _thanksCards; }
-            set
-            { 
-                if (_thanksCards == value)
-                    return;
-                _thanksCards = value;
-                RaisePropertyChanged();
-            }
-        }
-        #region Close
-
-
-        private ViewModelCommand _CloseCommand;
-
-        public ViewModelCommand CloseCommand
-        {
-            get
-            {
-                if (_CloseCommand == null)
-                {
-                    _CloseCommand = new ViewModelCommand(Close);
-                }
-                return _CloseCommand;
-            }
-        }
-
-        public void Close()
-        {
-            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
-        }
-
-
-
-        #endregion
-
-        #region MessageView
-
-        private ListenerCommand<ThanksCard> _MessageViewCommand;
-
-        public ListenerCommand<ThanksCard> MessageViewCommand
-        {
-            get
-            {
-                if (_MessageViewCommand == null)
-                {
-                    _MessageViewCommand = new ListenerCommand<ThanksCard>(MessageView);
-                }
-                return _MessageViewCommand;
-            }
-        }
-
-        public void MessageView(ThanksCard parameter)
-        {
-            var message = new TransitionMessage(typeof(Views.MessageView), new MessageViewViewModel(parameter), TransitionMode.Modal, "MessageView");
-            Messenger.Raise(message);
-        }
-
-        #endregion
-
         #region テンプレ
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -127,10 +62,76 @@ namespace LivetApp1.ViewModels
          */
         #endregion
 
-        public async void Initialize()
+
+
+
+        //これかな？？
+        private List<ThanksCard> _thanksCards;
+
+        public List<ThanksCard> thanksCards
         {
-            IRestService service = new RestService();
-            this.thanksCards =await service.GetCardsAsync();
+            get
+            { return _thanksCards; }
+            set
+            {
+                if (_thanksCards == value)
+                    return;
+                _thanksCards = value;
+                RaisePropertyChanged();
+            }
+        }
+        public MessageViewViewModel()
+		{
+
+        }
+
+		public MessageViewViewModel(ThanksCard thanksCard)
+        {
+            this.thanksCard = thanksCard;
+        }
+
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+
+        public void Close()
+        {
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
+        }
+        #endregion
+
+        #region thanksCard
+        private ThanksCard _thanksCard;
+
+        public ThanksCard thanksCard
+        {
+            get
+            { return _thanksCard; }
+            set
+            { 
+                if (_thanksCard == value)
+                    return;
+                _thanksCard = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+
+        public  void Initialize()
+        {
 
         }
     }

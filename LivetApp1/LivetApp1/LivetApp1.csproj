@@ -73,6 +73,7 @@
     <Compile Include="ViewModels\HomemenuViewModel.cs" />
     <Compile Include="ViewModels\LogonViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MessageViewViewModel.cs" />
     <Compile Include="Views\CreateCard.xaml.cs">
       <DependentUpon>CreateCard.xaml</DependentUpon>
     </Compile>
@@ -103,6 +104,9 @@
     </Compile>
     <Compile Include="Views\Homemenu.xaml.cs">
       <DependentUpon>Homemenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Ranking.xaml.cs">
       <DependentUpon>Ranking.xaml</DependentUpon>
@@ -168,6 +172,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Ranking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

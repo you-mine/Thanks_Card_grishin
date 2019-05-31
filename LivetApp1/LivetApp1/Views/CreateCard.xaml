@@ -37,7 +37,7 @@
 
     <Canvas>
 
-        <TextBox  Height="20" TextWrapping="Wrap" Text="{Binding ThanksCard.Title}"  Width="167" Margin="86,42,486,289"/>
+        <TextBox Height="20" TextWrapping="Wrap" Text="{Binding ThanksCard.Title}"  Width="167" Margin="86,42,486,289"/>
         <TextBox  Height="140" Width="275" TextWrapping="Wrap" Text="{Binding ThanksCard.Body}" Canvas.Left="52" Canvas.Top="109"/>
         <Label Content="本文"  Height="24" Margin="52,80,631,247"   Width="55" />
         <Label Content="感謝カード作成"  Height="27"   Width="255" Background="Aqua" Canvas.Left="52" Canvas.Top="10"/>
@@ -51,6 +51,7 @@
             Height="210" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301">
             <DataGrid.Columns>
 
+                
                 <DataGridTextColumn Header="氏名" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="部署" Binding="{Binding Department.DepartmentName}" />
                 <DataGridTextColumn Header="課" Binding="{Binding Department.SectionName}"/>
