@@ -99,7 +99,7 @@ namespace LivetApp1.ViewModels
 
         public void Close()
         {
-            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
         #endregion
 
