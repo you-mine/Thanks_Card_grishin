@@ -26,8 +26,12 @@
             <l:TransitionInteractionMessageAction/>
         </l:InteractionMessageTrigger>
 
-        <l:InteractionMessageTrigger MessageKey="Logout" Messenger="{Binding Messenger}">
+        <l:InteractionMessageTrigger MessageKey="CreateCard" Messenger="{Binding Messenger}">
             <l:TransitionInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
+        <l:InteractionMessageTrigger MessageKey="Logout" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
 
 
@@ -51,7 +55,7 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        <Button Content="カード作成" HorizontalAlignment="Left" Margin="55,39,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,0.6"/>
+        <Button Content="カード作成" HorizontalAlignment="Left" Margin="55,39,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,0.6" Command="{Binding CreateCradCommand}"/>
         <Button Content="カード作成（簡易）" HorizontalAlignment="Left" Margin="55,84,0,0" VerticalAlignment="Top" Width="124"/>
         <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="55,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.32,-0.8" Command="{Binding CardviewCommand}"/>
         <Button Content="管理者向けメニュー" HorizontalAlignment="Left" Margin="55,179,0,0" VerticalAlignment="Top" Width="145"  Command="{Binding AdminMenuCommand}"/>

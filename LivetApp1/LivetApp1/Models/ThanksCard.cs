@@ -30,6 +30,44 @@ namespace LivetApp1.Models
         }
         #endregion
 
+        #region FromIDProparty
+
+        private int _FromId;
+
+        public int FromId
+        {
+            get
+            { return _FromId; }
+            set
+            { 
+                if (_FromId == value)
+                    return;
+                _FromId = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region ToIDProparty
+
+        private int _ToId;
+
+        public int ToId
+        {
+            get
+            { return _ToId; }
+            set
+            { 
+                if (_ToId == value)
+                    return;
+                _ToId = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
         #region CardToProperty
 
         private User _To;

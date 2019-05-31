@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="カード作成画面" Height="350" Width="730">
+        Title="カード作成画面" Height="380" Width="745" ResizeMode="NoResize">
 
     <Window.DataContext>
         <vm:CreateCardViewModel/>
@@ -35,20 +35,20 @@
         </l:InteractionMessageTrigger>
     </i:Interaction.Triggers>
 
-    <Grid>
+    <Canvas>
 
-        <TextBox HorizontalAlignment="Center" Height="20" TextWrapping="Wrap" Text="{Binding ThanksCard.Title}" VerticalAlignment="Top" Width="174" Margin="105,38,443,0"/>
-        <TextBox HorizontalAlignment="Center" Height="140" TextWrapping="Wrap" Text="{Binding ThanksCard.Body}" VerticalAlignment="Top" Width="255" Margin="45,110,422,0"/>
-        <TextBlock HorizontalAlignment="Left" Height="20" Margin="30,90,0,0" TextWrapping="Wrap" Text="メッセージ" VerticalAlignment="Top" Width="55"/>
-        <TextBlock HorizontalAlignment="Left" Height="18" Margin="45,15,0,0" TextWrapping="Wrap" Text="感謝カード" VerticalAlignment="Top" Width="255" Background="Aqua"/>
-        <Button Content="閉じる" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Margin="637,299,0,0" Click="Button_Click" Command="{Binding CloseCommand}"/>
-        <Button Content="送信" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Margin="575,299,0,0" Command="{Binding SendCommand}"/>
-        <TextBox HorizontalAlignment="Left" Height="20" Margin="54,38,0,0" TextWrapping="Wrap" Text="タイトル" VerticalAlignment="Top" Width="46" TextChanged="TextBox_TextChanged"/>
-        <Label Content="誰に送りますか？" HorizontalAlignment="Left" Height="25" Margin="360,38,0,0" VerticalAlignment="Top" Width="180"/>
-        <Label Content="From/" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,270,0,0" />
+        <TextBox  Height="20" TextWrapping="Wrap" Text="{Binding ThanksCard.Title}"  Width="167" Margin="86,42,486,289"/>
+        <TextBox  Height="140" Width="275" TextWrapping="Wrap" Text="{Binding ThanksCard.Body}" Canvas.Left="52" Canvas.Top="109"/>
+        <Label Content="本文"  Height="24" Margin="52,80,631,247"   Width="55" />
+        <Label Content="感謝カード作成"  Height="27"   Width="255" Background="Aqua" Canvas.Left="52" Canvas.Top="10"/>
+        <Button Content="閉じる"  Width="55" Margin="650,306,33,22" Click="Button_Click" Command="{Binding CloseCommand}"/>
+        <Button Content="送信"  Width="55" Margin="568,307,115,22" Command="{Binding SendCommand}"/>
+        <Label Content="{Binding ThanksCard.From.Name}" Margin="76,270,486,0"  Height="24"/>
+        <Label Content="タイトル"  Height="24" Margin="32,38,658,289"   Width="49" />
+        <Label Content="From/"  Margin="37,270,647,50" />
 
-        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="360,70,10,44"
-            Height="232" VerticalAlignment="Top" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="322">
+        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
+            Height="210" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="氏名" Binding="{Binding Name}" />
@@ -58,14 +58,14 @@
                 <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="選択" Command="{Binding DataContext.UserDeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <Button Content="選択" Command="{Binding DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="{Binding ThanksCard.From.Name}" HorizontalAlignment="Left" Margin="76,270,0,0" VerticalAlignment="Top"/>
 
-    </Grid>
+
+    </Canvas>
 
 </Window>

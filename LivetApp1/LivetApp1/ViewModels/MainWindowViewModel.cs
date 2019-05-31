@@ -63,12 +63,13 @@ namespace LivetApp1.ViewModels
 
             if(Authrized != null)
             {
+                
+                System.Diagnostics.Debug.WriteLine("ログインに成功しました");
                 SessionService session = SessionService.Instance;
                 session.IsAuthorized = true;
                 session.AuthorizedUser = Authrized;
                 var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
                 Messenger.Raise(message);
-                System.Diagnostics.Debug.WriteLine("ログインに成功しました");
             }
             else
             {
@@ -81,12 +82,7 @@ namespace LivetApp1.ViewModels
 
         public void Initialize()
         {
-            var message = new TransitionMessage(typeof(Views.Cardview), new CardviewViewModel(), TransitionMode.Modal, "CreateCard");
-            Messenger.Raise(message);
             this.User = new User();
-            //var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
-            //Messenger.Raise(message);
-
         }
 
         #region なんかテンプレ

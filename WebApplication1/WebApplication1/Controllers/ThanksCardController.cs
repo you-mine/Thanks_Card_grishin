@@ -38,8 +38,12 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult<ThanksCard>> Post([FromBody] ThanksCard thanksCard)
         {
             // From, To には既に存在しているユーザが入るため、更新の対象から外す。
-            _context.Users.Attach(thanksCard.From);
-            _context.Users.Attach(thanksCard.To);
+
+            //_context.Department.Attach(thanksCard.From.Department);
+            //_context.Department.Attach(thanksCard.To.Department);
+            //_context.Users.Attach(thanksCard.From);
+            //_context.Users.Attach(thanksCard.To);
+
 
             _context.ThanksCards.Add(thanksCard);
             await _context.SaveChangesAsync();
