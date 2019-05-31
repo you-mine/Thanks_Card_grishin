@@ -10,97 +10,13 @@ using Livet.Messaging;
 using Livet.Messaging.IO;
 using Livet.EventListeners;
 using Livet.Messaging.Windows;
-using LivetApp1.Services;
+
 using LivetApp1.Models;
 
 namespace LivetApp1.ViewModels
 {
-    public class ShowUserViewModel : ViewModel
+    public class EditUserViewModelcs : ViewModel
     {
-
-        public void Initialize()
-        {
-            _Users = new List<User>();
-        }
-
-        #region UsersProperty
-
-        private List<User> _Users;
-
-        public List<User> Users
-        {
-            get
-            { return _Users; }
-            set
-            { 
-                if (_Users == value)
-                    return;
-                _Users = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
-        #endregion
-
-        #region ShowUserCommand
-
-        private ViewModelCommand _ShowUserCommand;
-
-        public ViewModelCommand ShowUserCommand
-        {
-            get
-            {
-                if (_ShowUserCommand == null)
-                {
-                    _ShowUserCommand = new ViewModelCommand(ShowUser);
-                }
-                return _ShowUserCommand;
-            }
-        }
-
-        async public void ShowUser()
-        {
-            ShowUserService service = new ShowUserService();
-            List<User> users = await service.ShowUserAsync();
-
-
-            if (users != null) // 全件取得成功
-            {
-                this.Users = users; //プロパティに入れる。
-            }
-            else // Logon 失敗
-            {
-                System.Diagnostics.Debug.WriteLine("データの取得に失敗しました");
-            }
-
-        }
-
-        #endregion
-
-        #region EditUserCommand
-
-        private ListenerCommand<User> _EditUserCommand;
-
-        public ListenerCommand<User> EditUserCommand
-        {
-            get
-            {
-                if (_EditUserCommand == null)
-                {
-                    _EditUserCommand = new ListenerCommand<User>(EditUser);
-                }
-                return _EditUserCommand;
-            }
-        }
-
-        public void EditUser(User parameter)
-        {
-            var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(parameter), TransitionMode.Modal, "ShowEdit");
-            Messenger.Raise(message);
-        }
-        #endregion
-
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
          *  lvcom   : ViewModelCommand
@@ -143,6 +59,8 @@ namespace LivetApp1.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-
+        public void Initialize()
+        {
+        }
     }
 }

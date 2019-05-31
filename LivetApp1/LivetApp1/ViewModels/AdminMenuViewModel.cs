@@ -116,7 +116,7 @@ namespace LivetApp1.ViewModels
 
         public void EditUser()
         {
-            var message = new TransitionMessage(typeof(Views.ShowUser), new ShowUserViewModel(), TransitionMode.Modal, "EditUser");
+            var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(), TransitionMode.Modal, "EditUser");
             Messenger.Raise(message);
         }
 

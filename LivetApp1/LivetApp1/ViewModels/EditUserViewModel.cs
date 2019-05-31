@@ -12,31 +12,11 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
-using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
     public class EditUserViewModel : ViewModel
     {
-
-        #region 
-        private List<User> _Users;
-
-        public List<User> Users
-        {
-            get
-            { return _Users; }
-            set
-            { 
-                if (_Users == value)
-                    return;
-                _Users = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
 
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -80,50 +60,6 @@ namespace LivetApp1.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-        #region DepartmentProperrty
-        private List<Department> _Departments;
-
-        public List<Department> Departments
-        {
-            get
-            { return _Departments; }
-            set
-            { 
-                if (_Departments == value)
-                    return;
-                _Departments = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-
-        #region Department Command
-        private ListenerCommand<Department> _SelectDepartmentCommand;
-
-
-        public ListenerCommand<Department> SelectDepartmentCommand
-        {
-            get
-            {
-                if (_SelectDepartmentCommand == null)
-                {
-                    _SelectDepartmentCommand = new ListenerCommand<Department>(SelectDepartment);
-                }
-                return _SelectDepartmentCommand;
-            }
-        }
-
-        public void SelectDepartment(Department parameter)
-        {
-            this.User.Department = parameter;
-        }
-
-        #endregion
-
-
-
         public EditUserViewModel(User user)
         {
             this.User = user;
@@ -135,7 +71,6 @@ namespace LivetApp1.ViewModels
 
         public void Initialize()
         {
-           
         }
 
 
