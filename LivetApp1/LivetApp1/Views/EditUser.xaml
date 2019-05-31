@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="EditUser" Height="350" Width="525">
+        Title="EditUser" Height="350" Width="537.569">
 
     <Window.DataContext>
         <vm:EditUserViewModel/>
@@ -39,16 +39,16 @@
         <Label Content="氏名" HorizontalAlignment="Left" Margin="55,107,0,0" VerticalAlignment="Top"/>
         <Label Content="ふりがな" HorizontalAlignment="Left" Margin="41,135,0,0" VerticalAlignment="Top"/>
         <Label Content="管理者フラグ" HorizontalAlignment="Left" Margin="12,162,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,22,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,53,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,83,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,111,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,139,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <CheckBox Content="" HorizontalAlignment="Left" Margin="89,168,0,0" VerticalAlignment="Top" />
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,22,0,0" TextWrapping="Wrap" Text="{Binding User.CD}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,53,0,0" TextWrapping="Wrap" Text="{Binding User.UserName}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,83,0,0" TextWrapping="Wrap" Text="{Binding User.Password}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,111,0,0" TextWrapping="Wrap" Text="{Binding User.Name}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,139,0,0" TextWrapping="Wrap" Text="{Binding User.Hurigana}" VerticalAlignment="Top" Width="120"/>
+        <CheckBox IsChecked="{Binding User.IsAdmin}" Content="" HorizontalAlignment="Left" Margin="89,168,0,0" VerticalAlignment="Top" />
         <Label Content="所属部署" HorizontalAlignment="Left" Margin="26,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.603,2"/>
         <Label Content="{Binding User.Department.DepartmentName}" HorizontalAlignment="Left" Margin="116,205,0,0" VerticalAlignment="Top"/>
         <Label Content= "{Binding User.Department.SectionName}" HorizontalAlignment="Left" Margin="116,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.603,2"/>
-        <DataGrid ItemsSource="{Binding Departments}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="288,0,0,29">
+        <DataGrid ItemsSource="{Binding Departments}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="268,0,20,29">
 
             <DataGrid.Columns>
               
@@ -65,5 +65,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="変更" HorizontalAlignment="Left" Margin="435,295,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SendCommand}" />
     </Grid>
 </Window>

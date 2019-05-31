@@ -63,7 +63,7 @@ namespace LivetApp1.ViewModels
 
         public void EditUser(User parameter)
         {
-            var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(parameter), TransitionMode.Modal, "ShowEdit");
+            var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(parameter,"Put"), TransitionMode.Modal, "ShowEdit");
             Messenger.Raise(message);
         }
         #endregion
