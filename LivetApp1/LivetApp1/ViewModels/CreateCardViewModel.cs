@@ -124,6 +124,7 @@ namespace LivetApp1.ViewModels
             ThanksCard.ThanksCount = 1;
             ThanksCard.FromId = ThanksCard.From.Id;
             ThanksCard.ToId = ThanksCard.To.Id;
+            ThanksCard.PostDate = DateTime.Now.Date;
             ThanksCard.From = null;
             ThanksCard.To = null;
             var PostedThanksCard = await this.ThanksCard.CreateCardAsync();
