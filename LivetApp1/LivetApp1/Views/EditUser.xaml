@@ -7,17 +7,17 @@
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
         Title="EditUser" Height="350" Width="525">
-    
+
     <Window.DataContext>
         <vm:EditUserViewModel/>
     </Window.DataContext>
-    
-     <i:Interaction.Triggers>
-     
-     	<!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
-    	<!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
-    	<!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています --> 
-        
+
+    <i:Interaction.Triggers>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
         <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
         <i:EventTrigger EventName="ContentRendered">
             <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
@@ -31,8 +31,39 @@
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
     </i:Interaction.Triggers>
-    
+
     <Grid>
-        
+        <Label Content="ユーザーCD" HorizontalAlignment="Left" Margin="28,22,0,0" VerticalAlignment="Top"/>
+        <Label Content="ユーザー名" HorizontalAlignment="Left" Margin="35,53,0,0" VerticalAlignment="Top"/>
+        <Label Content="パスワード" HorizontalAlignment="Left" Margin="35,83,0,0" VerticalAlignment="Top"/>
+        <Label Content="氏名" HorizontalAlignment="Left" Margin="55,107,0,0" VerticalAlignment="Top"/>
+        <Label Content="ふりがな" HorizontalAlignment="Left" Margin="41,135,0,0" VerticalAlignment="Top"/>
+        <Label Content="管理者フラグ" HorizontalAlignment="Left" Margin="12,162,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,22,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,53,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,83,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,111,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,139,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <CheckBox Content="" HorizontalAlignment="Left" Margin="89,168,0,0" VerticalAlignment="Top" />
+        <Label Content="所属部署" HorizontalAlignment="Left" Margin="26,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.603,2"/>
+        <Label Content="{Binding User.Department.DepartmentName}" HorizontalAlignment="Left" Margin="116,205,0,0" VerticalAlignment="Top"/>
+        <Label Content= "{Binding User.Department.SectionName}" HorizontalAlignment="Left" Margin="116,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.603,2"/>
+        <DataGrid ItemsSource="{Binding Departments}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="288,0,0,29">
+
+            <DataGrid.Columns>
+              
+                    <DataGridTextColumn Header="CD" Binding="{Binding CD}" />
+                <DataGridTextColumn Header="部" Binding="{Binding DepartmentName}" />
+                <DataGridTextColumn Header="課" Binding="{Binding SectionName}" />
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                            <Button Content="選択" Command="{Binding DataContext.SelectDepartmentCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
