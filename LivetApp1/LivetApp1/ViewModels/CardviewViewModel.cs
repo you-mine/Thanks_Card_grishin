@@ -33,9 +33,7 @@ namespace LivetApp1.ViewModels
                 RaisePropertyChanged();
             }
         }
-        #region Close
-
-
+        #region CloseCommand
         private ViewModelCommand _CloseCommand;
 
         public ViewModelCommand CloseCommand
@@ -54,9 +52,6 @@ namespace LivetApp1.ViewModels
         {
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
-
-
-
         #endregion
 
         #region MessageView

@@ -65,30 +65,6 @@ namespace LivetApp1.ViewModels
 
 
 
-        //これかな？？
-        private List<ThanksCard> _thanksCards;
-
-        public List<ThanksCard> thanksCards
-        {
-            get
-            { return _thanksCards; }
-            set
-            {
-                if (_thanksCards == value)
-                    return;
-                _thanksCards = value;
-                RaisePropertyChanged();
-            }
-        }
-        public MessageViewViewModel()
-		{
-
-        }
-
-		public MessageViewViewModel(ThanksCard thanksCard)
-        {
-            this.thanksCard = thanksCard;
-        }
 
         #region CloseCommand
         private ViewModelCommand _CloseCommand;
@@ -107,7 +83,7 @@ namespace LivetApp1.ViewModels
 
         public void Close()
         {
-            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
         #endregion
 
