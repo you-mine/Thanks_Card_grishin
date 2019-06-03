@@ -243,7 +243,7 @@ namespace LivetApp1.Models
         public async Task<ThanksCard> CreateCardAsync()
         {
             IRestService rest = new RestService();
-            ThanksCard authorizedThanksCard = await rest.ReadedAsync(this);
+            ThanksCard authorizedThanksCard = await rest.CreateCardAsync(this);
             return authorizedThanksCard;
         }
         #endregion
@@ -252,7 +252,7 @@ namespace LivetApp1.Models
         public void PutCard()
         {
             IRestService rest = new RestService();
-            rest.ReadedAsync(this);
+            rest.PutCard(this);
         }
         #endregion
 
