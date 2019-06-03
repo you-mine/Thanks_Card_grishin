@@ -15,15 +15,11 @@ namespace LivetApp1.Services
         private HttpClient Client;
         private string BaseUrl;
 
-
-
-
         public RestService()
         {
             this.Client = new HttpClient();
             this.BaseUrl = "https://localhost:5001";
         }
-
 
         #region ログイン処理
         public async Task<User> LogonAsync(User user)
@@ -104,6 +100,21 @@ namespace LivetApp1.Services
                 // TODO
                 System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
             }
+
+            var a =
+                responseCards
+                            .Where(x => x.PostDate < DateTime.Today)
+                            .GroupBy(x => new { x.To.Id })
+                            .Select(
+                                        x => new {
+                                            x.Key.Id
+                                                ,
+                                            名前 = x.Select(y => y.To.Name).ToArray()[0]
+                                                ,
+                                            総数 = x.Select(y => y.ThanksCount).Sum()
+                                        }
+                                    ).ToList();
+
             return responseCards;
         }
         #endregion
@@ -129,8 +140,6 @@ namespace LivetApp1.Services
             }
             return responseDepartments;
         }
-
-
 
 
     }
