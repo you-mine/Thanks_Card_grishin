@@ -12,6 +12,7 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 using LivetApp1.Services;
 using LivetApp1.Models;
+using System.Windows;
 
 namespace LivetApp1.ViewModels
 {
@@ -23,6 +24,8 @@ namespace LivetApp1.ViewModels
             IShowUserService service = new ShowUserService();
             Users = await service.ShowUserAsync();
         }
+
+        IShowUserService service = new ShowUserService();
 
         #region UsersProperty
 
@@ -44,29 +47,93 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-        
-        #region EditUserCommand
+        #region ユーザー編集コマンド
+        private ListenerCommand<User> _EditUserPutCommand;
 
-        private ListenerCommand<User> _EditUserCommand;
-
-        public ListenerCommand<User> EditUserCommand
+        public ListenerCommand<User> EditUserPutCommand
         {
             get
             {
-                if (_EditUserCommand == null)
+                if (_EditUserPutCommand == null)
                 {
-                    _EditUserCommand = new ListenerCommand<User>(EditUser);
+                    _EditUserPutCommand = new ListenerCommand<User>(EditUserPut);
                 }
-                return _EditUserCommand;
+                return _EditUserPutCommand;
             }
         }
 
-        public void EditUser(User parameter)
+        public void EditUserPut(User parameter)
         {
-            var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(parameter,"Put"), TransitionMode.Modal, "ShowEdit");
+            var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(parameter, "Put"), TransitionMode.Modal, "EditUserPut");
             Messenger.Raise(message);
         }
         #endregion
+
+        #region ユーザー追加コマンド
+
+
+        private ViewModelCommand _EditUserAddCommand;
+
+        public ViewModelCommand EditUserAddCommand
+        {
+            get
+            {
+                if (_EditUserAddCommand == null)
+                {
+                    _EditUserAddCommand = new ViewModelCommand(EditUserAddAsync);
+                }
+                return _EditUserAddCommand;
+            }
+        }
+
+        public async void EditUserAddAsync()
+        {
+            
+            User user = new User();
+            var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(user, "Add"), TransitionMode.Modal, "EditUserAdd");
+            Messenger.Raise(message);
+            this.Users = await this.service.ShowUserAsync();
+        }
+
+        #endregion
+
+        #region ユーザーデリートコマンド
+        private ListenerCommand<User> _DeleteUserCommand;
+
+        public ListenerCommand<User> DeleteUserCommand
+        {
+            get
+            {
+                if (_DeleteUserCommand == null)
+                {
+                    _DeleteUserCommand = new ListenerCommand<User>(DeleteUserAsync);
+                }
+                return _DeleteUserCommand;
+            }
+        }
+
+        public async void DeleteUserAsync(User parameter)
+        {
+            IRestService service = new RestService();
+            string process = await service.DeleteUserAsync(parameter);
+
+            if (process == "success")
+            {
+                MessageBox.Show("ユーザーを削除しました。", "情報");
+                this.Users = await this.service.ShowUserAsync();
+            }
+            else
+            {
+                MessageBox.Show("データ更新に失敗しました。正しい値を入力してください", "エラー");
+            }
+
+        }
+        #endregion
+
+
+
+
+
 
         /* コマンド、プロパティの定義にはそれぞれ 
          * 

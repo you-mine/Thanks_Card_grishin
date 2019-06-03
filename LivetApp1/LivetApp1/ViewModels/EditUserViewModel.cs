@@ -13,6 +13,7 @@ using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
 using LivetApp1.Services;
+using System.Windows;
 
 namespace LivetApp1.ViewModels
 {
@@ -116,15 +117,24 @@ namespace LivetApp1.ViewModels
             {
                 if (_SendCommand == null)
                 {
-                    _SendCommand = new ViewModelCommand(Send);
+                    _SendCommand = new ViewModelCommand(SendAsync);
                 }
                 return _SendCommand;
             }
         }
 
-        public void Send()
+        public async void SendAsync()
         {
-            service.EditUserAsync(this.User);
+            string process =await service.EditUserAsync(User);
+            if (process == "success")
+            {
+                MessageBox.Show("データ更新に成功しました。", "情報");
+                Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+            }
+            else
+            {
+                MessageBox.Show("データ更新に失敗しました。正しい値を入力してください", "エラー");
+            }
         }
 
 
@@ -191,6 +201,16 @@ namespace LivetApp1.ViewModels
         public async void EditUser()
         {
           String process = await this.User.EditAsync();
+            if(process == "success")
+            {
+                MessageBox.Show("データ更新に成功しました。", "情報");
+                Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+            }
+            else
+            {
+                MessageBox.Show("データ更新に失敗しました。正しい値を入力してください", "エラー");
+            }
+          
             //TODO 処理の成功可否処理の追加
         }
 

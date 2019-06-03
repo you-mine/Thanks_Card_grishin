@@ -14,6 +14,7 @@ namespace LivetApp1.Services
         Task<ThanksCard> CreateCardAsync(ThanksCard thanksCard);
         Task<List<ThanksCard>> GetCardsAsync();
         Task<List<Department>> GetDepartmentsAsync();
+        Task<string> DeleteUserAsync(User user);
 
     }
 }

@@ -24,6 +24,9 @@ namespace LivetApp1.Services
 
         public async Task<string> EditUserAsync(User user)
         {
+            user.DepartmentId = user.Department.Id;
+            user.Department = null;
+            user.Id = 0;
             var jObject = JsonConvert.SerializeObject(user);
 
             //Make Json object into content type
@@ -40,7 +43,7 @@ namespace LivetApp1.Services
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
                     responseUser = JsonConvert.DeserializeObject<User>(responseContent);
-                    return "succcess";
+                    return "success";
                 }
             }
             catch (Exception e)
