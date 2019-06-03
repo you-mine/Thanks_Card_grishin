@@ -77,7 +77,7 @@ namespace LivetApp1.Services
         }
 
 
-        public async Task<ThanksCard> CreateCardAsync(ThanksCard thanksCard)
+        public async Task<ThanksCard> PutCardAsync(ThanksCard thanksCard)
         {
             var jObject = JsonConvert.SerializeObject(thanksCard);
 
@@ -147,5 +147,38 @@ namespace LivetApp1.Services
             }
             return responseDepartments;
         }
+
+                                                      //↓ここに追加
+        public async Task<ThanksCard> PutCard(ThanksCard thanksCard)
+        {
+            thanksCard.ToId = thanksCard.To.Id;
+            thanksCard.FromId = thanksCard.From.Id;
+            thanksCard.To = null;
+            thanksCard.From = null;
+
+            var jObject = JsonConvert.SerializeObject(thanksCard);
+
+            //Make Json object into content type
+            var content = new StringContent(jObject);
+            //Adding header of the contenttype
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            ThanksCard responseThanksCard = null;
+            try
+            {
+                var response = await Client.PutAsync(this.BaseUrl + "/api/Users/" + thanksCard.Id, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    responseThanksCard = JsonConvert.DeserializeObject<ThanksCard>(responseContent);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.PutUserAsync: " + e);
+            }
+            return responseThanksCard;
+        }
+
     }
 }

@@ -11,9 +11,11 @@ namespace LivetApp1.Services
     {
         Task<User> LogonAsync(User user);
         Task<String> PutUserAsync(User user);
-        Task<ThanksCard> CreateCardAsync(ThanksCard thanksCard);
+        Task<ThanksCard> CreateAsync(ThanksCard thanksCard);
         Task<List<ThanksCard>> GetCardsAsync();
         Task<List<Department>> GetDepartmentsAsync();
+
+        Task<ThanksCard> PutCard(ThanksCard thanksCard); //←ここに追加
 
     }
 }

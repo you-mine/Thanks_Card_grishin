@@ -50,5 +50,39 @@ namespace WebApplication1.Controllers
             // TODO: Error Handling
             return thanksCard;
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutThanksCard(long id, ThanksCard thanksCard)
+        {
+            if (id != thanksCard.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(thanksCard).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ThanksCardExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool ThanksCardExists(long id)
+        {
+            return _context.ThanksCards.Any(e => e.Id == id);
+        }
     }
 }
