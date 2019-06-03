@@ -105,6 +105,16 @@ namespace LivetApp1.ViewModels
         #endregion
 
 
+       public MessageViewViewModel()
+        {
+
+        }
+
+        public MessageViewViewModel(ThanksCard thanksCard)
+        {
+            this.thanksCard = thanksCard;
+        }
+
 
         public  void Initialize()
         {

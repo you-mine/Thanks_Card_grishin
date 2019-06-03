@@ -19,24 +19,7 @@ namespace LivetApp1.ViewModels
     public class EditUserViewModel : ViewModel
     {
 
-        #region 
-        private List<User> _Users;
-
-        public List<User> Users
-        {
-            get
-            { return _Users; }
-            set
-            { 
-                if (_Users == value)
-                    return;
-                _Users = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
+        IEditUserService service = null;
 
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -80,6 +63,9 @@ namespace LivetApp1.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
+
+
+
         #region DepartmentProperrty
         private List<Department> _Departments;
 
@@ -97,7 +83,6 @@ namespace LivetApp1.ViewModels
         }
 
         #endregion
-
 
         #region Department Command
         private ListenerCommand<Department> _SelectDepartmentCommand;
@@ -123,19 +108,51 @@ namespace LivetApp1.ViewModels
         #endregion
 
 
+        private ViewModelCommand _SendCommand;
 
-        public EditUserViewModel(User user)
+        public ViewModelCommand SendCommand
+        {
+            get
+            {
+                if (_SendCommand == null)
+                {
+                    _SendCommand = new ViewModelCommand(Send);
+                }
+                return _SendCommand;
+            }
+        }
+
+        public void Send()
+        {
+            service.EditUserAsync(this.User);
+        }
+
+
+
+
+        public EditUserViewModel(User user ,String mode)
         {
             this.User = user;
+
+            if(mode == "Add")
+            {
+                service =new EditUserPostService();
+            }
+            else if(mode == "Put")
+            {
+                service = new EditUserPutService();
+            }
+
         }
 
         public EditUserViewModel()
         {
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
-           
+            IRestService service = new RestService();
+            this.Departments = await service.GetDepartmentsAsync();
         }
 
 

@@ -104,6 +104,7 @@ namespace LivetApp1.Services
             }
             return responseThanksCard;
         }
+
         public async Task<List<ThanksCard>> GetCardsAsync()
         {
             
@@ -124,6 +125,27 @@ namespace LivetApp1.Services
                 System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
             }
             return responseCards;
+        }
+
+        public async Task<List<Department>> GetDepartmentsAsync()
+        {
+            List<Department> responseDepartments = null;
+            try
+            {
+                var response = await Client.GetAsync(this.BaseUrl + "/api/Departments");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    responseDepartments = JsonConvert.DeserializeObject<List<Department>>(responseContent);
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
+            }
+            return responseDepartments;
         }
     }
 }
