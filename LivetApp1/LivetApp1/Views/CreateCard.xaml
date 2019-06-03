@@ -50,7 +50,6 @@
             Height="210" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301">
             <DataGrid.Columns>
 
-                
                 <DataGridTextColumn Header="氏名" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="部署" Binding="{Binding Department.DepartmentName}" />
                 <DataGridTextColumn Header="課" Binding="{Binding Department.SectionName}"/>
@@ -64,6 +63,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="感謝カードを送る人を選択してください" Canvas.Left="386" Canvas.Top="42"/>
 
 
     </Canvas>

@@ -55,8 +55,7 @@ namespace LivetApp1.Services
         }
         #endregion
 
-        #region カード作成
-        public async Task<ThanksCard> CreateCardAsync(ThanksCard thanksCard)
+
         {
             var jObject = JsonConvert.SerializeObject(thanksCard);
 
@@ -130,56 +129,7 @@ namespace LivetApp1.Services
             }
             return responseDepartments;
         }
-        #endregion
 
-        #region ユーザー削除
-        public async Task<string> DeleteUserAsync(User user)
-        {
-            try
-            {
-                var response = await Client.DeleteAsync(this.BaseUrl + "/api/Users/" + user.Id);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return "success";
-                }
-            }
-            catch (Exception e)
-            {
-                // TODO
-                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
-            }
-            return "fail";
-        }
-        #endregion
-
-        #region ユーザー編集
-        public async Task<String> PutUserAsync(User user)
-        {
-            var jObject = JsonConvert.SerializeObject(user);
-
-            //Make Json object into content type
-            var content = new StringContent(jObject);
-            //Adding header of the contenttype
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            try
-            {
-                var response = await Client.PutAsync(this.BaseUrl + "/api/Users/" + user.Id, content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return "Success";
-                }
-            }
-            catch (Exception e)
-            {
-                // TODO
-                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
-            }
-            return "failed";
-        }
-        #endregion
 
 
 
