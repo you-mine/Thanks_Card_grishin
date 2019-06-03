@@ -63,9 +63,6 @@ namespace LivetApp1.ViewModels
         #endregion
 
 
-
-
-
         #region CloseCommand
         private ViewModelCommand _CloseCommand;
 
@@ -83,6 +80,7 @@ namespace LivetApp1.ViewModels
 
         public void Close()
         {
+            this.thanksCard.PutCard();
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
         #endregion
