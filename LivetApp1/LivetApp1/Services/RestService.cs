@@ -120,6 +120,39 @@ namespace LivetApp1.Services
         }
         #endregion
 
+        #region カード更新
+        public async Task<ThanksCard> PutCard(ThanksCard thanksCard)
+        {
+            thanksCard.ToId = thanksCard.To.Id;
+            thanksCard.FromId = thanksCard.From.Id;
+            thanksCard.To = null;
+            thanksCard.From = null;
+
+            var jObject = JsonConvert.SerializeObject(thanksCard);
+
+            //Make Json object into content type
+            var content = new StringContent(jObject);
+            //Adding header of the contenttype
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            ThanksCard responseThanksCard = null;
+            try
+            {
+                var response = await Client.PutAsync(this.BaseUrl + "/api/Users/" + thanksCard.Id, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    responseThanksCard = JsonConvert.DeserializeObject<ThanksCard>(responseContent);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.PutUserAsync: " + e);
+            }
+            return responseThanksCard;
+        }
+        #endregion
+
         #region 部署一覧取得
         public async Task<List<Department>> GetDepartmentsAsync()
         {
@@ -191,6 +224,8 @@ namespace LivetApp1.Services
             return "failed";
         }
         #endregion
+
+
 
     }
 }
