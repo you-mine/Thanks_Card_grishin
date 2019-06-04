@@ -240,7 +240,7 @@ namespace LivetApp1.Models
         #endregion
 
         #region カード送信メソッド
-        public async Task<ThanksCard> CreateCardAsync()
+        public async Task<ThanksCard> CreateCard2Async()
         {
             IRestService rest = new RestService();
             ThanksCard authorizedThanksCard = await rest.CreateCardAsync(this);

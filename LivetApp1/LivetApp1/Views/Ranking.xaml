@@ -13,8 +13,11 @@
     </Window.DataContext>
     
      <i:Interaction.Triggers>
-     
-     	<!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
     	<!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
     	<!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています --> 
         
@@ -33,6 +36,16 @@
     </i:Interaction.Triggers>
     
     <Grid>
-        
+        <DataGrid HorizontalAlignment="Left" Height="100" Margin="136,98,0,0" VerticalAlignment="Top" Width="302">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="順位" Binding="{Binding To.Name}" />
+                <DataGridTextColumn Header="名前" Binding="{Binding From.Name}" />
+                <DataGridTextColumn Header="部署" Binding="{Binding To.Name}" />
+                <DataGridTextColumn Header="感謝度" Binding="{Binding From.Name}" />
+                <DataGridTextColumn/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="閉じる" HorizontalAlignment="Left" Margin="423,289,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
     </Grid>
+    
 </Window>

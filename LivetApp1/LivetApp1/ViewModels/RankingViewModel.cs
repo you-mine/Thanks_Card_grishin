@@ -17,6 +17,71 @@ namespace LivetApp1.ViewModels
 {
     public class RankingViewModel : ViewModel
     {
+        #region Cards
+
+        private List<ThanksCard> _Cards;
+
+        public List<ThanksCard> Cards
+        {
+            get
+            { return _Cards; }
+            set
+            { 
+                if (_Cards == value)
+                    return;
+                _Cards = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Ranking
+
+        private List<Ranking> _Ranking;
+
+        public List<Ranking> Ranking
+        {
+            get
+            { return _Ranking; }
+            set
+            { 
+                if (_Ranking == value)
+                    return;
+                _Ranking = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+
+        #endregion
+
+        #region　Close
+
+        private ViewModelCommand _CloseCommand;
+
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+
+        public void Close()
+        {
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+        }
+
+        #endregion
+
+
+        #region コマンド
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
          *  lvcom   : ViewModelCommand
@@ -58,7 +123,7 @@ namespace LivetApp1.ViewModels
          * LivetのViewModelではプロパティ変更通知(RaisePropertyChanged)やDispatcherCollectionを使ったコレクション変更通知は
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
-
+        #endregion
         public void Initialize()
         {
         }

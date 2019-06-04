@@ -16,10 +16,9 @@ using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
-    public class CreateCardViewModel : ViewModel
+    public class CreateCard2ViewModel : ViewModel
     {
-
-        #region プロパティのテンプレ
+        #region テンプレ
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
          *  lvcom   : ViewModelCommand
@@ -63,26 +62,8 @@ namespace LivetApp1.ViewModels
          */
         #endregion
 
-        #region ThanksCard
+        #region　Close
 
-        private ThanksCard _ThanksCard;
-
-        public ThanksCard ThanksCard
-        {
-            get
-            { return _ThanksCard; }
-            set
-            { 
-                if (_ThanksCard == value)
-                    return;
-                _ThanksCard = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region CloseCommand
         private ViewModelCommand _CloseCommand;
 
         public ViewModelCommand CloseCommand
@@ -101,9 +82,12 @@ namespace LivetApp1.ViewModels
         {
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
+
         #endregion
 
-        #region SendCommand
+
+
+        #region Send
         private ViewModelCommand _SendCommand;
 
         public ViewModelCommand SendCommand
@@ -120,8 +104,8 @@ namespace LivetApp1.ViewModels
 
         public async void SendAsync()
         {
-            //外部キーのみをエンティティに持たせる。
             ThanksCard.ThanksCount = 1;
+           // ThanksCard.Body =  :
             ThanksCard.FromId = ThanksCard.From.Id;
             ThanksCard.ToId = ThanksCard.To.Id;
             ThanksCard.PostDate = DateTime.Now.Date;
@@ -130,9 +114,30 @@ namespace LivetApp1.ViewModels
             var PostedThanksCard = await this.ThanksCard.CreateCard2Async();
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
         }
+
         #endregion
 
-        #region UsersProperty
+
+        #region ThanksCard
+        private ThanksCard _ThanksCard;
+
+        public ThanksCard ThanksCard
+        {
+            get
+            { return _ThanksCard; }
+            set
+            { 
+                if (_ThanksCard == value)
+                    return;
+                _ThanksCard = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Users
+
         private List<User> _Users;
 
         public List<User> Users
@@ -147,30 +152,73 @@ namespace LivetApp1.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+
+
         #endregion
 
-        #region SelectCommand
-        private ListenerCommand<User> _SelectCommand;
+        #region Message1
+        private string _Message1;
 
-        public ListenerCommand<User> SelectCommand
+        public string Message1
         {
             get
-            {
-                if (_SelectCommand == null)
-                {
-                    _SelectCommand = new ListenerCommand<User>(Select);
-                }
-                return _SelectCommand;
+            { return _Message1; }
+            set
+            { 
+                if (_Message1 == value)
+                    return;
+                _Message1 = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Message2
+
+
+        private string _Message2;
+
+        public string Message2
+        {
+            get
+            { return _Message2; }
+            set
+            { 
+                if (_Message2 == value)
+                    return;
+                _Message2 = value;
+                RaisePropertyChanged();
             }
         }
 
-        public void Select(User parameter)
+
+
+
+
+        #endregion
+
+        #region Message3
+
+
+        private string _Message3;
+
+        public string Message3
         {
-            this.ThanksCard.To = parameter;
+            get
+            { return _Message3; }
+            set
+            { 
+                if (_Message3 == value)
+                    return;
+                _Message3 = value;
+                RaisePropertyChanged();
+            }
         }
 
 
         #endregion
+
 
         public void Initialize()
         {
@@ -183,8 +231,6 @@ namespace LivetApp1.ViewModels
             ShowUserService service = new ShowUserService();
             List<User> users = await service.ShowUserAsync();
             this.Users = users; //プロパティに入れる。
-            var message = new TransitionMessage(typeof(Views.Logon), new CreateCardViewModel(), TransitionMode.Modal, "");
-            Messenger.Raise(message);
             this.ThanksCard = new ThanksCard();
             SessionService session = SessionService.Instance;
             this.ThanksCard.From = session.AuthorizedUser;
