@@ -17,6 +17,7 @@ namespace LivetApp1.ViewModels
 {
     public class AnalyzeViewModel : ViewModel
     {
+        #region テンプレ
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
          *  lvcom   : ViewModelCommand
@@ -58,9 +59,51 @@ namespace LivetApp1.ViewModels
          * LivetのViewModelではプロパティ変更通知(RaisePropertyChanged)やDispatcherCollectionを使ったコレクション変更通知は
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
+        #endregion
+
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+
+        public void Close()
+        {
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+        }
+        #endregion
+
+        #region Cards   //ここに追加
+
+        private ThanksCard _Cards;
+
+        public ThanksCard Cards
+        {
+            get
+            { return _Cards; }
+            set
+            { 
+                if (_Cards == value)
+                    return;
+                _Cards = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
 
         public void Initialize()
         {
+
         }
     }
 }
