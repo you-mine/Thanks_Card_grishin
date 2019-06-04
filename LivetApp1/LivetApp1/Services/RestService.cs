@@ -138,7 +138,7 @@ namespace LivetApp1.Services
             ThanksCard responseThanksCard = null;
             try
             {
-                var response = await Client.PutAsync(this.BaseUrl + "/api/Users/" + thanksCard.Id, content);
+                var response = await Client.PutAsync(this.BaseUrl + "/api/ThanksCard/" + thanksCard.Id, content);
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();

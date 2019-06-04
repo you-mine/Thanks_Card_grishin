@@ -163,8 +163,78 @@ namespace LivetApp1.ViewModels
         }
         #endregion
 
-        public void Initialize()
+        #region Cardsプロパティ
+
+        private List<ThanksCard> _Cards;
+
+        public List<ThanksCard> Cards
         {
+            get
+            { return _Cards; }
+            set
+            { 
+                if (_Cards == value)
+                    return;
+                _Cards = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region UserCardsプロパティ
+
+        private List<ThanksCard> _UserCards;
+
+        public List<ThanksCard> UserCards
+        {
+            get
+            { return _UserCards; }
+            set
+            { 
+                if (_UserCards == value)
+                    return;
+                _UserCards = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region RepresentativeCardsプロパティ
+
+        private List<ThanksCard> _RepresentativeCards;
+
+        public List<ThanksCard> RepresentativeCards
+        {
+            get
+            { return _RepresentativeCards; }
+            set
+            { 
+                if (_RepresentativeCards == value)
+                    return;
+                _RepresentativeCards = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion 
+
+        public async void InitializeAsync()
+        {
+            IRestService service = new RestService();
+            Cards = await service.GetCardsAsync();
+            User AuthorizedUser = SessionService.Instance.AuthorizedUser;
+
+            //ここでユーザーカードにログイン済みのユーザーのみにフィルタリングする。
+            UserCards = Cards.Where(x => 
+                                x.FromId == AuthorizedUser.Id //ここでログイン済みのユーザーの送ったものを抽出
+                                || 
+                                x.ToId == AuthorizedUser.Id //ここでログイン済みのユーザーがもらったものを表示
+                                   ).ToList();
+            
+            //ここで代表事例を抽出する。
+            RepresentativeCards = Cards.Where(x => x.IsRepresentative == true).ToList();
 
         }
     }
