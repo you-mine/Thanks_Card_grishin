@@ -140,7 +140,7 @@ namespace LivetApp1.ViewModels
 
 
         #endregion
-
+        
         #region CreateCard
         private ViewModelCommand _CreateCradCommand;
 
@@ -220,7 +220,9 @@ namespace LivetApp1.ViewModels
 
         #endregion 
 
-        public async void InitializeAsync()
+        
+
+        public async void Initialize()
         {
             IRestService service = new RestService();
             Cards = await service.GetCardsAsync();

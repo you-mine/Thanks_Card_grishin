@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="Homemenu" Height="350" Width="525">
+        Title="ホーム" Height="500" Width="825">
 
     <Window.DataContext>
         <vm:HomemenuViewModel/>
@@ -61,6 +61,38 @@
         <Button Content="管理者向けメニュー" HorizontalAlignment="Left" Margin="55,179,0,0" VerticalAlignment="Top" Width="145"  Command="{Binding AdminMenuCommand}"/>
         <Button Content="ログアウト" HorizontalAlignment="Left" Margin="55,229,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LogoutCommand }"/>
         <Button Content="ランキング" HorizontalAlignment="Left" Margin="55,109,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding RankingCommand}"/>
+
+        <DataGrid ItemsSource="{Binding RepresentativeCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,39,10,340">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
+                <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
+                <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
+                <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <DataGrid ItemsSource="{Binding UserCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,167,10,189">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
+                <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
+                <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
+                <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid ItemsSource="{Binding Cards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,311,10,34">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
+                <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
+                <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
+                <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Background="Honeydew" Content="今月の代表事例" HorizontalAlignment="Left" Margin="210,13,0,0" VerticalAlignment="Top"/>
+        <Label Background="Bisque" Content="あなたに関するカード一覧" HorizontalAlignment="Left" Margin="210,141,0,0" VerticalAlignment="Top"/>
+        <Label Background="LightGreen" Content="最新のカード情報" HorizontalAlignment="Left" Margin="210,285,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
