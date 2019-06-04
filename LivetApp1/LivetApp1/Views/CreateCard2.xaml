@@ -1,0 +1,75 @@
+﻿<Window x:Class="LivetApp1.Views.CreateCards2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:LivetApp1.Views"
+        xmlns:vm="clr-namespace:LivetApp1.ViewModels"
+        Title="CreateCards2" Height="380" Width="745">
+
+    <Window.DataContext>
+        <vm:CreateCard2ViewModel/>
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
+        <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+        </i:EventTrigger>
+
+        <!--Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+
+        <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
+
+    </i:Interaction.Triggers>
+
+    <Grid Margin="0,0,-8,0" Height="349" VerticalAlignment="Top">
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="91,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
+        <Label Content="タイトル" HorizontalAlignment="Left" Margin="29,57,0,0" VerticalAlignment="Top"/>
+        <Label Content="場所" HorizontalAlignment="Left" Margin="29,104,0,0" VerticalAlignment="Top"/>
+        <Label Content="内容" HorizontalAlignment="Left" Margin="29,145,0,0" VerticalAlignment="Top"/>
+        <Label Content="内容2" HorizontalAlignment="Left" Margin="29,192,0,0" VerticalAlignment="Top"/>
+        <Label Content="From/" HorizontalAlignment="Left" Margin="34,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.55,1.962"/>
+        <ComboBox HorizontalAlignment="Left" Margin="91,108,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
+            <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.789,0.538"/>
+
+        </ComboBox>
+        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Id" SelectedItem="{Binding Message1}"  SelectedValuePath="Name" HorizontalAlignment="Left" Margin="91,149,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged_1"/>
+        <ComboBox HorizontalAlignment="Left" Margin="91,192,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="{Binding ThanksCard.From.Name}" HorizontalAlignment="Left" Margin="91,258,0,0" VerticalAlignment="Top" Height="14" Width="18" RenderTransformOrigin="1.278,1.714"/>
+
+        <Label Content="をしてくれてありがとうございました。" HorizontalAlignment="Left" Margin="132,219,0,0" VerticalAlignment="Top" Width="167"/>
+        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
+            Height="210"  HorizontalAlignment="Left" Width="301">
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="氏名" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="部署" Binding="{Binding Department.DepartmentName}" />
+                <DataGridTextColumn Header="課" Binding="{Binding Department.SectionName}"/>
+
+
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="選択" Command="{Binding DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="閉じる" HorizontalAlignment="Left" Margin="612,298,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="送信" HorizontalAlignment="Left" Margin="480,303,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding SendCommand}"/>
+
+    </Grid>
+</Window>

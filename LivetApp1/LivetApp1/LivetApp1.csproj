@@ -54,6 +54,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Ranking.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\EditUserPostService.cs" />
     <Compile Include="Services\EditUserPutService.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Services\RestService.cs" />
     <Compile Include="Services\SessionService.cs" />
     <Compile Include="Services\ShowUserService.cs" />
+    <Compile Include="ViewModels\CreateCard2ViewModel.cs" />
     <Compile Include="ViewModels\CreateCardViewModel.cs" />
     <Compile Include="ViewModels\AdminMenuViewModel.cs" />
     <Compile Include="ViewModels\AnalyzeViewModel.cs" />
@@ -94,6 +96,9 @@
     </Compile>
     <Compile Include="Views\Close.xaml.cs">
       <DependentUpon>Close.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateCard2.xaml.cs">
+      <DependentUpon>CreateCard2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditDepartment.xaml.cs">
       <DependentUpon>EditDepartment.xaml</DependentUpon>
@@ -135,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Close.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateCard2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

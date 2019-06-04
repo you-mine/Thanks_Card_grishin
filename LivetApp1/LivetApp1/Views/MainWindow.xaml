@@ -34,15 +34,9 @@
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
         <!-- MainWindowViewModel からの TransitionMessage("ShowLogon") を受け取とってログオン画面を表示する処理。 -->
-        <l:InteractionMessageTrigger MessageKey="CreateCard" Messenger="{Binding Messenger}">
-            <l:TransitionInteractionMessageAction/>
-        </l:InteractionMessageTrigger>
+
 
         <l:InteractionMessageTrigger MessageKey="Homemenu" Messenger="{Binding Messenger}">
-            <l:TransitionInteractionMessageAction/>
-        </l:InteractionMessageTrigger>
-
-        <l:InteractionMessageTrigger MessageKey="AdminMenu" Messenger="{Binding Messenger}">
             <l:TransitionInteractionMessageAction/>
         </l:InteractionMessageTrigger>
 
