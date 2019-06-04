@@ -29,6 +29,8 @@ namespace WebApplication1.Controllers
             return await _context.ThanksCards
                                     .Include(ThanksCard => ThanksCard.From)
                                     .Include(ThanksCard => ThanksCard.To)
+                                    .Include(ThanksCard => ThanksCard.To.Department)
+                                    .Include(ThanksCard => ThanksCard.From.Department)
                                     .ToListAsync();
         }
         #endregion
