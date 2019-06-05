@@ -25,9 +25,9 @@ namespace LivetApp1.Views
     /// <summary>
     /// CreateCards2.xaml の相互作用ロジック
     /// </summary>
-    public partial class CreateCards2 : Window
+    public partial class CreateCard2 : Window
     {
-        public CreateCards2()
+        public CreateCard2()
         {
             InitializeComponent();
         }
