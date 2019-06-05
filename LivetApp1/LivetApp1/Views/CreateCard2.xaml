@@ -1,4 +1,4 @@
-﻿<Window x:Class="LivetApp1.Views.CreateCards2"
+﻿<Window x:Class="LivetApp1.Views.CreateCard2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -68,7 +68,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="閉じる" HorizontalAlignment="Left" Margin="612,298,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="閉じる" HorizontalAlignment="Left" Margin="612,303,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
         <Button Content="送信" HorizontalAlignment="Left" Margin="480,303,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding SendCommand}"/>
 
     </Grid>

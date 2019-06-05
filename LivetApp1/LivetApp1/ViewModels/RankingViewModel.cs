@@ -12,29 +12,12 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
+using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
     public class RankingViewModel : ViewModel
     {
-        #region Cards
-
-        private List<ThanksCard> _Cards;
-
-        public List<ThanksCard> Cards
-        {
-            get
-            { return _Cards; }
-            set
-            { 
-                if (_Cards == value)
-                    return;
-                _Cards = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
 
         #region Ranking
 
@@ -80,7 +63,6 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-
         #region コマンド
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -124,8 +106,13 @@ namespace LivetApp1.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
         #endregion
-        public void Initialize()
+
+        public async void Initialize()
         {
+            IRestService service = new RestService();
+            Ranking =await service.GetRankings();
         }
+
+
     }
 }
