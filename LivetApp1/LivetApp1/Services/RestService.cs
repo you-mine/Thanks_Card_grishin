@@ -102,20 +102,6 @@ namespace LivetApp1.Services
                 System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
             }
 
-            var a =
-                responseCards
-                            .Where(x => x.PostDate < DateTime.Today)
-                            .GroupBy(x => new { x.To.Id })
-                            .Select(
-                                        x => new {
-                                            x.Key.Id
-                                                ,
-                                            名前 = x.Select(y => y.To.Name).ToArray()[0]
-                                                ,
-                                            総数 = x.Select(y => y.ThanksCount).Sum()
-                                        }
-                                    ).ToList();
-
             return responseCards;
         }
         #endregion
@@ -222,6 +208,34 @@ namespace LivetApp1.Services
                 System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
             }
             return "failed";
+        }
+        #endregion
+
+        #region ランキング取得
+        public async Task<List<Ranking>> GetRankings()
+        {
+            List<Ranking> responseRankings = null;
+            try { 
+                    var response = await Client.GetAsync(this.BaseUrl + "/api/Ranking");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        responseRankings = JsonConvert.DeserializeObject<List<Ranking>>(responseContent);
+                            //降順並んでいるだけでランク付けされていないため、ここでランク付けする。
+                            int Index = 1;
+                            foreach (Ranking a in responseRankings)
+                            {
+                                a.Rank = Index++; 
+                            }
+                    }
+                }
+
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
+            }
+
+            return responseRankings;
         }
         #endregion
 
