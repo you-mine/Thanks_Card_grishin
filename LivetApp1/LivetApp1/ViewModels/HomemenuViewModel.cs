@@ -163,6 +163,30 @@ namespace LivetApp1.ViewModels
         }
         #endregion
 
+        #region CreateCard2
+
+        private ViewModelCommand _CreateCard2Command;
+
+        public ViewModelCommand CreateCard2Command
+        {
+            get
+            {
+                if (_CreateCard2Command == null)
+                {
+                    _CreateCard2Command = new ViewModelCommand(CreateCard2);
+                }
+                return _CreateCard2Command;
+            }
+        }
+
+        public void CreateCard2()
+        {
+            var message = new TransitionMessage(typeof(Views.CreateCard2), new CreateCard2ViewModel(), TransitionMode.Modal, "CreateCard2");
+            Messenger.Raise(message);
+        }
+
+        #endregion
+
         #region Cardsプロパティ
 
         private List<ThanksCard> _Cards;
