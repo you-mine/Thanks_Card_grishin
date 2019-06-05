@@ -7,20 +7,20 @@
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
         Title="Ranking" Height="350" Width="525">
-    
+
     <Window.DataContext>
         <vm:RankingViewModel/>
     </Window.DataContext>
-    
-     <i:Interaction.Triggers>
+
+    <i:Interaction.Triggers>
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
             <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
 
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
-    	<!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
-    	<!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています --> 
-        
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
         <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
         <i:EventTrigger EventName="ContentRendered">
             <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
@@ -34,9 +34,9 @@
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
     </i:Interaction.Triggers>
-    
+
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="100" Margin="136,98,0,0" VerticalAlignment="Top" Width="302">
+        <DataGrid HorizontalAlignment="Left" Height="216" Margin="67,47,0,0" VerticalAlignment="Top" Width="394">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="順位" Binding="{Binding To.Name}" />
                 <DataGridTextColumn Header="名前" Binding="{Binding From.Name}" />
@@ -47,5 +47,5 @@
         </DataGrid>
         <Button Content="閉じる" HorizontalAlignment="Left" Margin="423,289,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
     </Grid>
-    
+
 </Window>
