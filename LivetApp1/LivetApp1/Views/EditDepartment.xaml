@@ -6,18 +6,18 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="EditDepartment" Height="350" Width="525">
-    
+        Title="EditDepartment" Height="384" Width="525" ResizeMode="NoResize" >
+
     <Window.DataContext>
         <vm:EditDepartmentViewModel/>
     </Window.DataContext>
-    
-     <i:Interaction.Triggers>
-     
-     	<!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
-    	<!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
-    	<!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています --> 
-        
+
+    <i:Interaction.Triggers>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
         <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
         <i:EventTrigger EventName="ContentRendered">
             <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
@@ -31,8 +31,47 @@
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
     </i:Interaction.Triggers>
-    
+
     <Grid>
-        
+        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="97,0,98,101">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="部署CD" Binding="{Binding CD}" />
+                <DataGridTextColumn IsReadOnly="True" Header="部名" Binding="{Binding Department.DepartmentName}" />
+                <DataGridTextColumn IsReadOnly="True" Header="課名" Binding="{Binding Department.SectionName}" />
+                <DataGridTemplateColumn Header="管理者フラグ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                            <CheckBox IsChecked="{Binding IsAdmin}" IsEnabled="False"></CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                            <Button Content="編集" Command="{Binding DataContext.EditUserPutCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                            <Button Content="削除" Command="{Binding DataContext.DeleteUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="部署CD" HorizontalAlignment="Left" Margin="100,262,0,0" VerticalAlignment="Top"/>
+        <Label Content="部名" HorizontalAlignment="Left" Margin="185,262,0,0" VerticalAlignment="Top"/>
+        <Label Content="課名" HorizontalAlignment="Left" Margin="270,262,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="97,293,0,0" TextWrapping="Wrap" Text="{Binding EditDepartment.CD}" VerticalAlignment="Top" Width="73"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="185,293,0,0" TextWrapping="Wrap" Text="{Binding EditDepartment.DepartmentName}" VerticalAlignment="Top" Width="73"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="270,293,0,0" TextWrapping="Wrap" Text="{Binding EditDepartment.SectionName}" VerticalAlignment="Top" Width="73"/>
     </Grid>
 </Window>

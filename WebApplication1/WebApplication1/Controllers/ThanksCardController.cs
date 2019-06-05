@@ -31,6 +31,7 @@ namespace WebApplication1.Controllers
                                     .Include(ThanksCard => ThanksCard.To)
                                     .Include(ThanksCard => ThanksCard.To.Department)
                                     .Include(ThanksCard => ThanksCard.From.Department)
+                                    .OrderByDescending(x => x.Id)
                                     .ToListAsync();
         }
         #endregion

@@ -17,6 +17,8 @@ namespace LivetApp1.ViewModels
 {
     public class AnalyzeViewModel : ViewModel
     {
+
+
         #region テンプレ
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -103,7 +105,6 @@ namespace LivetApp1.ViewModels
 
         public void Initialize()
         {
-
         }
     }
 }
