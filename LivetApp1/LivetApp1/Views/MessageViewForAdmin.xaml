@@ -47,14 +47,6 @@
         <TextBox IsEnabled="False" Height="128" Canvas.Left="42" TextWrapping="Wrap" Text="{Binding thanksCard.Body}" Canvas.Top="144" Width="443"/>
         <CheckBox Content="管理者チェック" Canvas.Left="441" Canvas.Top="420" IsChecked="{Binding thanksCard.IsReadedAdmin}" RenderTransformOrigin="4.114,5" />
         <Button Content="閉じる" Canvas.Left="225" Canvas.Top="405" Width="75" Command="{Binding CloseCommand}" RenderTransformOrigin="0.5,0.5"  >
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="329.539"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
         </Button>
         <TextBox Height="23" Canvas.Left="255" TextWrapping="Wrap" Text="TextBox" Canvas.Top="317" Width="120"/>
         <CheckBox Content="" Canvas.Left="370" Canvas.Top="351"/>
