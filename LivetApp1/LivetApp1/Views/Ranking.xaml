@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="Ranking" Height="350" Width="525">
+        Title="Ranking" Height="350" Width="202.073">
 
     <Window.DataContext>
         <vm:RankingViewModel/>
@@ -36,7 +36,7 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        <DataGrid ItemsSource="{Binding Ranking}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="260" Margin="10,10,0,0" VerticalAlignment="Top" Width="497">
+        <DataGrid IsEnabled="False" ItemsSource="{Binding Ranking}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="260" Margin="10,10,0,0" VerticalAlignment="Top" Width="173">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="順位" Binding="{Binding Rank}" />
                 <DataGridTextColumn Header="名前" Binding="{Binding Name}" />
@@ -44,7 +44,7 @@
                 <DataGridTextColumn Header="感謝度" Binding="{Binding ThanksCount}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="閉じる" HorizontalAlignment="Left" Margin="423,289,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="閉じる" HorizontalAlignment="Left" Margin="98,289,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
     </Grid>
 
 </Window>

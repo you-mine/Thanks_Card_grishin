@@ -64,16 +64,18 @@ namespace LivetApp1.ViewModels
             {
                 if (_MessageViewCommand == null)
                 {
-                    _MessageViewCommand = new ListenerCommand<ThanksCard>(MessageView);
+                    _MessageViewCommand = new ListenerCommand<ThanksCard>(MessageViewAsync);
                 }
                 return _MessageViewCommand;
             }
         }
 
-        public void MessageView(ThanksCard parameter)
+        public async void MessageViewAsync(ThanksCard parameter)
         {
             var message = new TransitionMessage(typeof(Views.MessageView), new MessageViewViewModel(parameter), TransitionMode.Modal, "MessageView");
             Messenger.Raise(message);
+            IRestService service = new RestService();
+            this.thanksCards = await service.GetCardsAsync();
         }
 
         #endregion
