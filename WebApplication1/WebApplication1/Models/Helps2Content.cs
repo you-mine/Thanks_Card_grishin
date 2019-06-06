@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Models
 {
-    public class Place
+    public class Helps2Content
     {
         public int Id { get; set; }
         public string CD { get; set; }
-        public string Place { get; set; }
+        public string Help2{ get; set; }
     }
 }
