@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="ShowUser" Height="385.526" Width="470">
+        Title="ShowUser" Height="385.526" Width="470" ResizeMode="NoResize">
     
     <Window.DataContext>
         <vm:ShowUserViewModel/>
@@ -47,13 +47,13 @@
     <Grid>
         <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="CD" Binding="{Binding CD}" />
-                <DataGridTextColumn Header="部" Binding="{Binding Department.DepartmentName}" />
-                <DataGridTextColumn Header="課" Binding="{Binding Department.SectionName}" />
-                <DataGridTextColumn Header="ユーザー名(ID)" Binding="{Binding UserName}"  />
-                <DataGridTextColumn Header="パスワード" Binding="{Binding Password}" />
-                <DataGridTextColumn Header="氏名" Binding="{Binding Name}"  />
-                <DataGridTextColumn Header="ふりがな" Binding="{Binding Hurigana}"  />
+                <DataGridTextColumn IsReadOnly="True" Header="CD" Binding="{Binding CD}" />
+                <DataGridTextColumn IsReadOnly="True" Header="部" Binding="{Binding Department.DepartmentName}" />
+                <DataGridTextColumn IsReadOnly="True" Header="課" Binding="{Binding Department.SectionName}" />
+                <DataGridTextColumn IsReadOnly="True" Header="ユーザー名" Binding="{Binding UserName}"  />
+                <DataGridTextColumn IsReadOnly="True" Header="パスワード" Binding="{Binding Password}" />
+                <DataGridTextColumn IsReadOnly="True" Header="氏名" Binding="{Binding Name}"  />
+                <DataGridTextColumn IsReadOnly="True" Header="ふりがな" Binding="{Binding Hurigana}"  />
                 <DataGridTemplateColumn Header="管理者フラグ">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

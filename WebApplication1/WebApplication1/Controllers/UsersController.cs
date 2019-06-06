@@ -26,6 +26,7 @@ namespace WebApplication1.Controllers
         {
             return await _context.Users
                                         .Include(Users => Users.Department)
+                                        .OrderByDescending(x => x.Id)
                                         .ToListAsync();
         }
 
