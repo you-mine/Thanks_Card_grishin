@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="メッセージ詳細（管理者向け）" Height="492" Width="539">
+        Title="メッセージ詳細（管理者向け）" Height="492" Width="555">
 
     <Window.DataContext>
         <vm:MessageViewForAdminViewModel/>
@@ -48,8 +48,8 @@
         <CheckBox Content="管理者チェック" Canvas.Left="441" Canvas.Top="420" IsChecked="{Binding thanksCard.IsReadedAdmin}" RenderTransformOrigin="4.114,5" />
         <Button Content="閉じる" Canvas.Left="225" Canvas.Top="405" Width="75" Command="{Binding CloseCommand}" RenderTransformOrigin="0.5,0.5"  >
         </Button>
-        <TextBox Height="23" Canvas.Left="255" TextWrapping="Wrap" Text="TextBox" Canvas.Top="317" Width="120"/>
-        <CheckBox Content="" Canvas.Left="370" Canvas.Top="351"/>
+        <TextBox Height="23" Canvas.Left="255" TextWrapping="Wrap" Text="{Binding thanksCard.ThanksCount}" Canvas.Top="317" Width="120"/>
+        <CheckBox Content="" Canvas.Left="370" Canvas.Top="351" IsChecked="{Binding thanksCard.IsRepresentative}"/>
         <Label Content="このカードの感謝度はどのくらいにしますか？" Canvas.Left="164" Canvas.Top="283" RenderTransformOrigin="0,0"/>
         <Label Content="感謝度" Canvas.Left="212" Canvas.Top="314"/>
         <Label Content="このカードを代表事例にする" Canvas.Left="182" Canvas.Top="345" RenderTransformOrigin="0,0"/>

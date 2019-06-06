@@ -32,12 +32,17 @@
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
             <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
+
+        <l:InteractionMessageTrigger MessageKey="Authorized" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+        
     </i:Interaction.Triggers>
 
     <Canvas>
 
         <TextBox Height="20" TextWrapping="Wrap" Text="{Binding ThanksCard.Title}"  Width="167" Margin="86,42,486,289"/>
-        <TextBox  Height="140" Width="275" TextWrapping="Wrap" Text="{Binding ThanksCard.Body}" Canvas.Left="52" Canvas.Top="109"/>
+        <TextBox AcceptsReturn="True" Height="140" Width="275" TextWrapping="Wrap" Text="{Binding ThanksCard.Body}" Canvas.Left="52" Canvas.Top="109"/>
         <Label Content="本文"  Height="24" Margin="52,80,631,247"   Width="55" />
         <Label Content="感謝カード作成"  Height="27"   Width="255" Background="Aqua" Canvas.Left="52" Canvas.Top="10"/>
         <Button Content="閉じる"  Width="55" Margin="650,306,33,22" Click="Button_Click" Command="{Binding CloseCommand}"/>

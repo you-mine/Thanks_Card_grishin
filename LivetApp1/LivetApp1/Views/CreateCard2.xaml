@@ -42,13 +42,12 @@
         <Label Content="内容2" HorizontalAlignment="Left" Margin="29,192,0,0" VerticalAlignment="Top"/>
         <Label Content="From/" HorizontalAlignment="Left" Margin="34,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.55,1.962"/>
         <ComboBox HorizontalAlignment="Left" Margin="91,108,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
-            <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.789,0.538"/>
+        <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.789,0.538"/>
 
         </ComboBox>
         <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Id" SelectedItem="{Binding Message1}"  SelectedValuePath="Name" HorizontalAlignment="Left" Margin="91,149,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged_1"/>
         <ComboBox HorizontalAlignment="Left" Margin="91,192,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="{Binding ThanksCard.From.Name}" HorizontalAlignment="Left" Margin="91,258,0,0" VerticalAlignment="Top" Height="14" Width="18" RenderTransformOrigin="1.278,1.714"/>
-
+        <Label Content="{Binding ThanksCard.From.Name}" Margin="70,258,630,67"  Height="24"/>
         <Label Content="をしてくれてありがとうございました。" HorizontalAlignment="Left" Margin="132,219,0,0" VerticalAlignment="Top" Width="167"/>
         <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
             Height="210"  HorizontalAlignment="Left" Width="301">
