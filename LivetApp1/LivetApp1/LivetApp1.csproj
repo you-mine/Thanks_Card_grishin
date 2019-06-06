@@ -53,11 +53,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AnalyzeDtoD.cs" />
+    <Compile Include="Models\AnalyzeUtoU.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Ranking.cs" />
+    <Compile Include="Models\Term.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Services\AnalyzeService.cs" />
     <Compile Include="Services\EditUserPostService.cs" />
     <Compile Include="Services\EditUserPutService.cs" />
+    <Compile Include="Services\IAnalyzeService.cs" />
     <Compile Include="Services\IEditUserService.cs" />
     <Compile Include="Services\IRestService.cs" />
     <Compile Include="Services\IShowUserService.cs" />
