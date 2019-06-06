@@ -12,9 +12,9 @@ namespace WebApplication1.Models
         public DbSet<User> Users { get; set; }
         public DbSet<ThanksCard> ThanksCards { get; set; }
         public DbSet<Department> Department { get; set; }
-        public Dbset<Place> Place { get; set; }
-        public Dbset<Helps1> Helps1 { get; set; }
-        public Dbset<Helps2> Helps2 { get; set; }
+        public DbSet<PlaceContent> Place { get; set; }
+        public DbSet<Helps1Content> Helps1 { get; set; }
+        public DbSet<Helps2Content> Helps2 { get; set; }
 
     }
 }

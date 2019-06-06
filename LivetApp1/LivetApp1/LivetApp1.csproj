@@ -54,10 +54,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Help1Content.cs" />
+    <Compile Include="Models\Help2Content.cs" />
+    <Compile Include="Models\PlaceContent.cs" />
     <Compile Include="Models\Ranking.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Services\ContentServise.cs" />
     <Compile Include="Services\EditUserPostService.cs" />
     <Compile Include="Services\EditUserPutService.cs" />
+    <Compile Include="Services\IContentServise.cs" />
     <Compile Include="Services\IEditUserService.cs" />
     <Compile Include="Services\IRestService.cs" />
     <Compile Include="Services\IShowUserService.cs" />
