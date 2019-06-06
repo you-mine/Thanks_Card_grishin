@@ -50,7 +50,7 @@
                 <DataGridTextColumn Header="CD" Binding="{Binding CD}" />
                 <DataGridTextColumn Header="部" Binding="{Binding Department.DepartmentName}" />
                 <DataGridTextColumn Header="課" Binding="{Binding Department.SectionName}" />
-                <DataGridTextColumn Header="ユーザー名" Binding="{Binding UserName}"  />
+                <DataGridTextColumn Header="ユーザー名(ID)" Binding="{Binding UserName}"  />
                 <DataGridTextColumn Header="パスワード" Binding="{Binding Password}" />
                 <DataGridTextColumn Header="氏名" Binding="{Binding Name}"  />
                 <DataGridTextColumn Header="ふりがな" Binding="{Binding Hurigana}"  />
