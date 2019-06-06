@@ -12,6 +12,7 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
+using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
@@ -63,6 +64,65 @@ namespace LivetApp1.ViewModels
          */
         #endregion
 
+        #region サービス
+        private IAnalyzeService service = new AnalyzeService();
+        #endregion
+
+        #region Term
+        private Term _Term;
+
+        public Term Term
+        {
+            get
+            { return _Term; }
+            set
+            {
+                if (_Term == value)
+                    return;
+                _Term = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region UtoU
+
+        private List<AnalyzeUtoU> _UtoU;
+
+        public List<AnalyzeUtoU> UtoU
+        {
+            get
+            { return _UtoU; }
+            set
+            {
+                if (_UtoU == value)
+                    return;
+                _UtoU = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region DtoD
+
+        private List<AnalyzeDtoD> _DtoD;
+
+        public List<AnalyzeDtoD> DtoD
+        {
+            get
+            { return _DtoD; }
+            set
+            { 
+                if (_DtoD == value)
+                    return;
+                _DtoD = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
         #region CloseCommand
         private ViewModelCommand _CloseCommand;
 
@@ -84,27 +144,37 @@ namespace LivetApp1.ViewModels
         }
         #endregion
 
-        #region Cards   //ここに追加
+        #region RefreshCommand
 
-        private ThanksCard _Cards;
+        private ViewModelCommand _RefreshCommand;
 
-        public ThanksCard Cards
+        public ViewModelCommand RefreshCommand
         {
             get
-            { return _Cards; }
-            set
-            { 
-                if (_Cards == value)
-                    return;
-                _Cards = value;
-                RaisePropertyChanged();
+            {
+                if (_RefreshCommand == null)
+                {
+                    _RefreshCommand = new ViewModelCommand(Refresh);
+                }
+                return _RefreshCommand;
             }
+        }
+
+        public async void Refresh()
+        {
+            UtoU = await service.GetAnalyzeUtoUs(this.Term);
+            DtoD = await service.GetAnalyzeDtoDs(this.Term);
         }
 
         #endregion
 
+
+
         public void Initialize()
         {
+            this.Term = new Term();
         }
+
+
     }
 }
