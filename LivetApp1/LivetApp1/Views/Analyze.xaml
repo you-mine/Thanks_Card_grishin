@@ -46,11 +46,11 @@
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="372*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid HorizontalAlignment="Left" Height="172" Margin="10,10,0,0" VerticalAlignment="Top" Width="444" Grid.ColumnSpan="4">
+                    <DataGrid IsReadOnly="True" ItemsSource="{Binding UtoU}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="172" Margin="10,10,0,0" VerticalAlignment="Top" Width="444" Grid.ColumnSpan="4">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="名前" Binding="{Binding Cards.}" />
-                            <DataGridTextColumn Header="部署名" Binding="{Binding Cards}" />
-                            <DataGridTextColumn Header="感謝度" Binding="{Binding Cards}"  />
+                            <DataGridTextColumn Header="名前" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="部署名" Binding="{Binding DepartmentName}" />
+                            <DataGridTextColumn Header="感謝度" Binding="{Binding ThanksCount}"  />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -61,20 +61,30 @@
                         <ColumnDefinition Width="12*"/>
                         <ColumnDefinition Width="397*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid HorizontalAlignment="Left" Height="172" Margin="10,10,0,0" VerticalAlignment="Top" Width="444" Grid.ColumnSpan="2">
+                    <DataGrid IsReadOnly="True" ItemsSource="{Binding DtoD}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="172" Margin="10,10,0,0" VerticalAlignment="Top" Width="444" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="部署名" Binding="{Binding Cards.}" />
-                            <DataGridTextColumn Header="感謝度" Binding="{Binding Cards}" />
-                            <DataGridTextColumn Header="部署－部署" Binding="{Binding Cards}"  />
+                            <DataGridTextColumn Header="部署名" Binding="{Binding FromDepartmentName}" />
+                            
+                            <DataGridTemplateColumn Header="">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="→" IsEnabled="False"></TextBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            
+                            <DataGridTextColumn Header="部署名" Binding="{Binding ToDepartmentName}" />
+                            <DataGridTextColumn Header="感謝度" Binding="{Binding ThanksCount}"  />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
         <Button Content="閉じる" HorizontalAlignment="Left" Margin="420,280,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" />
-        <DatePicker SelectedDate="{Binding Date}" HorizontalAlignment="Left" Margin="25,16,0,0" VerticalAlignment="Top" Width="122"/>
-        <DatePicker HorizontalAlignment="Left" Margin="192,16,0,0" VerticalAlignment="Top" Width="122"/>
+        <DatePicker SelectedDate="{Binding Term.Term1}" HorizontalAlignment="Left" Margin="25,16,0,0" VerticalAlignment="Top" Width="122"/>
+        <DatePicker SelectedDate="{Binding Term.Term2}" HorizontalAlignment="Left" Margin="192,16,0,0" VerticalAlignment="Top" Width="122"/>
         <Label Content="～" HorizontalAlignment="Left" Margin="158,15,0,0" VerticalAlignment="Top"/>
+        <Button Content="範囲決定" HorizontalAlignment="Left" Height="19" Margin="330,18,0,0" VerticalAlignment="Top" Width="99" Command="{Binding RefreshCommand}" />
 
     </Grid>
 </Window>
