@@ -64,8 +64,6 @@
     <Compile Include="Models\Term.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\ContentServise.cs" />
-    <Compile Include="Services\EditUserPostService.cs" />
-    <Compile Include="Services\EditUserPutService.cs" />
     <Compile Include="Services\IContentServise.cs" />
     <Compile Include="Services\AnalyzeService.cs" />
     <Compile Include="Services\EditUserPostService.cs" />
