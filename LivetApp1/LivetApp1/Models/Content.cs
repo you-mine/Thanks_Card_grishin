@@ -7,7 +7,7 @@ using Livet;
 
 namespace LivetApp1.Models
 {
-    public class PlaceContent : NotificationObject
+    public class Content : NotificationObject
     {
         /*
          * NotificationObjectはプロパティ変更通知の仕組みを実装したオブジェクトです。
@@ -53,17 +53,17 @@ namespace LivetApp1.Models
 
         #region PlaceProperty
 
-        private string _Place;
+        private string _Content;
 
-        public string Place
+        public string Content
         {
             get
-            { return _Place; }
+            { return _Content; }
             set
             { 
-                if (_Place == value)
+                if (_Content == value)
                     return;
-                _Place = value;
+                _Content = value;
                 RaisePropertyChanged();
             }
         }
