@@ -6,8 +6,10 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="MainWindow" Height="350" Width="525">
-
+        Title="MainWindow" Height="350" Width="525" Icon="../Resources/sakura2-01.png">
+        
+    
+    
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -45,17 +47,26 @@
             <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
 
-
     </i:Interaction.Triggers>
 
     <Grid>
+        
         <TextBox HorizontalAlignment="Left" Height="23" Margin="187,57,0,0" TextWrapping="Wrap" Text="{Binding User.UserName}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,125,0,0" TextWrapping="Wrap" Text="{Binding User.Password}" VerticalAlignment="Top" Width="120"/>
+       
+        <PasswordBox  HorizontalAlignment="Left" Height="23" Margin="187,125,0,0" VerticalAlignment="Top" Width="120">
+            <i:Interaction.Behaviors>
+                <l:PasswordBoxBindingSupportBehavior Password="{Binding User.Password}" />
+            </i:Interaction.Behaviors>
+        </PasswordBox>
+        
         <Label Content="ID" HorizontalAlignment="Left" Margin="149,54,0,0" VerticalAlignment="Top"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="127,125,0,0" VerticalAlignment="Top"/>
         <Button Content="ログイン" HorizontalAlignment="Left" Margin="201,234,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LogonCommand}"/>
-        <Image Source="../Resources/sakura2-01.png" Margin="335,191,81,33"/>
 
+        <Grid.Background>
+            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+            </Grid.Background>
+        
     </Grid>
     
     

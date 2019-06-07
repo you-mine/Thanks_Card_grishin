@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="ホーム" Height="500" Width="825">
+        Title="ホーム" Height="500" Width="825" Icon="../Resources/watermark.jpg">
 
     <Window.DataContext>
         <vm:HomemenuViewModel/>
@@ -59,6 +59,10 @@
     </i:Interaction.Triggers>
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Resources/39_t.jpeg"/>
+        </Grid.Background>
+
         <Button Content="カード作成" HorizontalAlignment="Left" Margin="55,39,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,0.6" Command="{Binding CreateCradCommand}"/>
         <Button Content="カード作成（簡易）" HorizontalAlignment="Left" Margin="55,84,0,0" VerticalAlignment="Top" Width="124" Command="{Binding CreateCard2Command}"/>
         <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="55,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.32,-0.8" Command="{Binding CardviewCommand}"/>
@@ -97,6 +101,6 @@
         <Label Background="Honeydew" Content="今月の代表事例" HorizontalAlignment="Left" Margin="210,13,0,0" VerticalAlignment="Top"/>
         <Label Background="Bisque" Content="あなたに関するカード一覧" HorizontalAlignment="Left" Margin="210,141,0,0" VerticalAlignment="Top"/>
         <Label Background="LightGreen" Content="最新のカード情報" HorizontalAlignment="Left" Margin="210,285,0,0" VerticalAlignment="Top"/>
-
+        <Image Source="../Resources/bird2_R.png" Margin="33,301,651,50"></Image>
     </Grid>
 </Window>

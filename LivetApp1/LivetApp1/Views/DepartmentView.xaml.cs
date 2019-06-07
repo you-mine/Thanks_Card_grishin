@@ -23,11 +23,11 @@ namespace LivetApp1.Views
      */
 
     /// <summary>
-    /// Content.xaml の相互作用ロジック
+    /// EditDepartment.xaml の相互作用ロジック
     /// </summary>
-    public partial class Content : Window
+    public partial class DepartmentView : Window
     {
-        public Content()
+        public DepartmentView()
         {
             InitializeComponent();
         }

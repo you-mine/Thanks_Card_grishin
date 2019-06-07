@@ -68,10 +68,13 @@
     <Compile Include="Services\EditUserPostService.cs" />
     <Compile Include="Services\EditUserPutService.cs" />
     <Compile Include="Services\IAnalyzeService.cs" />
+    <Compile Include="Services\IEditDepartment.cs" />
     <Compile Include="Services\IEditUserService.cs" />
     <Compile Include="Services\IRestService.cs" />
     <Compile Include="Services\IShowUserService.cs" />
     <Compile Include="Services\PlaceContentService.cs" />
+    <Compile Include="Services\PostDepartmentService.cs" />
+    <Compile Include="Services\PutDepartmentService.cs" />
     <Compile Include="Services\RestService.cs" />
     <Compile Include="Services\SessionService.cs" />
     <Compile Include="Services\ShowUserService.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="ViewModels\CardsViewForAdminViewModel.cs" />
     <Compile Include="ViewModels\CardviewViewModel.cs" />
     <Compile Include="ViewModels\CloseViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentViewViewModel.cs" />
     <Compile Include="ViewModels\EditDepartmentViewModel.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
     <Compile Include="ViewModels\ExceloutputViewModel.cs" />
@@ -91,9 +95,6 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MessageViewForAdminViewModel.cs" />
     <Compile Include="ViewModels\MessageViewViewModel.cs" />
-    <Compile Include="Views\Content.xaml.cs">
-      <DependentUpon>Content.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CreateCard.xaml.cs">
       <DependentUpon>CreateCard.xaml</DependentUpon>
     </Compile>
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="Views\CreateCard2.xaml.cs">
       <DependentUpon>CreateCard2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentView.xaml.cs">
+      <DependentUpon>DepartmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditDepartment.xaml.cs">
       <DependentUpon>EditDepartment.xaml</DependentUpon>
@@ -140,10 +144,6 @@
     <Compile Include="Views\ShowUser.xaml.cs">
       <DependentUpon>ShowUser.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\Content.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\CreateCard.xaml">
     </Page>
     <Page Include="Views\AdminMenu.xaml">
@@ -167,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateCard2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DepartmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -274,13 +278,46 @@
     <None Include="Resources\watermark %281%29.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\00000228.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\00000260.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\00000097.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ga.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\mm.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\_yotsuba-clover-01-02-02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\watermark.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\39_t.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\76884407.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\37641167.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bird2_R.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\star_p.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\4hana_green_honbun.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\11happa_green_honbun.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

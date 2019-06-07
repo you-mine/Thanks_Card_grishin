@@ -35,6 +35,11 @@
     </i:Interaction.Triggers>
 
     <Grid Margin="0,0,-8,0" Height="349" VerticalAlignment="Top">
+        <Grid.Background>
+            <ImageBrush ImageSource="../Resources/images.jpg"/>
+        </Grid.Background>
+
+
         <TextBox HorizontalAlignment="Left" Height="23" Margin="91,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
         <Label Content="タイトル" HorizontalAlignment="Left" Margin="29,57,0,0" VerticalAlignment="Top"/>
         <Label Content="場所" HorizontalAlignment="Left" Margin="29,104,0,0" VerticalAlignment="Top"/>
