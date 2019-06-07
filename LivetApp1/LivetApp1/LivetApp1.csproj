@@ -257,7 +257,22 @@
     <Resource Include="Resources\it-598180514dd41-1200.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\plant39.jpg" />
+    <Resource Include="Resources\plant39.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\illust4460_thumb.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\watermark %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\00000228.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\00000260.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\00000097.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
