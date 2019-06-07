@@ -137,8 +137,7 @@ namespace LivetApp1.ViewModels
             }
         }
 
-
-
+        
 
         public EditUserViewModel(User user ,String mode)
         {
