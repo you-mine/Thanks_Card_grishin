@@ -17,5 +17,6 @@ namespace LivetApp1.Services
         Task<string> DeleteUserAsync(User user);
         Task<ThanksCard> PutCard(ThanksCard thanksCard);
         Task<List<Ranking>> GetRankings();
+        Task<string> PutDepartment(Department department);
     }
 }

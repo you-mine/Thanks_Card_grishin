@@ -162,6 +162,32 @@ namespace LivetApp1.Services
         }
         #endregion
 
+        #region 部署更新
+        public async Task<string> PutDepartment(Department department)
+        {
+            var jObject = JsonConvert.SerializeObject(department);
+
+            //Make Json object into content type
+            var content = new StringContent(jObject);
+            //Adding header of the contenttype
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            try
+            {
+                var response = await Client.PutAsync(this.BaseUrl + "/api/Departments/" + department.Id, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return "success";
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.PutUserAsync: " + e);
+            }
+            return "failed";
+        }
+        #endregion
+
         #region ユーザー削除
         public async Task<string> DeleteUserAsync(User user)
         {

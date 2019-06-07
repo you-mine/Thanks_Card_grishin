@@ -17,6 +17,24 @@ namespace LivetApp1.ViewModels
 {
     public class EditDepartmentViewModel : ViewModel
     {
+        #region Departments
+
+        private List<Department> _Departments;
+
+        public List<Department> Departments
+        {
+            get
+            { return _Departments; }
+            set
+            { 
+                if (_Departments == value)
+                    return;
+                _Departments = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
 
         #region EditDepartment
 
@@ -37,7 +55,28 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-        
+        #region SelectCommand
+
+        private ListenerCommand<Department> _SelectCommand;
+
+        public ListenerCommand<Department> SelectCommand
+        {
+            get
+            {
+                if (_SelectCommand == null)
+                {
+                    _SelectCommand = new ListenerCommand<Department>(Select);
+                }
+                return _SelectCommand;
+            }
+        }
+
+        public void Select(Department parameter)
+        {
+            this.EditDepartment = parameter;
+        }
+
+        #endregion
 
         public void Initialize()
         {
