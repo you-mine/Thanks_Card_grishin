@@ -68,6 +68,6 @@
         <Button Content="Excel出力" HorizontalAlignment="Left" Margin="214,131,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" RenderTransformOrigin="0.347,0.7" Command="{Binding outputCommand }" />
         <Button Content="ユーザー情報変更・追加" HorizontalAlignment="Left" Margin="183,179,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="3.4,5.6" Grid.ColumnSpan="2" Command="{Binding EditUserCommand }"/>
         <Button Content="部署情報変更・追加" HorizontalAlignment="Left" Margin="183,239,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2" Command="{Binding EditDepartmentCommand}" />
-
+        <Image Source="../Resources/plant39.jpg" Margin="29,216,123,23" />
     </Grid>
 </Window>

@@ -36,7 +36,7 @@
         <l:InteractionMessageTrigger MessageKey="Authorized" Messenger="{Binding Messenger}">
             <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
-        
+
     </i:Interaction.Triggers>
 
     <Canvas>
@@ -50,6 +50,7 @@
         <Label Content="{Binding ThanksCard.From.Name}" Margin="76,270,486,0"  Height="24"/>
         <Label Content="タイトル"  Height="24" Margin="32,38,658,289"   Width="49" />
         <Label Content="From/"  Margin="37,270,647,50" />
+       
 
         <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
             Height="200" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301">
