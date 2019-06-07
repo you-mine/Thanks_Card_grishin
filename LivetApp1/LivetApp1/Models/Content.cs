@@ -51,11 +51,11 @@ namespace LivetApp1.Models
 
         #endregion
 
-        #region PlaceProperty
+        #region ContentProperty
 
         private string _Content;
 
-        public string Content
+        public string content
         {
             get
             { return _Content; }

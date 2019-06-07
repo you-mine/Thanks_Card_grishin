@@ -13,11 +13,14 @@ using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
 using System.Windows;
+using LivetApp1.Services;
 
 namespace LivetApp1.ViewModels
 {
     public class ContentViewModel : ViewModel
     {
+        IContentServise service = null;
+
         #region テンプレ
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -62,73 +65,58 @@ namespace LivetApp1.ViewModels
          */
         #endregion
 
-        #region Help1Property
+        #region ContentProperty
 
-        private Help1Content _Help1Content;
+        private Content _content;
 
-        public Help1Content Help1Content
+        public Content content
         {
             get
-            { return _Help1Content; }
+            { return _content; }
             set
-            { 
-                if (_Help1Content == value)
+            {
+                if (_content == value)
                     return;
-                _Help1Content = value;
+                _content = value;
                 RaisePropertyChanged();
             }
         }
 
         #endregion
 
-        #region Help2Proerty
+        #region Close
 
-        private Help2Content _Help2Content;
+        private ViewModelCommand _CloseCommand;
 
-        public Help2Content Help2Content
+        public ViewModelCommand CloseCommand
         {
             get
-            { return _Help2Content; }
-            set
-            { 
-                if (_Help2Content == value)
-                    return;
-                _Help2Content = value;
-                RaisePropertyChanged();
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
             }
         }
 
-        #endregion
-
-        #region PlaceProperty
-
-        private PlaceContent _PlaceContent;
-
-        public PlaceContent PlaceContent
+        public void Close()
         {
-            get
-            { return _PlaceContent; }
-            set
-            { 
-                if (_PlaceContent == value)
-                    return;
-                _PlaceContent = value;
-                RaisePropertyChanged();
-            }
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
 
         #endregion
 
         #region Help1List
 
-        private List<string> _help1Content;
+        private List<Content> _help1Content;
 
-        public List<string> help1Content
+        public List<Content> help1Content
         {
             get
             { return _help1Content; }
             set
-            { 
+            {
                 if (_help1Content == value)
                     return;
                 _help1Content = value;
@@ -140,14 +128,14 @@ namespace LivetApp1.ViewModels
 
         #region Help2List
 
-        private List<string> _help2Content;
+        private List<Content> _help2Content;
 
-        public List<string> help2Content
+        public List<Content> help2Content
         {
             get
             { return _help2Content; }
             set
-            { 
+            {
                 if (_help2Content == value)
                     return;
                 _help2Content = value;
@@ -158,15 +146,15 @@ namespace LivetApp1.ViewModels
         #endregion
 
         #region PlaceList
-        
-        private List<string> _placeContent;
 
-        public List<string> placeContent
+        private List<Content> _placeContent;
+
+        public List<Content> placeContent
         {
             get
             { return _placeContent; }
             set
-            { 
+            {
                 if (_placeContent == value)
                     return;
                 _placeContent = value;
@@ -176,28 +164,27 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-        #region Help1Post
+        #region SendCommand
+        private ViewModelCommand _SendCommand;
 
-        private ViewModelCommand _Help1PostCommand;
-
-        public ViewModelCommand Help1PostCommand
+        public ViewModelCommand SendCommand
         {
             get
             {
-                if (_Help1PostCommand == null)
+                if (_SendCommand == null)
                 {
-                    _Help1PostCommand = new ViewModelCommand(Help1Post);
+                    _SendCommand = new ViewModelCommand(SendAsync);
                 }
-                return _Help1PostCommand;
+                return _SendCommand;
             }
         }
 
-        public async void Help1Post()
+        public async void SendAsync()
         {
-            string process = await service.EditUserAsync();
-            if (process == "success")
+            string result = await service.Put(content);
+            if (result == "success")
             {
-                MessageBox.Show("データ作成に成功しました。", "情報");
+                MessageBox.Show("データ更新に成功しました。", "情報");
                 Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
             }
             else
@@ -205,214 +192,54 @@ namespace LivetApp1.ViewModels
                 MessageBox.Show("データ更新に失敗しました。正しい値を入力してください", "エラー");
             }
         }
-
-        public Help1ContentViewModel(Help1Content help1Content, String mode)
-        {
-            this.Help1Content = help1Content;
-
-            if (mode == "Add")
-            {
-                service = new EditUserPostService();
-            }
-            else if (mode == "Put")
-            {
-                service = new EditUserPutService();
-            }
-
-        }
-
-        public EditUserViewModel()
-        {
-        }
-
         #endregion
 
-        #region Help1Put
+        #region DeleteCommand
 
-        private ViewModelCommand _Help1PutCommand;
+        private ViewModelCommand _DeleteCommand;
 
-        public ViewModelCommand Help1PutCommand
+        public ViewModelCommand DeleteCommand
         {
             get
             {
-                if (_Help1PutCommand == null)
+                if (_DeleteCommand == null)
                 {
-                    _Help1PutCommand = new ViewModelCommand(Help1Put);
+                    _DeleteCommand = new ViewModelCommand(Delete);
                 }
-                return _Help1PutCommand;
+                return _DeleteCommand;
             }
         }
 
-        public void Help1Put()
+        public void Delete()
         {
-            
+            service.Delete(content);
         }
 
         #endregion
 
-        #region Help1Delete
-
-        private ViewModelCommand _Help1DeleteCommand;
-
-        public ViewModelCommand Help1DeleteCommand
+        public void ChangeToPlace()
         {
-            get
-            {
-                if (_Help1DeleteCommand == null)
-                {
-                    _Help1DeleteCommand = new ViewModelCommand(Help1Delete);
-                }
-                return _Help1DeleteCommand;
-            }
+            this.service = new PlaceContentService();
         }
 
-        public void Help1Delete()
+        public void ChangeToThanks1()
         {
-            
+            this.service = new Help1ContentService();
         }
 
-        #endregion
-
-        #region Help2Post
-
-        private ViewModelCommand _Help2PostCommand;
-
-        public ViewModelCommand Help2PostCommand
+        public void ChangeToThank2()
         {
-            get
-            {
-                if (_Help2PostCommand == null)
-                {
-                    _Help2PostCommand = new ViewModelCommand(Help2Post);
-                }
-                return _Help2PostCommand;
-            }
+            this.service = new Help2ContentService();
         }
 
-        public void Help2Post()
+        public async void Initialize()
         {
-            
-        }
-
-        #endregion
-
-        #region Help2Put
-
-        private ViewModelCommand _Help2PutCommand;
-
-        public ViewModelCommand Help2PutCommand
-        {
-            get
-            {
-                if (_Help2PutCommand == null)
-                {
-                    _Help2PutCommand = new ViewModelCommand(Help2Put);
-                }
-                return _Help2PutCommand;
-            }
-        }
-
-        public void Help2Put()
-        {
-            
-        }
-
-        #endregion
-
-        #region Help2Delete
-
-        private ViewModelCommand _Help2DeleteCommand;
-
-        public ViewModelCommand Help2DeleteCommand
-        {
-            get
-            {
-                if (_Help2DeleteCommand == null)
-                {
-                    _Help2DeleteCommand = new ViewModelCommand(Help2Delete);
-                }
-                return _Help2DeleteCommand;
-            }
-        }
-
-        public void Help2Delete()
-        {
-
-        }
-
-        #endregion
-
-        #region PlacePost
-
-        private ViewModelCommand _PlacePostCommand;
-
-        public ViewModelCommand PlacePostCommand
-        {
-            get
-            {
-                if (_PlacePostCommand == null)
-                {
-                    _PlacePostCommand = new ViewModelCommand(PlacePost);
-                }
-                return _PlacePostCommand;
-            }
-        }
-
-        public void PlacePost()
-        {
-
-        }
-
-        #endregion
-
-        #region PlacePut
-
-        private ViewModelCommand _PlacePutCommand;
-
-        public ViewModelCommand PlacePutCommand
-        {
-            get
-            {
-                if (_PlacePutCommand == null)
-                {
-                    _PlacePutCommand = new ViewModelCommand(PlacePut);
-                }
-                return _PlacePutCommand;
-            }
-        }
-
-        public void PlacePut()
-        {
-            
-        }
-
-        #endregion
-
-        #region PlaceDelete
-
-        private ViewModelCommand _PlaceDeleteCommand;
-
-        public ViewModelCommand PlaceDeleteCommand
-        {
-            get
-            {
-                if (_PlaceDeleteCommand == null)
-                {
-                    _PlaceDeleteCommand = new ViewModelCommand(PlaceDelete);
-                }
-                return _PlaceDeleteCommand;
-            }
-        }
-
-        public void PlaceDelete()
-        {
-             
-        }
-
-        #endregion
-
-        public void Initialize()
-        {
+            service = new Help1ContentService();
+            help1Content = await service.Get();
+            service = new Help2ContentService();
+            help2Content = await service.Get();
+            service = new PlaceContentService();
+            placeContent = await service.Get();
 
         }
     }

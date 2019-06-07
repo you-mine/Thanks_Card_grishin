@@ -9,8 +9,9 @@ namespace LivetApp1.Services
 {
     interface IContentServise
     {                                        //ここ！ここ！ここ！
-        Task<String> Help1ContentAsync(Help1Content help1Content);
-        Task<String> Help2ContentAsync(Help2Content help2Content);
-        Task<String> PlaceContentAsync(PlaceContent placeContent);
+        Task<List<Content>> Get();
+        Task<String> Put(Content content);
+        Task<String> Post(Content content);
+        Task<String> Delete(Content content);
     }
 }
