@@ -162,19 +162,13 @@ namespace LivetApp1.Services
         }
         #endregion
 
-        #region 部署更新
-        public async Task<string> PutDepartment(Department department)
+        #region 部署削除
+        public async Task<string> DeleteDepartment(Department department)
         {
-            var jObject = JsonConvert.SerializeObject(department);
-
-            //Make Json object into content type
-            var content = new StringContent(jObject);
-            //Adding header of the contenttype
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
             try
             {
-                var response = await Client.PutAsync(this.BaseUrl + "/api/Departments/" + department.Id, content);
+                var response = await Client.DeleteAsync(this.BaseUrl + "/api/Departments/" + department.Id);
+
                 if (response.IsSuccessStatusCode)
                 {
                     return "success";
@@ -182,11 +176,14 @@ namespace LivetApp1.Services
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("Exception in RestService.PutUserAsync: " + e);
+                // TODO
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
             }
-            return "failed";
+            return "fail";
         }
         #endregion
+
+
 
         #region ユーザー削除
         public async Task<string> DeleteUserAsync(User user)

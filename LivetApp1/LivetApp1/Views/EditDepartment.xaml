@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="EditDepartment" Height="384" Width="525" ResizeMode="NoResize" >
+        Title="EditDepartment" Height="178" Width="221">
 
     <Window.DataContext>
         <vm:EditDepartmentViewModel/>
@@ -27,43 +27,23 @@
         <i:EventTrigger EventName="Closed">
             <l:DataContextDisposeAction/>
         </i:EventTrigger>
-
+        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+        
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
     </i:Interaction.Triggers>
 
     <Grid>
-        <DataGrid ItemsSource="{Binding Departments}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="97,0,98,101">
-            <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Header="部署CD" Binding="{Binding CD}" />
-                <DataGridTextColumn IsReadOnly="True" Header="部名" Binding="{Binding }" />
-                <DataGridTextColumn IsReadOnly="True" Header="課名" Binding="{Binding }" />
-                
-                <DataGridTemplateColumn Header="">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                            <Button Content="選択" Command="{Binding DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="69,13,0,0" TextWrapping="Wrap" Text="{Binding Department.CD}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="部署CD" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="69,44,0,0" TextWrapping="Wrap" Text="{Binding Department.DepartmentName}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="部名" HorizontalAlignment="Left" Margin="26,41,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="69,75,0,0" TextWrapping="Wrap" Text="{Binding Department.SectionName}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="課名" HorizontalAlignment="Left" Margin="26,72,0,0" VerticalAlignment="Top"/>
+        <Button Content="追加・編集" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SendCommand}" CommandParameter="{Binding Department}"/>
+        <Button Content="キャンセル" HorizontalAlignment="Left" Margin="128,117,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" />
 
-                <DataGridTemplateColumn Header="">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                            <Button Content="削除" Command="{Binding DataContext.DeleteUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-            </DataGrid.Columns>
-        </DataGrid>
-        <Label Content="部署CD" HorizontalAlignment="Left" Margin="100,262,0,0" VerticalAlignment="Top"/>
-        <Label Content="部名" HorizontalAlignment="Left" Margin="185,262,0,0" VerticalAlignment="Top"/>
-        <Label Content="課名" HorizontalAlignment="Left" Margin="270,262,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="97,293,0,0" TextWrapping="Wrap" Text="{Binding EditDepartment.CD}" VerticalAlignment="Top" Width="73"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="185,293,0,0" TextWrapping="Wrap" Text="{Binding EditDepartment.DepartmentName}" VerticalAlignment="Top" Width="73"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="270,293,0,0" TextWrapping="Wrap" Text="{Binding EditDepartment.SectionName}" VerticalAlignment="Top" Width="73"/>
     </Grid>
 </Window>

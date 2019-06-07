@@ -146,7 +146,7 @@ namespace LivetApp1.ViewModels
 
         public void EditDepartment()
         {
-            var message = new TransitionMessage(typeof(Views.EditDepartment), new EditDepartmentViewModel(), TransitionMode.Modal, "EditDepartment");
+            var message = new TransitionMessage(typeof(Views.DepartmentView), new DepartmentViewViewModel(), TransitionMode.Modal, "EditDepartment");
             Messenger.Raise(message);
         }
 
