@@ -85,7 +85,24 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-        #region Department Command
+        #region UserProperty
+        private User _User;
+
+        public User User
+        {
+            get
+            { return _User; }
+            set
+            {
+                if (_User == value)
+                    return;
+                _User = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SelectDepartment Command
         private ListenerCommand<Department> _SelectDepartmentCommand;
 
 
@@ -165,22 +182,7 @@ namespace LivetApp1.ViewModels
         }
 
 
-        #region UserProperty
-        private User _User;
-
-        public User User
-        {
-            get
-            { return _User; }
-            set
-            {
-                if (_User == value)
-                    return;
-                _User = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
+     
 
 
         private ViewModelCommand _EditUserCommand;

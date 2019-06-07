@@ -11,76 +11,132 @@ using Livet.Messaging.IO;
 using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
+using LivetApp1.Services;
+
 using LivetApp1.Models;
+using System.Windows;
 
 namespace LivetApp1.ViewModels
 {
     public class EditDepartmentViewModel : ViewModel
     {
-        #region Departments
+        private IEditDepartment service = null;
 
-        private List<Department> _Departments;
-
-        public List<Department> Departments
+        public EditDepartmentViewModel() { }
+        
+        public EditDepartmentViewModel(Department department,string mode)
         {
-            get
-            { return _Departments; }
-            set
-            { 
-                if (_Departments == value)
-                    return;
-                _Departments = value;
-                RaisePropertyChanged();
+            if(mode == "put")
+            {
+                this.Department = department;
+                service = new PutDepartmentService();
+            }
+            else if (mode == "post")
+            {
+                this.Department = department;
+                service = new PostDepartmentService();
             }
         }
 
-        #endregion
+        #region Department
+        private Department _Department;
 
-        #region EditDepartment
-
-        private Department _EditDepartment;
-
-        public Department EditDepartment
+        public Department Department
         {
             get
-            { return _EditDepartment; }
+            { return _Department; }
             set
             {
-                if (_EditDepartment == value)
+                if (_Department == value)
                     return;
-                _EditDepartment = value;
+                _Department = value;
                 RaisePropertyChanged();
             }
         }
-
         #endregion
 
-        #region SelectCommand
+        #region SendCommand
+        private ListenerCommand<Department> _SendCommand;
 
-        private ListenerCommand<Department> _SelectCommand;
-
-        public ListenerCommand<Department> SelectCommand
+        public ListenerCommand<Department> SendCommand
         {
             get
             {
-                if (_SelectCommand == null)
+                if (_SendCommand == null)
                 {
-                    _SelectCommand = new ListenerCommand<Department>(Select);
+                    _SendCommand = new ListenerCommand<Department>(Send);
                 }
-                return _SelectCommand;
+                return _SendCommand;
             }
         }
 
-        public void Select(Department parameter)
+        public async void Send(Department parameter)
         {
-            this.EditDepartment = parameter;
+            string error = Inputcheck();
+
+            if (string.IsNullOrEmpty(error))
+            {
+                string result = await service.EditDepartment(parameter);
+
+                if (result == "success")
+                {
+                    MessageBox.Show("データ更新に成功しました。", "情報");
+                    Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+                }
+                else
+                {
+                    MessageBox.Show("データ更新に失敗しました。", "エラー！");
+                }
+            }
+            else
+            {
+                MessageBox.Show(error+"を入力してください", "情報");
+            }
+
+        }
+        #endregion
+
+        #region CloseCommand
+
+        private ViewModelCommand _CloseCommand;
+
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+
+        public void Close()
+        {
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
 
         #endregion
+
+        private string Inputcheck()
+        {
+            string result = null;
+            if (string.IsNullOrEmpty(this.Department.CD))
+            {
+                result += "コード";
+            }
+
+            return result;
+        }
 
         public void Initialize()
         {
         }
+
+
+
+
 
     }
 }
