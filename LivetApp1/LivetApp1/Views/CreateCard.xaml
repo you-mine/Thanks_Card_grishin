@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="カード作成画面" Height="380" Width="745" ResizeMode="NoResize">
+        Title="カード作成画面" Height="380" Width="745" ResizeMode="NoResize " Icon="../Resources/mm.jpg">
 
     <Window.DataContext>
         <vm:CreateCardViewModel/>
@@ -40,6 +40,7 @@
     </i:Interaction.Triggers>
 
     <Canvas>
+        
 
         <TextBox Height="20" TextWrapping="Wrap" Text="{Binding ThanksCard.Title}"  Width="167" Margin="86,42,486,289"/>
         <TextBox AcceptsReturn="True" Height="140" Width="275" TextWrapping="Wrap" Text="{Binding ThanksCard.Body}" Canvas.Left="52" Canvas.Top="109"/>
@@ -53,8 +54,9 @@
        
 
         <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
-            Height="200" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301">
+            Height="200" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301" >
             <DataGrid.Columns>
+                
 
                 <DataGridTextColumn Header="氏名" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="部署" Binding="{Binding Department.DepartmentName}" />
@@ -71,6 +73,9 @@
         </DataGrid>
         <Label Content="感謝カードを送る人を選択してください" Canvas.Left="386" Canvas.Top="42"/>
 
+        <Canvas.Background>
+            <ImageBrush ImageSource="../Resources/images.jpg"/>
+        </Canvas.Background>
 
     </Canvas>
 
