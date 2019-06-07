@@ -1,0 +1,136 @@
+﻿<Window x:Class="LivetApp1.Views.Content"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:LivetApp1.Views"
+        xmlns:vm="clr-namespace:LivetApp1.ViewModels"
+        Title="Content" Height="372" Width="525">
+
+    <Window.DataContext>
+        <vm:ContentViewModel/>
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
+        <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+        </i:EventTrigger>
+
+        <!--Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+
+        <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
+
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="268" Margin="47,36,0,0" VerticalAlignment="Top" Width="430">
+            <TabItem Header="場所">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="200*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid ItemsSource="{Binding Departments}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,10,10,46" Grid.ColumnSpan="3" Grid.Column="1">
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="CD" Binding="{Binding CD}" />
+                            <DataGridTextColumn Header="場所" Binding="{Binding PlaceContent}" />
+                            <DataGridTemplateColumn Header="">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                                        <Button Content="選択" Command="{Binding DataContext.SelectDepartmentCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="16,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="79,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="286" Grid.Column="1"/>
+                    <Label Background="AliceBlue" Content="CD" Grid.Column="1" HorizontalAlignment="Left" Margin="16,194,0,0" VerticalAlignment="Top" Height="23" Width="26"/>
+                    <Label Background="AliceBlue" Content="場所" Grid.Column="1" HorizontalAlignment="Left" Margin="78,194,0,0" VerticalAlignment="Top" Height="23" Width="34"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="感謝事項1">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ContextMenuOpening" >
+                        <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="ChangeToPlace"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="101*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid ItemsSource="{Binding Departments}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10,10,10,46" Grid.ColumnSpan="2">
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="CD" Binding="{Binding CD}" />
+                            <DataGridTextColumn Header="内容1" Binding="{Binding Help1Content}" />
+                            <DataGridTemplateColumn Header="">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                                        <Button Content="選択" Command="{Binding DataContext.SelectDepartmentCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="6,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="69,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="286" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Label Background="AliceBlue" Content="CD" Grid.Column="1" HorizontalAlignment="Left" Margin="6,194,0,0" VerticalAlignment="Top" Height="23"/>
+                    <Label Background="AliceBlue" Content="場所" Grid.Column="1" HorizontalAlignment="Left" Margin="68,194,0,0" VerticalAlignment="Top" Height="23"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="感謝事項2" HorizontalAlignment="Left" Width="46">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="36*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid ItemsSource="{Binding Departments}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10,10,10,46" Grid.ColumnSpan="3">
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="CD" Binding="{Binding CD}" />
+                            <DataGridTextColumn Header="内容2" Binding="{Binding Help2Content}" />
+                            <DataGridTemplateColumn Header="">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                                        <Button Content="選択" Command="{Binding DataContext.SelectDepartmentCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="6,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="69,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="286" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Label Background="AliceBlue" Content="CD" Grid.Column="1" HorizontalAlignment="Left" Margin="6,194,0,0" VerticalAlignment="Top" Height="23" Width="26"/>
+                    <Label Background="AliceBlue" Content="感謝事項2" Grid.Column="1" HorizontalAlignment="Left" Margin="68,194,0,0" VerticalAlignment="Top" Height="23" Width="67"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Label Content="カード作成（簡易）編集&#xD;&#xA;" HorizontalAlignment="Left" Margin="47,10,0,0" VerticalAlignment="Top" Height="26"/>
+        <Button Content="閉じる" HorizontalAlignment="Left" Margin="420,309,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

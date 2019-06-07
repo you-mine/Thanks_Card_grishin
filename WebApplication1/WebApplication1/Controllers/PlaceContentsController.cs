@@ -22,16 +22,16 @@ namespace WebApplication1.Controllers
 
         // GET: api/PlaceContents
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlaceContent>>> GetPlace()
+        public async Task<ActionResult<IEnumerable<PlaceContent>>> GetplaceContent()
         {
-            return await _context.Place.ToListAsync();
+            return await _context.placeContent.ToListAsync();
         }
 
         // GET: api/PlaceContents/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PlaceContent>> GetPlaceContent(int id)
         {
-            var placeContent = await _context.Place.FindAsync(id);
+            var placeContent = await _context.placeContent.FindAsync(id);
 
             if (placeContent == null)
             {
@@ -75,7 +75,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<ActionResult<PlaceContent>> PostPlaceContent(PlaceContent placeContent)
         {
-            _context.Place.Add(placeContent);
+            _context.placeContent.Add(placeContent);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPlaceContent", new { id = placeContent.Id }, placeContent);
@@ -85,13 +85,13 @@ namespace WebApplication1.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<PlaceContent>> DeletePlaceContent(int id)
         {
-            var placeContent = await _context.Place.FindAsync(id);
+            var placeContent = await _context.placeContent.FindAsync(id);
             if (placeContent == null)
             {
                 return NotFound();
             }
 
-            _context.Place.Remove(placeContent);
+            _context.placeContent.Remove(placeContent);
             await _context.SaveChangesAsync();
 
             return placeContent;
@@ -99,7 +99,7 @@ namespace WebApplication1.Controllers
 
         private bool PlaceContentExists(int id)
         {
-            return _context.Place.Any(e => e.Id == id);
+            return _context.placeContent.Any(e => e.Id == id);
         }
     }
 }

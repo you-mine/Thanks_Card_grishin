@@ -9,6 +9,6 @@ namespace WebApplication1.Models
     {
         public int Id { get; set; }
         public string CD { get; set; }
-        public string Place { get; set; }
+        public string Content { get; set; }
     }
 }

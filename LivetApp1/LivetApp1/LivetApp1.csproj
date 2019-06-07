@@ -57,13 +57,12 @@
     <Compile Include="Models\AnalyzeDtoD.cs" />
     <Compile Include="Models\AnalyzeUtoU.cs" />
     <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\Help1Content.cs" />
-    <Compile Include="Models\Help2Content.cs" />
-    <Compile Include="Models\PlaceContent.cs" />
+    <Compile Include="Models\Content.cs" />
     <Compile Include="Models\Ranking.cs" />
     <Compile Include="Models\Term.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Services\ContentServise.cs" />
+    <Compile Include="Services\Help1ContentService.cs" />
+    <Compile Include="Services\Help2ContentService.cs" />
     <Compile Include="Services\IContentServise.cs" />
     <Compile Include="Services\AnalyzeService.cs" />
     <Compile Include="Services\EditUserPostService.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="Services\IEditUserService.cs" />
     <Compile Include="Services\IRestService.cs" />
     <Compile Include="Services\IShowUserService.cs" />
+    <Compile Include="Services\PlaceContentService.cs" />
     <Compile Include="Services\PostDepartmentService.cs" />
     <Compile Include="Services\PutDepartmentService.cs" />
     <Compile Include="Services\RestService.cs" />
