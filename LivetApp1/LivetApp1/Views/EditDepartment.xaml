@@ -33,25 +33,17 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="97,0,98,101">
+        <DataGrid ItemsSource="{Binding Departments}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="97,0,98,101">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="部署CD" Binding="{Binding CD}" />
-                <DataGridTextColumn IsReadOnly="True" Header="部名" Binding="{Binding Department.DepartmentName}" />
-                <DataGridTextColumn IsReadOnly="True" Header="課名" Binding="{Binding Department.SectionName}" />
-                <DataGridTemplateColumn Header="管理者フラグ">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                            <CheckBox IsChecked="{Binding IsAdmin}" IsEnabled="False"></CheckBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
+                <DataGridTextColumn IsReadOnly="True" Header="部名" Binding="{Binding }" />
+                <DataGridTextColumn IsReadOnly="True" Header="課名" Binding="{Binding }" />
+                
                 <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                            <Button Content="編集" Command="{Binding DataContext.EditUserPutCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <Button Content="選択" Command="{Binding DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

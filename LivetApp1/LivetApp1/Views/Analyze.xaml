@@ -63,18 +63,18 @@
                     </Grid.ColumnDefinitions>
                     <DataGrid IsReadOnly="True" ItemsSource="{Binding DtoD}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="172" Margin="10,10,0,0" VerticalAlignment="Top" Width="444" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="部署名" Binding="{Binding FromDepartmentName}" />
+                            <DataGridTextColumn FontSize="15" Header="部署名" Binding="{Binding FromDepartmentName}" />
                             
                             <DataGridTemplateColumn Header="">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="→" IsEnabled="False"></TextBox>
+                                        <TextBox FontSize="15" Text="→" IsEnabled="False"></TextBox>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            
-                            <DataGridTextColumn Header="部署名" Binding="{Binding ToDepartmentName}" />
-                            <DataGridTextColumn Header="感謝度" Binding="{Binding ThanksCount}"  />
+
+                            <DataGridTextColumn FontSize="15" Header="部署名" Binding="{Binding ToDepartmentName}" />
+                            <DataGridTextColumn FontSize="15" Header="感謝度" Binding="{Binding ThanksCount}"  />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
