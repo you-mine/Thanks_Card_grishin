@@ -54,7 +54,8 @@
        
 
         <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
-            Height="200" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301" IsReadOnly="True" >
+            Height="200" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301" IsReadOnly="True">
+            
             <DataGrid.Columns>
                 
 

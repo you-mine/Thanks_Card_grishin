@@ -44,6 +44,8 @@
 
     </i:Interaction.Triggers>
 
+    
+
     <Grid>
         <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39">
             <DataGrid.Columns>
