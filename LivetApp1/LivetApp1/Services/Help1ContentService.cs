@@ -88,7 +88,7 @@ namespace LivetApp1.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return "succcess";
+                    return "success";
                 }
 
             }
@@ -99,6 +99,10 @@ namespace LivetApp1.Services
             return "fail";
         }
 
+        public string GetContentType()
+        {
+            return "感謝事項1";
+        }
 
         #endregion
 
@@ -117,7 +121,7 @@ namespace LivetApp1.Services
                 var response = await Client.PutAsync(this.BaseUrl + "/api/Help1Content/" + help1Content.Id, content);
                 if (response.IsSuccessStatusCode)
                 {
-                    return "succcess";
+                    return "success";
                 }
             }
             catch (Exception e)

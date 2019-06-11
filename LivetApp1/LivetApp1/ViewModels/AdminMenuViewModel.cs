@@ -153,6 +153,30 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
+        #region Content
+
+        private ViewModelCommand _ContentCommand;
+
+        public ViewModelCommand ContentCommand
+        {
+            get
+            {
+                if (_ContentCommand == null)
+                {
+                    _ContentCommand = new ViewModelCommand(Content);
+                }
+                return _ContentCommand;
+            }
+        }
+
+        public void Content()
+        {
+            var message = new TransitionMessage(typeof(Views.Content), new ContentViewModel(), TransitionMode.Modal, "Content");
+            Messenger.Raise(message);
+        }
+
+        #endregion
+
         #region Close
 
 
