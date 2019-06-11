@@ -83,9 +83,9 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid  IsReadOnly="True" ItemsSource="{Binding UserCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,167,10,189">
+        <DataGrid  IsReadOnly="True" ItemsSource="{Binding From}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,167,309,189">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
+
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
                 <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
                 <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
@@ -103,8 +103,17 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Background="Honeydew" Content="今月の代表事例" HorizontalAlignment="Left" Margin="210,13,0,0" VerticalAlignment="Top" Height="26" Width="92"/>
-        <Label Background="Bisque" Content="あなたに関するカード一覧" HorizontalAlignment="Left" Margin="210,141,0,0" VerticalAlignment="Top" Height="26" Width="129"/>
+        <Label Background="Bisque" Content="送ったメッセージ" HorizontalAlignment="Left" Margin="210,141,0,0" VerticalAlignment="Top" Height="26" Width="129"/>
         <Label Background="LightGreen" Content="最新のカード情報" HorizontalAlignment="Left" Margin="210,285,0,0" VerticalAlignment="Top" Height="26" Width="93"/>
         <Image Source="../Resources/bird2_R.png1.png" Margin="49,285,629,65"/>
+        <DataGrid  IsReadOnly="True" ItemsSource="{Binding To}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="509,167,10,189">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
+                <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
+                <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Background="Bisque" Content="受け取ったメッセージ" HorizontalAlignment="Left" Margin="509,141,0,0" VerticalAlignment="Top" Height="26" Width="129"/>
     </Grid>
 </Window>

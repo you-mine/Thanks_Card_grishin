@@ -19,8 +19,9 @@ namespace LivetApp1.ViewModels
 {
     public class HomemenuViewModel : ViewModel
     {
-        
-         
+
+        IRestService service = new RestService();
+
         #region Ranking
 
 
@@ -73,6 +74,7 @@ namespace LivetApp1.ViewModels
         {
             var message = new TransitionMessage(typeof(Views.Cardview), new CardviewViewModel(), TransitionMode.Modal, "Cardview");
             Messenger.Raise(message);
+            Initialize();
         }
 
 
@@ -105,6 +107,7 @@ namespace LivetApp1.ViewModels
             {
                 var message = new TransitionMessage(typeof(Views.AdminMenu), new AdminMenuViewModel(), TransitionMode.Modal, "AdminMenu");
                 Messenger.Raise(message);
+                Initialize();
             }
             else
             {
@@ -168,6 +171,7 @@ namespace LivetApp1.ViewModels
         {
             var message = new TransitionMessage(typeof(Views.CreateCard), new CreateCardViewModel(), TransitionMode.Modal, "CreateCard");
             Messenger.Raise(message);
+            Initialize();
         }
         #endregion
 
@@ -191,6 +195,7 @@ namespace LivetApp1.ViewModels
         {
             var message = new TransitionMessage(typeof(Views.CreateCard2), new CreateCard2ViewModel(), TransitionMode.Modal, "CreateCard2");
             Messenger.Raise(message);
+            Initialize();
         }
 
         #endregion
@@ -214,19 +219,38 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-        #region UserCardsプロパティ
+        #region FromCards
 
-        private List<ThanksCard> _UserCards;
+        private List<ThanksCard> _From;
 
-        public List<ThanksCard> UserCards
+        public List<ThanksCard> From
         {
             get
-            { return _UserCards; }
+            { return _From; }
             set
             { 
-                if (_UserCards == value)
+                if (_From == value)
                     return;
-                _UserCards = value;
+                _From = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region ToCards
+
+        private List<ThanksCard> _To;
+
+        public List<ThanksCard> To
+        {
+            get
+            { return _To; }
+            set
+            { 
+                if (_To == value)
+                    return;
+                _To = value;
                 RaisePropertyChanged();
             }
         }
@@ -256,18 +280,15 @@ namespace LivetApp1.ViewModels
 
         public async void Initialize()
         {
-            IRestService service = new RestService();
+            
             Cards = await service.GetCardsAsync();
+
             User AuthorizedUser = SessionService.Instance.AuthorizedUser;
 
-            //ここでユーザーカードにログイン済みのユーザーのみにフィルタリングする。
-            UserCards = Cards.Where(x => 
-                                x.FromId == AuthorizedUser.Id //ここでログイン済みのユーザーの送ったものを抽出
-                                || 
-                                x.ToId == AuthorizedUser.Id //ここでログイン済みのユーザーがもらったものを表示
-                                   ).ToList();
+            From = Cards.Where(x => x.FromId == AuthorizedUser.Id).ToList();
+
+            To = Cards.Where(x => x.ToId == AuthorizedUser.Id).ToList();
             
-            //ここで代表事例を抽出する。
             RepresentativeCards = Cards.Where(x => x.IsRepresentative == true).ToList();
 
         }

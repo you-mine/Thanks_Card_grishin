@@ -18,7 +18,7 @@ namespace WebApplication1.Models
         [MaxLength(20)]
         public string Title { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(400)]
         public string Body { get; set; }
 
         public int ThanksCount { get; set; }
