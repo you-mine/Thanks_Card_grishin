@@ -13,6 +13,9 @@
     </Window.DataContext>
 
     <i:Interaction.Triggers>
+        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
 
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
         <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
@@ -34,9 +37,7 @@
         </l:InteractionMessageTrigger>
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
-        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
-            <l:WindowInteractionMessageAction/>
-        </l:InteractionMessageTrigger>
+       
 
     </i:Interaction.Triggers>
 
@@ -77,5 +78,9 @@
         </DataGrid>
         <Button Content="変更・追加" HorizontalAlignment="Left" Width="75" Command="{Binding SendCommand}" Canvas.Left="447" Canvas.Top="297" />
         <Button Content="閉じる" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" Canvas.Left="51" Canvas.Top="292"/>
+
+        <Canvas.Background>
+            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+        </Canvas.Background>
     </Canvas>
 </Window>

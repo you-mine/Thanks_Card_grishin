@@ -36,7 +36,7 @@
 
     <Grid Margin="0,0,-8,0" Height="349" VerticalAlignment="Top">
         <Grid.Background>
-            <ImageBrush ImageSource="../Resources/images.jpg"/>
+            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
         </Grid.Background>
 
 
@@ -45,17 +45,26 @@
         <Label Content="場所" HorizontalAlignment="Left" Margin="29,104,0,0" VerticalAlignment="Top"/>
         <Label Content="内容" HorizontalAlignment="Left" Margin="29,145,0,0" VerticalAlignment="Top"/>
         <Label Content="内容2" HorizontalAlignment="Left" Margin="29,192,0,0" VerticalAlignment="Top"/>
-        <Label Content="From/" HorizontalAlignment="Left" Margin="34,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.55,1.962"/>
+        <Label Content="From/" HorizontalAlignment="Left" Margin="34,259,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.55,1.962" FontSize="14" Background="#FF1EB65C" Width="61" Height="28">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-1.043"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
         <ComboBox HorizontalAlignment="Left" Margin="91,108,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
-        <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.789,0.538"/>
+            <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.789,0.538"/>
 
         </ComboBox>
         <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Id" SelectedItem="{Binding Message1}"  SelectedValuePath="Name" HorizontalAlignment="Left" Margin="91,149,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged_1"/>
         <ComboBox HorizontalAlignment="Left" Margin="91,192,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="{Binding ThanksCard.From.Name}" Margin="70,258,630,67"  Height="24"/>
+        <Label Content="{Binding ThanksCard.From.Name}"  Margin="70,258,630,67"   Height="24"/>
         <Label Content="をしてくれてありがとうございました。" HorizontalAlignment="Left" Margin="132,219,0,0" VerticalAlignment="Top" Width="167"/>
-        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
-            Height="210"  HorizontalAlignment="Left" Width="301">
+        <DataGrid IsReadOnly="True"  ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
+            Height="210"  HorizontalAlignment="Left" Width="301" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="氏名" Binding="{Binding Name}" />
@@ -72,8 +81,12 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="閉じる" HorizontalAlignment="Left" Margin="612,303,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+        
+        
+        <Button Content="閉じる" HorizontalAlignment="Left" Margin="612,303,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" />
         <Button Content="送信" HorizontalAlignment="Left" Margin="480,303,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding SendCommand}"/>
 
+        
+        
     </Grid>
 </Window>

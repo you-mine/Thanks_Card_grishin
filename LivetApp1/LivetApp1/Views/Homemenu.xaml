@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="ホーム" Height="500" Width="825" Icon="../Resources/watermark.jpg">
+        Title="ホーム" Height="500" Width="825"  ResizeMode="NoResize"  Icon="../Resources/watermark.jpg" >
 
     <Window.DataContext>
         <vm:HomemenuViewModel/>
@@ -55,22 +55,26 @@
 
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
-        
+
     </i:Interaction.Triggers>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="808*"/>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="../Resources/39_t.jpeg"/>
+            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
         </Grid.Background>
 
-        <Button Content="カード作成" HorizontalAlignment="Left" Margin="55,39,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,0.6" Command="{Binding CreateCradCommand}"/>
-        <Button Content="カード作成（簡易）" HorizontalAlignment="Left" Margin="55,84,0,0" VerticalAlignment="Top" Width="124" Command="{Binding CreateCard2Command}"/>
-        <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="55,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.32,-0.8" Command="{Binding CardviewCommand}"/>
-        <Button Content="管理者向けメニュー" HorizontalAlignment="Left" Margin="55,179,0,0" VerticalAlignment="Top" Width="145"  Command="{Binding AdminMenuCommand}"/>
-        <Button Content="ログアウト" HorizontalAlignment="Left" Margin="55,229,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LogoutCommand }"/>
-        <Button Content="ランキング" HorizontalAlignment="Left" Margin="55,109,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding RankingCommand}"/>
+        <Button Content="カード作成" HorizontalAlignment="Left" Margin="55,39,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,0.6" Command="{Binding CreateCradCommand}" Height="20"/>
+        <Button Content="カード作成（簡易）" HorizontalAlignment="Left" Margin="55,84,0,0" VerticalAlignment="Top" Width="124" Command="{Binding CreateCard2Command}" Height="20"/>
+        <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="55,134,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.32,-0.8" Command="{Binding CardviewCommand}" Height="20"/>
+        <Button Content="管理者向けメニュー" HorizontalAlignment="Left" Margin="55,179,0,0" VerticalAlignment="Top" Width="145"  Command="{Binding AdminMenuCommand}" Height="20"/>
+        <Button Content="ログアウト" HorizontalAlignment="Left" Margin="55,229,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LogoutCommand }" Height="20"/>
+        <Button Content="ランキング" HorizontalAlignment="Left" Margin="55,109,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding RankingCommand}" Height="20"/>
 
-        <DataGrid ItemsSource="{Binding RepresentativeCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,39,10,340">
+        <DataGrid IsReadOnly="True" ItemsSource="{Binding RepresentativeCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,39,10,340">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
@@ -78,18 +82,8 @@
                 <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
             </DataGrid.Columns>
         </DataGrid>
-        
-        <DataGrid ItemsSource="{Binding UserCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,167,10,189">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
-                <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
-                <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
-                <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
 
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <DataGrid ItemsSource="{Binding Cards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,311,10,34">
+        <DataGrid  IsReadOnly="True" ItemsSource="{Binding UserCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,167,10,189">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
@@ -98,9 +92,19 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Label Background="Honeydew" Content="今月の代表事例" HorizontalAlignment="Left" Margin="210,13,0,0" VerticalAlignment="Top"/>
-        <Label Background="Bisque" Content="あなたに関するカード一覧" HorizontalAlignment="Left" Margin="210,141,0,0" VerticalAlignment="Top"/>
-        <Label Background="LightGreen" Content="最新のカード情報" HorizontalAlignment="Left" Margin="210,285,0,0" VerticalAlignment="Top"/>
-        <Image Source="../Resources/bird2_R.png" Margin="33,301,651,50"></Image>
+
+        <DataGrid IsReadOnly="True" ItemsSource="{Binding Cards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,311,10,34">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
+                <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
+                <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
+                <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Background="Honeydew" Content="今月の代表事例" HorizontalAlignment="Left" Margin="210,13,0,0" VerticalAlignment="Top" Height="26" Width="92"/>
+        <Label Background="Bisque" Content="あなたに関するカード一覧" HorizontalAlignment="Left" Margin="210,141,0,0" VerticalAlignment="Top" Height="26" Width="129"/>
+        <Label Background="LightGreen" Content="最新のカード情報" HorizontalAlignment="Left" Margin="210,285,0,0" VerticalAlignment="Top" Height="26" Width="93"/>
+        <Image Source="../Resources/bird2_R.png1.png" Margin="49,285,629,65"/>
     </Grid>
 </Window>
