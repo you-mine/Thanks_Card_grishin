@@ -89,8 +89,8 @@ namespace LivetApp1.ViewModels
         public async void EditUserAddAsync()
         {
             
-            User user = new User();
-            var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(user, "Add"), TransitionMode.Modal, "EditUserAdd");
+          
+            var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(new User(), "Add"), TransitionMode.Modal, "EditUserAdd");
             Messenger.Raise(message);
             this.Users = await this.service.ShowUserAsync();
         }

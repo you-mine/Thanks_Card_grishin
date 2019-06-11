@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace LivetApp1.Services
 {
-    interface IContentServise
+    public interface IContentServise
     {                                        //ここ！ここ！ここ！
         Task<List<Content>> Get();
         Task<String> Put(Content content);
         Task<String> Post(Content content);
         Task<String> Delete(Content content);
+        String GetContentType();
     }
 }

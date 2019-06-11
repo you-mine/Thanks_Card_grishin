@@ -27,7 +27,7 @@ namespace LivetApp1.Services
         {
             try
             {
-                var response = await Client.DeleteAsync(this.BaseUrl + "/api/PlaceContent/" + placeContent.Id);
+                var response = await Client.DeleteAsync(this.BaseUrl + "/api/PlaceContents/" + placeContent.Id);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -53,7 +53,7 @@ namespace LivetApp1.Services
             try
             {
 
-                var response = await Client.GetAsync(this.BaseUrl + "/api/PlaceContent");
+                var response = await Client.GetAsync(this.BaseUrl + "/api/PlaceContents");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -85,11 +85,11 @@ namespace LivetApp1.Services
 
             try
             {
-                var response = await Client.PostAsync(this.BaseUrl + "/api/PlaceContent", content);
+                var response = await Client.PostAsync(this.BaseUrl + "/api/PlaceContents", content);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return "succcess";
+                    return "success";
                 }
 
             }
@@ -115,10 +115,10 @@ namespace LivetApp1.Services
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             try
             {
-                var response = await Client.PutAsync(this.BaseUrl + "/api/PlaceContent/" + placeContent.Id, content);
+                var response = await Client.PutAsync(this.BaseUrl + "/api/PlaceContents/" + placeContent.Id, content);
                 if (response.IsSuccessStatusCode)
                 {
-                    return "succcess";
+                    return "success";
                 }
             }
             catch (Exception e)
@@ -132,6 +132,10 @@ namespace LivetApp1.Services
 
         #endregion
 
+        public string GetContentType()
+        {
+            return "場所";
+        }
 
     }
 }

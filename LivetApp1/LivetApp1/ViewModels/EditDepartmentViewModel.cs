@@ -133,10 +133,6 @@ namespace LivetApp1.ViewModels
         public void Initialize()
         {
         }
-
-
-
-
-
+        
     }
 }

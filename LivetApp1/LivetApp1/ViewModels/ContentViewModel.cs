@@ -194,25 +194,82 @@ namespace LivetApp1.ViewModels
         }
         #endregion
 
+        #region AddContent
+
+        private ViewModelCommand _AddContentCommand;
+
+        public ViewModelCommand AddContentCommand
+        {
+            get
+            {
+                if (_AddContentCommand == null)
+                {
+                    _AddContentCommand = new ViewModelCommand(AddContent);
+                }
+                return _AddContentCommand;
+            }
+        }
+
+        public void AddContent()
+        {
+            var message = new TransitionMessage(typeof(Views.AddContent), new AddContentViewModel(new Content(), "Add",service), TransitionMode.Modal, "AddContent");
+            Messenger.Raise(message);
+            Initialize();
+        }
+
+        #endregion
+
+
+        private ListenerCommand<Content> _PutCommand;
+
+        public ListenerCommand<Content> PutCommand
+        {
+            get
+            {
+                if (_PutCommand == null)
+                {
+                    _PutCommand = new ListenerCommand<Content>(Put);
+                }
+                return _PutCommand;
+            }
+        }
+
+        public void Put(Content parameter)
+        {
+            var message = new TransitionMessage(typeof(Views.AddContent), new AddContentViewModel(parameter, "Put", service), TransitionMode.Modal, "AddContent");
+            Messenger.Raise(message);
+            Initialize();
+        }
+
+
         #region DeleteCommand
 
-        private ViewModelCommand _DeleteCommand;
+        private ListenerCommand<Content> _DeleteCommand;
 
-        public ViewModelCommand DeleteCommand
+        public ListenerCommand<Content> DeleteCommand
         {
             get
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = new ViewModelCommand(Delete);
+                    _DeleteCommand = new ListenerCommand<Content>(Delete);
                 }
                 return _DeleteCommand;
             }
         }
 
-        public void Delete()
+        public async void Delete(Content parameter)
         {
-            service.Delete(content);
+            string result = await service.Delete(parameter);
+            if (result == "success")
+            {
+                MessageBox.Show("データを削除しました", "情報");
+            }
+            else
+            {
+                MessageBox.Show("データを削除に失敗しました", "情報");
+            }
+            Initialize();
         }
 
         #endregion
@@ -227,7 +284,7 @@ namespace LivetApp1.ViewModels
             this.service = new Help1ContentService();
         }
 
-        public void ChangeToThank2()
+        public void ChangeToThanks2()
         {
             this.service = new Help2ContentService();
         }
