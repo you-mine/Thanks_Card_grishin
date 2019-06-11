@@ -6,13 +6,18 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="CreateCards2" Height="380" Width="745">
+        Title="カード作成（簡易）" Height="380" Width="745">
 
     <Window.DataContext>
         <vm:CreateCard2ViewModel/>
     </Window.DataContext>
 
     <i:Interaction.Triggers>
+
+        <l:InteractionMessageTrigger MessageKey="Authorized" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
             <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
@@ -40,7 +45,7 @@
         </Grid.Background>
 
 
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="91,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding ThanksCard.Title}" Height="23" Margin="91,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
         <Label Content="タイトル" HorizontalAlignment="Left" Margin="29,57,0,0" VerticalAlignment="Top"/>
         <Label Content="場所" HorizontalAlignment="Left" Margin="29,104,0,0" VerticalAlignment="Top"/>
         <Label Content="内容" HorizontalAlignment="Left" Margin="29,145,0,0" VerticalAlignment="Top"/>
@@ -55,12 +60,11 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <ComboBox HorizontalAlignment="Left" Margin="91,108,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
-            <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.789,0.538"/>
 
-        </ComboBox>
-        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Id" SelectedItem="{Binding Message1}"  SelectedValuePath="Name" HorizontalAlignment="Left" Margin="91,149,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged_1"/>
-        <ComboBox HorizontalAlignment="Left" Margin="91,192,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox ItemsSource="{Binding Place}" DisplayMemberPath="content" SelectedValuePath="content" SelectedItem="{Binding Message1}" HorizontalAlignment="Left" Margin="91,108,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" />
+        <ComboBox ItemsSource="{Binding Help1}" DisplayMemberPath="content" SelectedValuePath="content" SelectedItem="{Binding Message2}"  HorizontalAlignment="Left" Margin="91,149,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged_1"/>
+        <ComboBox ItemsSource="{Binding Help2}" DisplayMemberPath="content" SelectedValuePath="content" SelectedItem="{Binding Message3}" HorizontalAlignment="Left" Margin="91,192,0,0" VerticalAlignment="Top" Width="120"/>
+      
         <Label Content="{Binding ThanksCard.From.Name}"  Margin="70,258,630,67"   Height="24"/>
         <Label Content="をしてくれてありがとうございました。" HorizontalAlignment="Left" Margin="132,219,0,0" VerticalAlignment="Top" Width="167"/>
         <DataGrid IsReadOnly="True"  ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
