@@ -80,6 +80,36 @@ namespace LivetApp1.ViewModels
         }
         #endregion
 
+        #region Close
+
+        private ViewModelCommand _CloseCommand;
+
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+
+        public void Close()
+        {
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+        }
+
+
+
+        #endregion
+
+
+
+
+
+
         #region SelectSavePathCommand
 
         private ViewModelCommand _SelectSavePathCommand;
