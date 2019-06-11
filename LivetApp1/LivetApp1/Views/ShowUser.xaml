@@ -86,5 +86,9 @@
         <Button Content="ユーザーの追加" HorizontalAlignment="Left" Margin="21,325,0,0" VerticalAlignment="Top" Width="86" Command="{Binding EditUserAddCommand}"/>
         <Button Content="閉じる" HorizontalAlignment="Left" Margin="361,325,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
 
+        <Grid.Background>
+            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+        </Grid.Background>
+        
     </Grid>
 </Window>

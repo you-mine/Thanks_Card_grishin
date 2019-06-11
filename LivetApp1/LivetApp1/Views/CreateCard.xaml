@@ -12,6 +12,7 @@
         <vm:CreateCardViewModel/>
     </Window.DataContext>
 
+    
     <i:Interaction.Triggers>
 
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
@@ -41,20 +42,19 @@
 
     <Canvas>
         
-
         <TextBox Height="20" TextWrapping="Wrap" Text="{Binding ThanksCard.Title}"  Width="167" Margin="86,42,486,289"/>
         <TextBox AcceptsReturn="True" Height="140" Width="275" TextWrapping="Wrap" Text="{Binding ThanksCard.Body}" Canvas.Left="52" Canvas.Top="109"/>
         <Label Content="本文"  Height="24" Margin="52,80,631,247"   Width="55" />
         <Label Content="感謝カード作成"  Height="27"   Width="255" Background="Aqua" Canvas.Left="52" Canvas.Top="10"/>
         <Button Content="閉じる"  Width="55" Margin="650,306,33,22" Click="Button_Click" Command="{Binding CloseCommand}"/>
-        <Button Content="送信"  Width="55" Margin="568,307,115,22" Command="{Binding SendCommand}"/>
+        <Button Content="送信"  Width="55" Margin="568,307,115,22" Command="{Binding SendCommand}" />
         <Label Content="{Binding ThanksCard.From.Name}" Margin="76,270,486,0"  Height="24"/>
         <Label Content="タイトル"  Height="24" Margin="32,38,658,289"   Width="49" />
         <Label Content="From/"  Margin="37,270,647,50" />
        
 
         <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
-            Height="200" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301" >
+            Height="200" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301" IsReadOnly="True" >
             <DataGrid.Columns>
                 
 
@@ -74,7 +74,7 @@
         <Label Content="感謝カードを送る人を選択してください" Canvas.Left="386" Canvas.Top="42"/>
 
         <Canvas.Background>
-            <ImageBrush ImageSource="../Resources/images.jpg"/>
+            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
         </Canvas.Background>
 
     </Canvas>

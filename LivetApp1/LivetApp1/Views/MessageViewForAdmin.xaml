@@ -54,5 +54,9 @@
         <Label Content="感謝度" Canvas.Left="212" Canvas.Top="314"/>
         <Label Content="このカードを代表事例にする" Canvas.Left="182" Canvas.Top="345" RenderTransformOrigin="0,0"/>
 
+
+        <Canvas.Background>
+            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+        </Canvas.Background>
     </Canvas>
 </Window>
