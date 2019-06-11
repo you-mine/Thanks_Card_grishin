@@ -6,18 +6,18 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="Exceloutput" Height="350" Width="525">
-    
+        Title="Exceloutput" Height="350" Width="525" ResizeMode="NoResize">
+
     <Window.DataContext>
         <vm:ExceloutputViewModel/>
     </Window.DataContext>
-    
-     <i:Interaction.Triggers>
-     
-     	<!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
-    	<!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
-    	<!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています --> 
-        
+
+    <i:Interaction.Triggers>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
         <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
         <i:EventTrigger EventName="ContentRendered">
             <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
@@ -31,8 +31,17 @@
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
     </i:Interaction.Triggers>
-    
+
     <Grid>
-        
+        <DatePicker SelectedDate="{Binding Term.Term1}" HorizontalAlignment="Left" Margin="80,75,0,0" VerticalAlignment="Top" Width="155"/>
+        <Label Content="～" HorizontalAlignment="Left" Margin="240,73,0,0" VerticalAlignment="Top"/>
+        <DatePicker SelectedDate="{Binding Term.Term2}" HorizontalAlignment="Left" Margin="267,75,0,0" VerticalAlignment="Top" Width="155"/>
+        <Label Content="期間" HorizontalAlignment="Left" Margin="80,44,0,0" VerticalAlignment="Top"/>
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="80,139,0,0" TextWrapping="Wrap" Text="{Binding SavePath}" VerticalAlignment="Top" Width="342"/>
+        <Label Content="保存先" HorizontalAlignment="Left" Margin="80,113,0,0" VerticalAlignment="Top"/>
+        <Button Content="参照" HorizontalAlignment="Left" Margin="427,139,0,0" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding SelectSavePathCommand}"/>
+        <Button FontSize="20" Content="報告書生成" HorizontalAlignment="Left" Margin="177,205,0,0" VerticalAlignment="Top" Width="162" Height="61" Command="{Binding ExecuteCommand}"  />
+
     </Grid>
+
 </Window>

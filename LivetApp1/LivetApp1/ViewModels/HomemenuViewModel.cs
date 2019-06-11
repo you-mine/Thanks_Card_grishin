@@ -13,6 +13,7 @@ using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
 using LivetApp1.Services;
+using System.Windows;
 
 namespace LivetApp1.ViewModels
 {
@@ -99,8 +100,17 @@ namespace LivetApp1.ViewModels
 
         public void AdminMenu()
         {
-            var message = new TransitionMessage(typeof(Views.AdminMenu), new AdminMenuViewModel(), TransitionMode.Modal, "AdminMenu");
-            Messenger.Raise(message);
+            bool IsAdmin = Services.SessionService.Instance.AuthorizedUser.IsAdmin;
+            if (IsAdmin)
+            {
+                var message = new TransitionMessage(typeof(Views.AdminMenu), new AdminMenuViewModel(), TransitionMode.Modal, "AdminMenu");
+                Messenger.Raise(message);
+            }
+            else
+            {
+                MessageBox.Show("管理者専用機能です", "情報");
+            }
+
         }
 
 
@@ -132,8 +142,6 @@ namespace LivetApp1.ViewModels
             SessionService session = SessionService.Instance;
             session.IsAuthorized = false;
             session.AuthorizedUser = null;
-            //var message = new TransitionMessage(typeof(Views.MainWindow), new MainWindowViewModel(), TransitionMode.Modal, "Logout");
-            //Messenger.Raise(message);
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Logout"));
         }
 

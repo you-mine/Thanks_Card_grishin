@@ -18,5 +18,6 @@ namespace LivetApp1.Services
         Task<ThanksCard> PutCard(ThanksCard thanksCard);
         Task<List<Ranking>> GetRankings();
         Task<String> DeleteDepartment(Department department);
+        Task<List<ThanksCard>> GetCardsForReport(Term term);
     }
 }

@@ -13,6 +13,7 @@ using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
 using LivetApp1.Services;
+using System.Windows;
 
 namespace LivetApp1.ViewModels
 {
@@ -73,7 +74,7 @@ namespace LivetApp1.ViewModels
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("ログインに失敗しました");
+                MessageBox.Show("ログインに失敗しました", "情報");
             }
 
         }
