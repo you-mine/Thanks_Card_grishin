@@ -85,7 +85,86 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
+        #region PlaceProperty
 
+        private List<Content> _Place;
+
+        public List<Content> Place
+        {
+            get
+            { return _Place; }
+            set
+            {
+                if (_Place == value)
+                    return;
+                _Place = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+          #region SelectCommand
+        private ListenerCommand<User> _SelectCommand;
+
+        public ListenerCommand<User> SelectCommand
+        {
+            get
+            {
+                if (_SelectCommand == null)
+                {
+                    _SelectCommand = new ListenerCommand<User>(Select);
+                }
+                return _SelectCommand;
+            }
+        }
+
+        public void Select(User parameter)
+        {
+            this.ThanksCard.To = parameter;
+        }
+
+
+        #endregion
+
+
+        #region Help1
+
+        private List<Content> _Help1;
+
+        public List<Content> Help1
+        {
+            get
+            { return _Help1; }
+            set
+            { 
+                if (_Help1 == value)
+                    return;
+                _Help1 = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Help2
+
+        private List<Content> _Help2;
+
+        public List<Content> Help2
+        {
+            get
+            { return _Help2; }
+            set
+            { 
+                if (_Help2 == value)
+                    return;
+                _Help2 = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
 
         #region Send
         private ViewModelCommand _SendCommand;
@@ -102,10 +181,15 @@ namespace LivetApp1.ViewModels
             }
         }
 
+
+        
+       
+
+
         public async void SendAsync()
         {
             ThanksCard.ThanksCount = 1;
-           // ThanksCard.Body =  :
+           // ThanksCard.Body =
             ThanksCard.FromId = ThanksCard.From.Id;
             ThanksCard.ToId = ThanksCard.To.Id;
             ThanksCard.PostDate = DateTime.Now.Date;
@@ -234,6 +318,12 @@ namespace LivetApp1.ViewModels
             this.ThanksCard = new ThanksCard();
             SessionService session = SessionService.Instance;
             this.ThanksCard.From = session.AuthorizedUser;
+            IContentServise servise = new Help1ContentService();
+            this.Help1 = await servise.Get();
+            servise = new Help2ContentService();
+            this.Help2 = await servise.Get();
+            servise = new PlaceContentService();
+            this.Place = await servise.Get();
         }
     }
 }

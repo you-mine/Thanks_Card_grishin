@@ -19,7 +19,7 @@ namespace LivetApp1.ViewModels
 {
     public class ContentViewModel : ViewModel
     {
-        IContentServise service = null;
+        IContentServise service = new PlaceContentService();
 
         #region テンプレ
         /* コマンド、プロパティの定義にはそれぞれ 
@@ -109,7 +109,7 @@ namespace LivetApp1.ViewModels
 
         #region Help1List
 
-        private List<Content> _help1Content;
+        private List<Content> _help1Content = new List<Content>();
 
         public List<Content> help1Content
         {
@@ -128,7 +128,7 @@ namespace LivetApp1.ViewModels
 
         #region Help2List
 
-        private List<Content> _help2Content;
+        private List<Content> _help2Content = new List<Content>();
 
         public List<Content> help2Content
         {
@@ -147,7 +147,7 @@ namespace LivetApp1.ViewModels
 
         #region PlaceList
 
-        private List<Content> _placeContent;
+        private List<Content> _placeContent = new List<Content>();
 
         public List<Content> placeContent
         {
@@ -291,12 +291,13 @@ namespace LivetApp1.ViewModels
 
         public async void Initialize()
         {
-            service = new Help1ContentService();
-            help1Content = await service.Get();
-            service = new Help2ContentService();
-            help2Content = await service.Get();
-            service = new PlaceContentService();
-            placeContent = await service.Get();
+            
+            IContentServise iniservice = new Help1ContentService();
+            help1Content = await iniservice.Get();
+            iniservice = new Help2ContentService();
+            help2Content = await iniservice.Get();
+            iniservice = new PlaceContentService();
+            placeContent = await iniservice.Get();
 
         }
     }

@@ -53,17 +53,17 @@ namespace LivetApp1.Models
 
         #region ContentProperty
 
-        private string _Content;
+        private string _content;
 
         public string content
         {
             get
-            { return _Content; }
+            { return _content; }
             set
             { 
-                if (_Content == value)
+                if (_content == value)
                     return;
-                _Content = value;
+                _content = value;
                 RaisePropertyChanged();
             }
         }
