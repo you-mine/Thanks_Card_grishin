@@ -13,6 +13,7 @@ using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
 using LivetApp1.Services;
+using System.Windows;
 
 namespace LivetApp1.ViewModels
 {
@@ -120,15 +121,26 @@ namespace LivetApp1.ViewModels
 
         public async void SendAsync()
         {
-            //外部キーのみをエンティティに持たせる。
-            ThanksCard.ThanksCount = 1;
-            ThanksCard.FromId = ThanksCard.From.Id;
-            ThanksCard.ToId = ThanksCard.To.Id;
-            ThanksCard.PostDate = DateTime.Now.Date;
-            ThanksCard.From = null;
-            ThanksCard.To = null;
-            var PostedThanksCard = await this.ThanksCard.CreateCard2Async();
-            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
+            string error = Inputcheck();
+
+            if (string.IsNullOrEmpty(error))
+            {
+                //外部キーのみをエンティティに持たせる。
+                ThanksCard.ThanksCount = 1;
+                ThanksCard.FromId = ThanksCard.From.Id;
+                ThanksCard.ToId = ThanksCard.To.Id;
+                ThanksCard.PostDate = DateTime.Now.Date;
+                ThanksCard.From = null;
+                ThanksCard.To = null;
+                var PostedThanksCard = await this.ThanksCard.CreateCard2Async();
+                MessageBox.Show("カードを送信しました");
+                Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
+            }
+            else
+            {
+                MessageBox.Show(error,"エラー");
+            }
+
         }
         #endregion
 
@@ -189,5 +201,34 @@ namespace LivetApp1.ViewModels
             SessionService session = SessionService.Instance;
             this.ThanksCard.From = session.AuthorizedUser;
         }
+
+        private string Inputcheck()
+        {
+            string error = "";
+            if(ThanksCard.To == null)
+            {
+                error += "宛先を選択してください\n";
+            }
+            if (string.IsNullOrEmpty(ThanksCard.Body))
+            {
+                error += "本文を入力してください\n";
+            }
+            else if(ThanksCard.Body.Length > 400)
+            {
+                error += "本文が長すぎます。400文字以内で入力してください。\n";
+            }
+
+            if (string.IsNullOrEmpty(ThanksCard.Title))
+            {
+                error += "タイトルを入力してください\n";
+            }
+            else if(ThanksCard.Title.Length > 20)
+            {
+                error += "タイトルが長すぎます。20文字以内で入力してください。\n";
+            }
+
+            return error;
+        }
+
     }
 }
