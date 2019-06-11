@@ -12,55 +12,223 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
+using Microsoft.Win32;
+using System.Data;
+using LivetApp1.Services;
+using System.Windows;
+using ClosedXML.Excel;
 
 namespace LivetApp1.ViewModels
 {
     public class ExceloutputViewModel : ViewModel
     {
-        /* コマンド、プロパティの定義にはそれぞれ 
-         * 
-         *  lvcom   : ViewModelCommand
-         *  lvcomn  : ViewModelCommand(CanExecute無)
-         *  llcom   : ListenerCommand(パラメータ有のコマンド)
-         *  llcomn  : ListenerCommand(パラメータ有のコマンド・CanExecute無)
-         *  lprop   : 変更通知プロパティ(.NET4.5ではlpropn)
-         *  
-         * を使用してください。
-         * 
-         * Modelが十分にリッチであるならコマンドにこだわる必要はありません。
-         * View側のコードビハインドを使用しないMVVMパターンの実装を行う場合でも、ViewModelにメソッドを定義し、
-         * LivetCallMethodActionなどから直接メソッドを呼び出してください。
-         * 
-         * ViewModelのコマンドを呼び出せるLivetのすべてのビヘイビア・トリガー・アクションは
-         * 同様に直接ViewModelのメソッドを呼び出し可能です。
-         */
+        private SaveFileDialog dialog = new SaveFileDialog()
+                                                            {
+            Filter = "Excelファイル(.xlsx)|*.xlsx"
+        };
 
-        /* ViewModelからViewを操作したい場合は、View側のコードビハインド無で処理を行いたい場合は
-         * Messengerプロパティからメッセージ(各種InteractionMessage)を発信する事を検討してください。
-         */
+        private IRestService service = new RestService();
 
-        /* Modelからの変更通知などの各種イベントを受け取る場合は、PropertyChangedEventListenerや
-         * CollectionChangedEventListenerを使うと便利です。各種ListenerはViewModelに定義されている
-         * CompositeDisposableプロパティ(LivetCompositeDisposable型)に格納しておく事でイベント解放を容易に行えます。
-         * 
-         * ReactiveExtensionsなどを併用する場合は、ReactiveExtensionsのCompositeDisposableを
-         * ViewModelのCompositeDisposableプロパティに格納しておくのを推奨します。
-         * 
-         * LivetのWindowテンプレートではViewのウィンドウが閉じる際にDataContextDisposeActionが動作するようになっており、
-         * ViewModelのDisposeが呼ばれCompositeDisposableプロパティに格納されたすべてのIDisposable型のインスタンスが解放されます。
-         * 
-         * ViewModelを使いまわしたい時などは、ViewからDataContextDisposeActionを取り除くか、発動のタイミングをずらす事で対応可能です。
-         */
+        #region TERM
+        private Term _Term;
 
-        /* UIDispatcherを操作する場合は、DispatcherHelperのメソッドを操作してください。
-         * UIDispatcher自体はApp.xaml.csでインスタンスを確保してあります。
-         * 
-         * LivetのViewModelではプロパティ変更通知(RaisePropertyChanged)やDispatcherCollectionを使ったコレクション変更通知は
-         * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
-         */
+        public Term Term
+        {
+            get
+            { return _Term; }
+            set
+            {
+                if (_Term == value)
+                    return;
+                _Term = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SavePath
+        private string _SavePath;
+
+        public string SavePath
+        {
+            get
+            { return _SavePath; }
+            set
+            {
+                if (_SavePath == value)
+                    return;
+                _SavePath = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ThanksCard
+        private List<ThanksCard> _ThanksCards;
+
+        public List<ThanksCard> ThanksCards
+        {
+            get
+            { return _ThanksCards; }
+            set
+            {
+                if (_ThanksCards == value)
+                    return;
+                _ThanksCards = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SelectSavePathCommand
+
+        private ViewModelCommand _SelectSavePathCommand;
+
+        public ViewModelCommand SelectSavePathCommand
+        {
+            get
+            {
+                if (_SelectSavePathCommand == null)
+                {
+                    _SelectSavePathCommand = new ViewModelCommand(SelectSavePath);
+                }
+                return _SelectSavePathCommand;
+            }
+        }
+
+        public void SelectSavePath()
+        {
+            dialog.FileName = "";
+            if ((bool)dialog.ShowDialog())
+            {
+                this.SavePath = dialog.FileName ;
+            }
+        }
+
+        #endregion
+
+        #region ExecuteCommand
+
+        private ViewModelCommand _ExecuteCommand;
+
+        public ViewModelCommand ExecuteCommand
+        {
+            get
+            {
+                if (_ExecuteCommand == null)
+                {
+                    _ExecuteCommand = new ViewModelCommand(Execute);
+                }
+                return _ExecuteCommand;
+            }
+        }
+
+        public async void Execute()
+        {
+            ThanksCards = await service.GetCardsForReport(this.Term);
+            if (ThanksCards != null)
+            {
+                IXLWorkbook book = new XLWorkbook();
+                MakeReport(book);
+                book.SaveAs(SavePath);
+                
+            }
+            else
+            {
+                MessageBox.Show("選択された範囲内に代表事例はありませんでした。", "情報");
+            }
+        }
+
+        #endregion
+
+        private void MakeReport(IXLWorkbook book)
+        {
+            //インデックスページの作成
+            int Contentcounter = 0;
+            int CellIndex = 4;
+            IXLWorksheet sheet = book.AddWorksheet("Index");
+            sheet.Range("B2", "C2").Merge().SetValue("感謝カード代表事例一覧（" + Term.Term1.Date + "～" + Term.Term2.Date + ")")
+                .Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+
+            sheet.Column("C").Width = 32.75;
+
+            sheet.Cell("B4").SetValue("項目番号").Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thick);
+
+            sheet.Cell("C4").SetValue("タイトル").Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thick);
+
+            foreach (ThanksCard t in ThanksCards)
+            {
+                CellIndex++;
+                Contentcounter++;
+                sheet.Cell("B" + CellIndex).Value = Contentcounter;
+                sheet.Cell("C" + CellIndex).Value = t.Title;
+                //代表事例一覧の作成
+                MakeBody(book.AddWorksheet("代表事例" + Contentcounter), Term, t);
+            }
+
+            sheet.Range("B5", "C" + CellIndex).Style
+                .Border.SetInsideBorder(XLBorderStyleValues.Thin)
+                .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+            sheet.Range("B5","B"+CellIndex).Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thick);
+
+            sheet.Range("C5", "C" + CellIndex).Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thick);
+
+        }
+
+        private void MakeBody(IXLWorksheet wt , Term term ,ThanksCard t)
+        {
+            wt.Range("B2", "I21").Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
+                .Fill.SetBackgroundColor(XLColor.LightSteelBlue);
+
+            wt.Range("C3", "H3").Merge().SetValue("感謝カード" + wt.Name + "（" + Term.Term1.Date + "～" + Term.Term2.Date + ")")
+                .Style
+                .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
+                .Fill.SetBackgroundColor(XLColor.LightSlateGray);
+
+            wt.Range("E5", "G5").Merge().SetValue(t.From.Name)
+                .Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
+                .Fill.SetBackgroundColor(XLColor.Lavender);
+
+            wt.Range("E7", "G7").Merge().SetValue(t.To.Name).Style
+                .Fill.SetBackgroundColor(XLColor.Lavender)
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+
+            wt.Range("D9", "H9").Merge().SetValue(t.Title).Style
+                .Fill.SetBackgroundColor(XLColor.Lavender)
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+
+            wt.Range("C12", "H20").Merge().SetValue(t.Body).Style
+                .Fill.SetBackgroundColor(XLColor.Lavender)
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+
+            wt.Cell("D5").SetValue("From").Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
+                .Fill.SetBackgroundColor(XLColor.LightSlateGray);
+
+            wt.Cell("D7").SetValue("To").Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
+                .Fill.SetBackgroundColor(XLColor.LightSlateGray);
+
+            wt.Cell("C9").SetValue("タイトル").Style
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
+                .Fill.SetBackgroundColor(XLColor.LightSlateGray);
+
+            wt.Cell("C11").SetValue("本文");
+
+        }
 
         public void Initialize()
         {
+            this.Term = new Term();
         }
     }
 }

@@ -183,7 +183,36 @@ namespace LivetApp1.Services
         }
         #endregion
 
+        #region 報告書用代表事例取得
+        public async Task<List<ThanksCard>> GetCardsForReport(Term term)
+        {
+            var jObject = JsonConvert.SerializeObject(term);
 
+            //Make Json object into content type
+            var content = new StringContent(jObject);
+            //Adding header of the contenttype
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            List<ThanksCard> responseCards = null;
+            try
+            {
+                var response = await Client.PostAsync(this.BaseUrl + "/api/Report" , content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    responseCards = JsonConvert.DeserializeObject<List<ThanksCard>>(responseContent);
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
+            }
+            return responseCards;
+        }
+
+        #endregion
 
         #region ユーザー削除
         public async Task<string> DeleteUserAsync(User user)
