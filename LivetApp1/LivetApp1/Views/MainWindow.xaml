@@ -40,7 +40,7 @@
 
 
         <l:InteractionMessageTrigger MessageKey="Homemenu" Messenger="{Binding Messenger}">
-            <l:TransitionInteractionMessageAction/>
+            <l:TransitionInteractionMessageAction  Mode="Modal"  InvokeActionOnlyWhenWindowIsActive="False" />
         </l:InteractionMessageTrigger>
 
 

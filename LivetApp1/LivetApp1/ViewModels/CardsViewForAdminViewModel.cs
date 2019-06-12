@@ -96,7 +96,7 @@ namespace LivetApp1.ViewModels
 
         public void MessageViewForAdmin(ThanksCard parameter)
         {
-            var message = new TransitionMessage(typeof(Views.MessageViewForAdmin), new MessageViewViewModel(parameter), TransitionMode.Modal, "MessageViewForAdmin");
+            var message = new TransitionMessage(typeof(Views.MessageViewForAdmin), new MessageViewForAdminViewModel(parameter), TransitionMode.Modal, "MessageViewForAdmin");
             Messenger.Raise(message);
         }
 
