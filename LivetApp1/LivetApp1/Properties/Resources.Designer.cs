@@ -73,6 +73,16 @@ namespace LivetApp1.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap _11 {
+            get {
+                object obj = ResourceManager.GetObject("_11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap _11happa_green_honbun {
             get {
                 object obj = ResourceManager.GetObject("_11happa_green_honbun", resourceCulture);
@@ -106,6 +116,26 @@ namespace LivetApp1.Properties {
         internal static System.Drawing.Bitmap _4hana_green_honbun {
             get {
                 object obj = ResourceManager.GetObject("_4hana_green_honbun", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap _52503830 {
+            get {
+                object obj = ResourceManager.GetObject("_52503830", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap _6529_19 {
+            get {
+                object obj = ResourceManager.GetObject("_6529_19", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -80,7 +80,7 @@
         <Button Content="閉じる" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" Canvas.Left="51" Canvas.Top="292"/>
 
         <Canvas.Background>
-            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+            <ImageBrush ImageSource="../Resources/_6529-19.jpg"/>
         </Canvas.Background>
     </Canvas>
 </Window>

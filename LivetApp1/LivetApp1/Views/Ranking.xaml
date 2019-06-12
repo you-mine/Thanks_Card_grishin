@@ -52,7 +52,7 @@
         <Button Content="閉じる" HorizontalAlignment="Left" Margin="98,289,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
 
         <Grid.Background>
-            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+            <ImageBrush ImageSource="../Resources/11.jpg"/>
         </Grid.Background>
     </Grid>
     
