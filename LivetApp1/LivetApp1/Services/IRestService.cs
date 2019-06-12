@@ -19,6 +19,6 @@ namespace LivetApp1.Services
         Task<List<Ranking>> GetRankings();
         Task<string> DeleteDepartment(Department department);
         Task<List<ThanksCard>> GetCardsForReport(Term term);
-        Task<string> UserNameExist(string UserName);
+
     }
 }

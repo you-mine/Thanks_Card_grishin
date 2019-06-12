@@ -80,7 +80,6 @@ namespace LivetApp1.ViewModels
 
         public void Close()
         {
-            this.thanksCard.PutCard();
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
         #endregion
@@ -116,7 +115,11 @@ namespace LivetApp1.ViewModels
 
         public  void Initialize()
         {
-
+            if(this.thanksCard.To.Id == SessionService.Instance.AuthorizedUser.Id)
+            {
+                this.thanksCard.IsReaded = true;
+                this.thanksCard.PutCard();
+            }
         }
     }
 }

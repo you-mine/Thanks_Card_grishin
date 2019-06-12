@@ -45,10 +45,18 @@ namespace WebApplication1.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDepartment(int id, Department department)
         {
+            
             if (id != department.Id)
             {
                 return BadRequest();
             }
+
+            List<Department> Exists = _context.Department.Where(x => x.Id != id && x.CD == department.CD).ToList();
+            if(Exists.Count > 0)
+            {
+                return BadRequest();
+            }
+
 
             _context.Entry(department).State = EntityState.Modified;
 
@@ -75,6 +83,12 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<ActionResult<Department>> PostDepartment(Department department)
         {
+            List<Department> Exists = _context.Department.Where(x => x.CD == department.CD).ToList();
+            if (Exists.Count > 0)
+            {
+                return BadRequest();
+            }
+
             _context.Department.Add(department);
             await _context.SaveChangesAsync();
 

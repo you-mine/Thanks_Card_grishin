@@ -49,7 +49,11 @@ namespace WebApplication1.Controllers
             {
                 return BadRequest();
             }
-
+            List<PlaceContent> Exists = _context.placeContent.Where(x => x.Id != id && placeContent.CD == x.CD).ToList();
+            if(Exists.Count > 0)
+            {
+                return BadRequest();
+            }
             _context.Entry(placeContent).State = EntityState.Modified;
 
             try
@@ -75,6 +79,12 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<ActionResult<PlaceContent>> PostPlaceContent(PlaceContent placeContent)
         {
+            List<PlaceContent> Exists = _context.placeContent.Where(x => placeContent.CD == x.CD).ToList();
+            if (Exists.Count > 0)
+            {
+                return BadRequest();
+            }
+
             _context.placeContent.Add(placeContent);
             await _context.SaveChangesAsync();
 
