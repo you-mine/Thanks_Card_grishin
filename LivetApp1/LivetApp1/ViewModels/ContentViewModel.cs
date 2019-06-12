@@ -212,8 +212,11 @@ namespace LivetApp1.ViewModels
 
         public void AddContent()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.AddContent), new AddContentViewModel(new Content(), "Add",service), TransitionMode.Modal, "AddContent");
             Messenger.Raise(message);
+            window.Show();
             Initialize();
         }
 

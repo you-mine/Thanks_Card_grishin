@@ -32,7 +32,7 @@
         </l:InteractionMessageTrigger>
 
         <l:InteractionMessageTrigger MessageKey="AddContent" Messenger="{Binding Messenger}">
-            <l:TransitionInteractionMessageAction/>
+            <l:TransitionInteractionMessageAction  Mode="Modal"  InvokeActionOnlyWhenWindowIsActive="False" />
         </l:InteractionMessageTrigger>
 
     </i:Interaction.Triggers>

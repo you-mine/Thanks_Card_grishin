@@ -15,7 +15,7 @@
     <i:Interaction.Triggers>
         <!--ここ！ここ！ここ！ここ！-->
         <l:InteractionMessageTrigger MessageKey="MessageView" Messenger="{Binding Messenger}">
-            <l:TransitionInteractionMessageAction/>
+            <l:TransitionInteractionMessageAction  Mode="Modal"  InvokeActionOnlyWhenWindowIsActive="False" />
         </l:InteractionMessageTrigger>
 
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">

@@ -12,6 +12,7 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
+using System.Windows;
 
 namespace LivetApp1.ViewModels
 {
@@ -34,8 +35,11 @@ namespace LivetApp1.ViewModels
 
         public void CardView()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.CardsViewForAdmin), new CardsViewForAdminViewModel(), TransitionMode.Modal, "CardsView");
             Messenger.Raise(message);
+            window.Show();
         }
 
 
@@ -60,8 +64,11 @@ namespace LivetApp1.ViewModels
 
         public void Analyze()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.Analyze), new AnalyzeViewModel(), TransitionMode.Modal, "Analyze");
             Messenger.Raise(message);
+            window.Show();
         }
 
 
@@ -87,8 +94,11 @@ namespace LivetApp1.ViewModels
 
         public void output()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.Exceloutput), new ExceloutputViewModel(), TransitionMode.Modal, "Exceloutput");
             Messenger.Raise(message);
+            window.Show();
         }
 
 
@@ -116,8 +126,11 @@ namespace LivetApp1.ViewModels
 
         public void EditUser()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.ShowUser), new ShowUserViewModel(), TransitionMode.Modal, "EditUser");
             Messenger.Raise(message);
+            window.Show();
         }
 
 
@@ -146,8 +159,11 @@ namespace LivetApp1.ViewModels
 
         public void EditDepartment()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.DepartmentView), new DepartmentViewViewModel(), TransitionMode.Modal, "EditDepartment");
             Messenger.Raise(message);
+            window.Show();
         }
 
 
@@ -171,8 +187,11 @@ namespace LivetApp1.ViewModels
 
         public void Content()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.Content), new ContentViewModel(), TransitionMode.Modal, "Content");
             Messenger.Raise(message);
+            window.Show();
         }
 
         #endregion
