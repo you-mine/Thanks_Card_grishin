@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="EditUser" Height="362" Width="537.569" ResizeMode="NoResize">
+        Title="ユーザー追加・編集画面" Height="362" Width="537.569" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:EditUserViewModel/>
@@ -37,7 +37,7 @@
         </l:InteractionMessageTrigger>
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
-       
+
 
     </i:Interaction.Triggers>
 
@@ -70,14 +70,14 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                            <Button Content="選択" Command="{Binding DataContext.SelectDepartmentCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <Button  VerticalAlignment="Center" Content="選択" Command="{Binding DataContext.SelectDepartmentCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="変更・追加" HorizontalAlignment="Left" Width="75" Command="{Binding SendCommand}" Canvas.Left="447" Canvas.Top="297" />
-        <Button Content="閉じる" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" Canvas.Left="51" Canvas.Top="292"/>
+        <Button Content="変更・追加" HorizontalAlignment="Left" Width="101" Command="{Binding SendCommand}" Canvas.Left="389" Canvas.Top="271" />
+        <Button Content="閉じる" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" Canvas.Left="65" Canvas.Top="271"/>
 
         <Canvas.Background>
             <ImageBrush ImageSource="../Resources/_6529-19.jpg"/>

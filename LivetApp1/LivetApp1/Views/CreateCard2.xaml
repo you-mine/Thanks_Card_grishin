@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="カード作成（簡易）" Height="380" Width="745">
+        Title="カード作成（簡易）" Height="380" Width="745" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" >
 
     <Window.DataContext>
         <vm:CreateCard2ViewModel/>
@@ -41,7 +41,7 @@
 
     <Grid Margin="0,0,-8,0" Height="349" VerticalAlignment="Top">
         <Grid.Background>
-            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+            <ImageBrush ImageSource="../Resources/_6529-19.jpg"/>
         </Grid.Background>
 
 
@@ -50,17 +50,20 @@
         <Label Content="場所" HorizontalAlignment="Left" Margin="29,104,0,0" VerticalAlignment="Top"/>
         <Label Content="内容" HorizontalAlignment="Left" Margin="29,145,0,0" VerticalAlignment="Top"/>
         <Label Content="内容2" HorizontalAlignment="Left" Margin="29,192,0,0" VerticalAlignment="Top"/>
-        <Label Content="From/" HorizontalAlignment="Left" Margin="34,259,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.55,1.962" FontSize="14" Background="#FF1EB65C" Width="140" Height="28">
-            
+        <Label Content="From/" HorizontalAlignment="Left" Margin="34,259,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.55,1.962" FontSize="14" Width="140" Height="28">
+            <Label.Background>
+                <SolidColorBrush Color="{DynamicResource DG_Color_MouseOver}"/>
+            </Label.Background>
+
         </Label>
 
         <ComboBox ItemsSource="{Binding Place}" DisplayMemberPath="content" SelectedValuePath="content" SelectedValue="{Binding Message1}" HorizontalAlignment="Left" Margin="91,108,0,0" VerticalAlignment="Top" Width="120" />
         <ComboBox ItemsSource="{Binding Help1}" DisplayMemberPath="content" SelectedValuePath="content" SelectedValue="{Binding Message2}" HorizontalAlignment="Left" Margin="91,149,0,0" VerticalAlignment="Top" Width="120" />
         <ComboBox ItemsSource="{Binding Help2}" DisplayMemberPath="content" SelectedValuePath="content" SelectedValue="{Binding Message3}" HorizontalAlignment="Left" Margin="91,192,0,0" VerticalAlignment="Top" Width="120" />
-      
-        <Label Content="{Binding ThanksCard.From.Name}"  Margin="80,259,571,62"/>
+
+        <Label Content="{Binding ThanksCard.From.Name}"  Margin="80,259,571,62" Background="{x:Null}"/>
         <Label Content="をしてくれてありがとうございました。" HorizontalAlignment="Left" Margin="132,219,0,0" VerticalAlignment="Top" Width="167"/>
-        <DataGrid IsReadOnly="True"  ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,67"  HorizontalAlignment="Left" Width="301" SelectionChanged="DataGrid_SelectionChanged">
+        <DataGrid IsReadOnly="True"  ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,80"  HorizontalAlignment="Left" Width="301" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="氏名" Binding="{Binding Name}" />
@@ -71,16 +74,16 @@
                 <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="選択" Command="{Binding DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <Button VerticalAlignment="Center" Content="選択" Command="{Binding DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        
-        
-        <Button Content="閉じる" HorizontalAlignment="Left" Margin="612,303,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" />
-        <Button Content="送信" HorizontalAlignment="Left" Margin="480,303,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding SendCommand}"/>
+
+
+        <Button Content="閉じる" HorizontalAlignment="Left" Margin="612,294,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" Click="Button_Click" RenderTransformOrigin="0.6,0.344" />
+        <Button Content="送信" HorizontalAlignment="Left" Margin="515,294,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding SendCommand}" RenderTransformOrigin="0.6,0.219" Click="Button_Click_1"/>
         <Label Content="で" HorizontalAlignment="Left" Margin="211,127,0,0" VerticalAlignment="Top" Width="27"/>
         <Label Content="の" HorizontalAlignment="Left" Margin="211,174,0,0" VerticalAlignment="Top" Width="32"/>
 

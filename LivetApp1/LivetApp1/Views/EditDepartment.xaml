@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="EditDepartment" Height="178" Width="221">
+        Title="部課編集画面" Height="185" Width="225" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:EditDepartmentViewModel/>
@@ -30,7 +30,7 @@
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
             <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
-        
+
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
     </i:Interaction.Triggers>
@@ -42,8 +42,8 @@
         <Label Content="部名" HorizontalAlignment="Left" Margin="26,41,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="69,75,0,0" TextWrapping="Wrap" Text="{Binding Department.SectionName}" VerticalAlignment="Top" Width="120"/>
         <Label Content="課名" HorizontalAlignment="Left" Margin="26,72,0,0" VerticalAlignment="Top"/>
-        <Button Content="追加・編集" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SendCommand}" CommandParameter="{Binding Department}"/>
-        <Button Content="キャンセル" HorizontalAlignment="Left" Margin="128,117,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" />
+        <Button Content="追加・編集" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="95" Command="{Binding SendCommand}" CommandParameter="{Binding Department}"/>
+        <Button Content="キャンセル" HorizontalAlignment="Left" Margin="110,107,0,0" VerticalAlignment="Top" Width="93" Command="{Binding CloseCommand}" />
 
     </Grid>
 </Window>

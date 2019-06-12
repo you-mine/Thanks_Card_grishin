@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="管理者メニュ－画面" Height="350" Width="525" ResizeMode="NoResize" >
+        Title="管理者メニュ－画面" Height="350" Width="525" ResizeMode="NoResize"   WindowStartupLocation="CenterScreen">
 
 
     <Window.DataContext>
@@ -72,15 +72,15 @@
         </Grid.ColumnDefinitions>
 
 
-        <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="214,32,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Command="{Binding CardViewCommand }"/>
-        <Button Content="統計画面" HorizontalAlignment="Left" Margin="214,74,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Command="{Binding AnalyzeCommand }"/>
+        <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="214,32,0,0" VerticalAlignment="Top" Width="119" Grid.ColumnSpan="2" Command="{Binding CardViewCommand }"/>
+        <Button Content="統計画面" HorizontalAlignment="Left" Margin="214,74,0,0" VerticalAlignment="Top" Width="119" Grid.ColumnSpan="2" Command="{Binding AnalyzeCommand }"/>
         <Button Content="閉じる" HorizontalAlignment="Left" Margin="135,266,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Command="{Binding CloseCommand }" />
-        <Button Content="Excel出力" HorizontalAlignment="Left" Margin="214,117,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" RenderTransformOrigin="0.347,0.7" Command="{Binding outputCommand }" />
-        <Button Content="ユーザー情報変更・追加" HorizontalAlignment="Left" Margin="183,161,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="3.4,5.6" Grid.ColumnSpan="2" Command="{Binding EditUserCommand }"/>
-        <Button Content="部署情報変更・追加" HorizontalAlignment="Left" Margin="183,246,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2" Command="{Binding EditDepartmentCommand}" />
+        <Button Content="Excel出力" HorizontalAlignment="Left" Margin="214,117,0,0" VerticalAlignment="Top" Width="119" Grid.ColumnSpan="2" RenderTransformOrigin="0.347,0.7" Command="{Binding outputCommand }" />
+        <Button Content="ユーザー情報変更・追加" HorizontalAlignment="Left" Margin="183,161,0,0" VerticalAlignment="Top" Width="170" RenderTransformOrigin="3.4,5.6" Grid.ColumnSpan="2" Command="{Binding EditUserCommand }"/>
+        <Button Content="部署情報変更・追加" HorizontalAlignment="Left" Margin="183,246,0,0" VerticalAlignment="Top" Width="170" Grid.ColumnSpan="2" Command="{Binding EditDepartmentCommand}" />
 
         <Image Source="../Resources/bird3_R.png" Margin="24,50,143,170"/>
-        <Button Content="簡易入力編集" HorizontalAlignment="Left" Margin="203,204,0,0" VerticalAlignment="Top" Width="101" Grid.ColumnSpan="2" Command="{Binding ContentCommand}"/>
+        <Button Content="簡易入力編集" HorizontalAlignment="Left" Margin="203,204,0,0" VerticalAlignment="Top" Width="130" Grid.ColumnSpan="2" Command="{Binding ContentCommand}"/>
 
         <Grid.Background>
            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>

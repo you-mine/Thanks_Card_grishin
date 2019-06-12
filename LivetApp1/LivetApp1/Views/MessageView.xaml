@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="メッセージ画面（一般向け）" Height="390" Width="525">
+        Title="メッセージ画面（一般向け）" Height="390" Width="525"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:MessageViewForAdminViewModel/>
@@ -48,8 +48,8 @@
         <TextBox IsReadOnly="True" IsEnabled="True" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.From.Name}" Canvas.Top="38" Width="120"/>
         <TextBox  IsReadOnly="True" IsEnabled="True" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.Title}" Canvas.Top="90" Width="120"/>
         <TextBox  IsReadOnly="True" IsEnabled="True" Height="128" Canvas.Left="42" TextWrapping="Wrap" Text="{Binding thanksCard.Body}" Canvas.Top="144" Width="443"/>
-        <CheckBox Content="既読" Canvas.Left="219" Canvas.Top="290" IsChecked="{Binding thanksCard.IsReaded}" /> 
-        <Button Content="閉じる" Canvas.Left="410" Canvas.Top="329" Width="75" Command="{Binding CloseCommand}"  />
+        <CheckBox IsEnabled="False" Content="既読" Canvas.Left="219" Canvas.Top="290" IsChecked="{Binding thanksCard.IsReaded}" /> 
+        <Button Content="閉じる" Canvas.Left="410" Canvas.Top="305" Width="75" Command="{Binding CloseCommand}"  />
         <Canvas.Background>
             <ImageBrush ImageSource="../Resources/_6529-19.jpg"/>
         </Canvas.Background>

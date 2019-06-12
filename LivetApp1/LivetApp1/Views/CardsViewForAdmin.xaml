@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="CardsViewForAdmin" Height="350" Width="858.5">
+        Title="過去事例一覧" Height="350" Width="858.5" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:CardsViewForAdminViewModel/>
@@ -41,7 +41,7 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        <DataGrid ItemsSource="{Binding AdminCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39">
+        <DataGrid ItemsSource="{Binding AdminCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,57">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="名前" Binding="{Binding To.Name}" />
                 <!-- <DataGridTextColumn Header="From" Binding="{Binding From.Name}" /> -->
@@ -64,14 +64,14 @@
                             <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
                             <!--ここに選択ボタンが押されたらcommandで
                             　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　MessageViewに遷移するようにする？-->
-                            <Button Content="選択" Command="{Binding DataContext.MessageViewForAdminCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <Button  VerticalAlignment="Center" Content="選択" Command="{Binding DataContext.MessageViewForAdminCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="閉じる"  Margin="375,289,375,0" VerticalAlignment="Top" Command="{Binding CloseCommand}"/>
+        <Button Content="閉じる"  Margin="376,269,374,0" VerticalAlignment="Top" Command="{Binding CloseCommand}" RenderTransformOrigin="0.441,0.375"/>
 
 
         <Grid.Background>

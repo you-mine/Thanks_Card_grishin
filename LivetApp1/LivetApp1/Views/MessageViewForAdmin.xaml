@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="メッセージ詳細（管理者向け）" Height="492" Width="555">
+        Title="メッセージ詳細（管理者向け）" Height="492" Width="555"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:MessageViewForAdminViewModel/>
@@ -41,11 +41,11 @@
         <Label Content="タイトル" Canvas.Left="66" Canvas.Top="87"/>
         <Label Content="本文：" Canvas.Left="42" Canvas.Top="118"/>
 
-        <TextBox IsEnabled="False" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.From.Name}" Canvas.Top="38" Width="120"/>
-        <TextBox IsEnabled="False" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.To.Name}" Canvas.Top="64" Width="120"/>
-        <TextBox IsEnabled="False" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.Title}" Canvas.Top="90" Width="120"/>
-        <TextBox IsEnabled="False" Height="128" Canvas.Left="42" TextWrapping="Wrap" Text="{Binding thanksCard.Body}" Canvas.Top="144" Width="443"/>
-        <CheckBox Content="管理者チェック" Canvas.Left="441" Canvas.Top="420" IsChecked="{Binding thanksCard.IsReadedAdmin}" RenderTransformOrigin="4.114,5" />
+        <TextBox IsReadOnly="True" IsEnabled="True" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.From.Name}" Canvas.Top="38" Width="120"/>
+        <TextBox IsReadOnly="True" IsEnabled="True" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.To.Name}" Canvas.Top="64" Width="120"/>
+        <TextBox IsReadOnly="True" IsEnabled="True" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.Title}" Canvas.Top="90" Width="120"/>
+        <TextBox IsReadOnly="True" IsEnabled="True" Height="128" Canvas.Left="42" TextWrapping="Wrap" Text="{Binding thanksCard.Body}" Canvas.Top="144" Width="443"/>
+        <CheckBox Content="管理者チェック" Canvas.Left="415" Canvas.Top="419" IsChecked="{Binding thanksCard.IsReadedAdmin}" RenderTransformOrigin="4.114,5" />
         <Button Content="閉じる" Canvas.Left="225" Canvas.Top="405" Width="75" Command="{Binding CloseCommand}" RenderTransformOrigin="0.5,0.5"  >
         </Button>
         <TextBox Height="23" Canvas.Left="255" TextWrapping="Wrap" Text="{Binding thanksCard.ThanksCount}" Canvas.Top="317" Width="120"/>
@@ -56,7 +56,7 @@
 
 
         <Canvas.Background>
-            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+            <ImageBrush ImageSource="../Resources/_6529-19.jpg"/>
         </Canvas.Background>
     </Canvas>
 </Window>

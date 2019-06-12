@@ -47,5 +47,10 @@ namespace LivetApp1.Views
         {
 
         }
+
+        private void Button_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+        }
     }
 }
