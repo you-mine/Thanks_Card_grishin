@@ -152,5 +152,8 @@
         <Label Content="カード作成（簡易）編集&#xD;&#xA;" HorizontalAlignment="Left" Margin="47,10,0,0" VerticalAlignment="Top" Height="26"/>
         <Button Content="閉じる" HorizontalAlignment="Left" Margin="420,309,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
         <Button Content="追加" HorizontalAlignment="Left" Margin="420,21,0,0" VerticalAlignment="Top" Width="75" Command="{Binding AddContentCommand}"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+        </Grid.Background>
     </Grid>
 </Window>

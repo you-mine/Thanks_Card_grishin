@@ -75,7 +75,7 @@
         <Label Content="感謝カードを送る人を選択してください" Canvas.Left="386" Canvas.Top="42"/>
 
         <Canvas.Background>
-            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+            <ImageBrush ImageSource="../Resources/_6529-19.jpg"/>
         </Canvas.Background>
 
     </Canvas>

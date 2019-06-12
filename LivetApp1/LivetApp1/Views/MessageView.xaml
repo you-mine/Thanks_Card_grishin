@@ -51,7 +51,7 @@
         <CheckBox Content="既読" Canvas.Left="219" Canvas.Top="290" IsChecked="{Binding thanksCard.IsReaded}" /> 
         <Button Content="閉じる" Canvas.Left="410" Canvas.Top="329" Width="75" Command="{Binding CloseCommand}"  />
         <Canvas.Background>
-            <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
+            <ImageBrush ImageSource="../Resources/_6529-19.jpg"/>
         </Canvas.Background>
         
     </Canvas>
