@@ -69,7 +69,8 @@
         <Button Content="ランキング" HorizontalAlignment="Left" Margin="55,170,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click" Command="{Binding RankingCommand}" Height="36" RenderTransformOrigin="0.538,0.809"/>
         <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="36,225,0,0" VerticalAlignment="Top" Width="143" RenderTransformOrigin="-1.32,-0.8" Command="{Binding CardviewCommand}" Height="39"/>
         <Button Content="管理者向けメニュー" HorizontalAlignment="Left" Margin="36,282,0,0" VerticalAlignment="Top" Width="145"  Command="{Binding AdminMenuCommand}" Height="32"/>
-        <Button Content="ログアウト" HorizontalAlignment="Left" Margin="57,354,0,0" VerticalAlignment="Top" Width="96" Command="{Binding LogoutCommand }" Height="29" RenderTransformOrigin="0.552,1.36"/>
+        <Button Content="ログアウト" HorizontalAlignment="Left" Margin="57,335,0,0" VerticalAlignment="Top" Width="96" Command="{Binding LogoutCommand }" Height="29" RenderTransformOrigin="0.552,1.36"/>
+        <Button Content="あなたを最も感謝しているユーザー" HorizontalAlignment="Left" Margin="0,382,0,0" VerticalAlignment="Top" Width="231" Command="{Binding MostthanksCommand }" Height="29" RenderTransformOrigin="0.552,1.36"/>
 
 
         <Label FontSize="23" Background="Honeydew" Content="今月の代表事例" HorizontalAlignment="Left" Margin="210,16,0,0" VerticalAlignment="Top" Height="46" Width="176"/>

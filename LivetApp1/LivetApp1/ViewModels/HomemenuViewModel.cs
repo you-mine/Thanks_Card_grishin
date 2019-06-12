@@ -42,11 +42,10 @@ namespace LivetApp1.ViewModels
 
         public void Ranking()
         {
-            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
-            window.Hide();
+
             var message = new TransitionMessage(typeof(Views.Ranking), new RankingViewModel(), TransitionMode.Modal, "Ranking");
             Messenger.Raise(message);
-            window.Show();
+
         }
 
 
@@ -75,11 +74,9 @@ namespace LivetApp1.ViewModels
 
         public void Cardview()
         {
-            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
-            window.Hide();
+
             var message = new TransitionMessage(typeof(Views.Cardview), new CardviewViewModel(), TransitionMode.Modal, "Cardview");
             Messenger.Raise(message);
-            window.Show();
             Initialize();
         }
 
@@ -111,11 +108,8 @@ namespace LivetApp1.ViewModels
             bool IsAdmin = Services.SessionService.Instance.AuthorizedUser.IsAdmin;
             if (IsAdmin)
             {
-                var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
-                window.Hide();
                 var message = new TransitionMessage(typeof(Views.AdminMenu), new AdminMenuViewModel(), TransitionMode.Modal, "AdminMenu");
                 Messenger.Raise(message);
-                window.Show();
                 Initialize();
             }
             else
@@ -178,11 +172,10 @@ namespace LivetApp1.ViewModels
 
         public void CreateCrad()
         {
-            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
-            window.Hide();
+
             var message = new TransitionMessage(typeof(Views.CreateCard), new CreateCardViewModel(), TransitionMode.Modal, "CreateCard");
             Messenger.Raise(message);
-            window.Show();
+
             Initialize();
         }
         #endregion
@@ -205,11 +198,9 @@ namespace LivetApp1.ViewModels
 
         public void CreateCard2()
         {
-            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
-            window.Hide();
+
             var message = new TransitionMessage(typeof(Views.CreateCard2), new CreateCard2ViewModel(), TransitionMode.Modal, "CreateCard2");
             Messenger.Raise(message);
-            window.Show();
             Initialize();
         }
 
@@ -289,9 +280,48 @@ namespace LivetApp1.ViewModels
             }
         }
 
-        #endregion 
+        #endregion
 
-        
+
+        private ViewModelCommand _MostthanksCommand;
+
+        public ViewModelCommand MostthanksCommand
+        {
+            get
+            {
+                if (_MostthanksCommand == null)
+                {
+                    _MostthanksCommand = new ViewModelCommand(Mostthanks);
+                }
+                return _MostthanksCommand;
+            }
+        }
+
+        public void Mostthanks()
+        {
+            try
+            {
+                var a = this.Cards
+                 .Where(x => x.To.Id == SessionService.Instance.AuthorizedUser.Id)
+                 .GroupBy(x => new { x.From.Id })
+                 .Select(x => new
+                 {
+                     ThanksCount = x.Select(y => y.ThanksCount).Sum(),
+                     Name = x.Select(y => y.From.Name).ToList()[0]
+                 })
+                 .OrderByDescending(x => x.ThanksCount).ToList()[0];
+
+                MessageBox.Show("あなたに一番感謝をしている人は、" + a.Name + "さんで、感謝度は" + a.ThanksCount + "です。");
+            }
+            catch
+            {
+                MessageBox.Show("まだ誰からも感謝されていないようです。");
+            }
+
+        }
+
+
+
 
         public async void Initialize()
         {
