@@ -6,7 +6,8 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="MainWindow" Height="350" Width="525" Icon="../Resources/sakura2-01.png">
+        Title="ログイン画面" Height="350" Width="525" Icon="../Resources/sakura2-01.png" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
         
     
     

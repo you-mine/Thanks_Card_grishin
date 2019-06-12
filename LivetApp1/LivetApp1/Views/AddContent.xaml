@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="AddContent" Height="277" Width="519">
+        Title="簡易入力編集画面" Height="277" Width="519" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:AddContentViewModel/>
@@ -42,8 +42,8 @@
             <Label Content="CD" HorizontalAlignment="Left" Margin="90,51,0,0" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="90,144,0,0" TextWrapping="Wrap" Text="{Binding Content.content}" VerticalAlignment="Top" Width="330"/>
             <Label Content="追加内容" HorizontalAlignment="Left" Margin="90,118,0,0" VerticalAlignment="Top"/>
-            <Button Content="追加・編集" HorizontalAlignment="Left" Margin="10,216,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SendCommand}" CommandParameter="{Binding Department}"/>
-            <Button Content="キャンセル" HorizontalAlignment="Left" Margin="426,216,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}" />
+            <Button Content="追加・編集" HorizontalAlignment="Left" Margin="41,189,0,0" VerticalAlignment="Top" Width="97" Command="{Binding SendCommand}" CommandParameter="{Binding Department}"/>
+            <Button Content="キャンセル" HorizontalAlignment="Left" Margin="389,189,0,0" VerticalAlignment="Top" Width="92" Command="{Binding CloseCommand}" />
             <Label Content="{Binding Type}" HorizontalAlignment="Left" Margin="160,118,0,0" VerticalAlignment="Top"/>
 
         </Grid>

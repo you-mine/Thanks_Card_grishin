@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="ホーム" Height="500" Width="825"  ResizeMode="NoResize"  Icon="../Resources/watermark.jpg" >
+        Title="ホーム" Height="688" Width="990"  ResizeMode="NoResize"  Icon="../Resources/watermark.jpg" WindowStartupLocation="CenterScreen" >
 
     <Window.DataContext>
         <vm:HomemenuViewModel/>
@@ -15,7 +15,7 @@
     <i:Interaction.Triggers>
 
         <l:InteractionMessageTrigger MessageKey="Ranking" Messenger="{Binding Messenger}">
-            <l:TransitionInteractionMessageAction/>
+            <l:TransitionInteractionMessageAction Mode="Modal" InvokeActionOnlyWhenWindowIsActive="False"/>
         </l:InteractionMessageTrigger>
 
         <l:InteractionMessageTrigger MessageKey="Cardview" Messenger="{Binding Messenger}">
@@ -64,16 +64,16 @@
             <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
         </Grid.Background>
 
-        <Button Content="カード作成" HorizontalAlignment="Left" Margin="57,39,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,0.6" Command="{Binding CreateCradCommand}" Height="20"/>
-        <Button Content="カード作成（簡易）" HorizontalAlignment="Left" Margin="57,64,0,0" VerticalAlignment="Top" Width="124" Command="{Binding CreateCard2Command}" Height="20"/>
-        <Button Content="ランキング" HorizontalAlignment="Left" Margin="57,89,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding RankingCommand}" Height="20"/>
-        <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="57,114,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.32,-0.8" Command="{Binding CardviewCommand}" Height="20"/>
-        <Button Content="管理者向けメニュー" HorizontalAlignment="Left" Margin="57,139,0,0" VerticalAlignment="Top" Width="145"  Command="{Binding AdminMenuCommand}" Height="20"/>
-        <Button Content="ログアウト" HorizontalAlignment="Left" Margin="55,229,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LogoutCommand }" Height="20"/>
+        <Button Content="カード作成" HorizontalAlignment="Left" Margin="57,53,0,0" VerticalAlignment="Top" Width="118" RenderTransformOrigin="0.107,0.6" Command="{Binding CreateCradCommand}" Height="37"/>
+        <Button Content="カード作成（簡易）" HorizontalAlignment="Left" Margin="27,110,0,0" VerticalAlignment="Top" Width="148" Command="{Binding CreateCard2Command}" Height="39"/>
+        <Button Content="ランキング" HorizontalAlignment="Left" Margin="55,170,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click" Command="{Binding RankingCommand}" Height="36" RenderTransformOrigin="0.538,0.809"/>
+        <Button Content="過去事例一覧" HorizontalAlignment="Left" Margin="36,225,0,0" VerticalAlignment="Top" Width="143" RenderTransformOrigin="-1.32,-0.8" Command="{Binding CardviewCommand}" Height="39"/>
+        <Button Content="管理者向けメニュー" HorizontalAlignment="Left" Margin="36,282,0,0" VerticalAlignment="Top" Width="145"  Command="{Binding AdminMenuCommand}" Height="32"/>
+        <Button Content="ログアウト" HorizontalAlignment="Left" Margin="57,354,0,0" VerticalAlignment="Top" Width="96" Command="{Binding LogoutCommand }" Height="29" RenderTransformOrigin="0.552,1.36"/>
 
 
-        <Label Background="Honeydew" Content="今月の代表事例" HorizontalAlignment="Left" Margin="210,13,0,0" VerticalAlignment="Top" Height="26" Width="92"/>
-        <DataGrid IsReadOnly="True" ItemsSource="{Binding RepresentativeCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,39,10,340">
+        <Label FontSize="23" Background="Honeydew" Content="今月の代表事例" HorizontalAlignment="Left" Margin="210,16,0,0" VerticalAlignment="Top" Height="46" Width="176"/>
+        <DataGrid FontSize="15" IsReadOnly="True" ItemsSource="{Binding RepresentativeCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,61,10,426">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
@@ -84,10 +84,10 @@
 
 
 
-        <TabControl Margin="210,143,10,191">
+        <TabControl Margin="210,238,10,190">
 
             <TabItem Header="受け取ったメッセージ">
-                <DataGrid  IsReadOnly="True" ItemsSource="{Binding To}" AutoGenerateColumns="False" CanUserAddRows="False" >
+                <DataGrid FontSize="15" IsReadOnly="True" ItemsSource="{Binding To}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,-12" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
                         <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
@@ -97,7 +97,7 @@
             </TabItem>
 
             <TabItem Header="送ったメッセージ">
-                <DataGrid  IsReadOnly="True" ItemsSource="{Binding From}" AutoGenerateColumns="False" CanUserAddRows="False" >
+                <DataGrid   FontSize="15" IsReadOnly="True" ItemsSource="{Binding From}" AutoGenerateColumns="False" CanUserAddRows="False"  Margin="0,0,0,-12">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
                         <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
@@ -107,8 +107,8 @@
             </TabItem>
         </TabControl>
 
-        <Label Background="LightGreen" Content="最新のカード情報" HorizontalAlignment="Left" Margin="210,285,0,0" VerticalAlignment="Top" Height="26" Width="93"/>
-        <DataGrid IsReadOnly="True" ItemsSource="{Binding Cards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,311,10,34">
+        <Label FontSize="23"  Background="LightGreen" Content="最新のカード情報" HorizontalAlignment="Left" Margin="210,478,0,0" VerticalAlignment="Top" Height="38" Width="176"/>
+        <DataGrid  FontSize="15" IsReadOnly="True" ItemsSource="{Binding Cards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="210,517,10,10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
@@ -117,7 +117,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Image Source="../Resources/bird2_R.png1.png" Margin="49,285,629,65"/>
+        <Image Source="../Resources/bird2_R.png1.png" Margin="55,369,786,23"/>
 
     </Grid>
 </Window>

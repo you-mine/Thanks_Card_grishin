@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="Cardview" Height="350" Width="858.5" Icon="../Resources/_yotsuba-clover-01-02-02.png">
+        Title="過去事例一覧" Height="350" Width="858.5" Icon="../Resources/_yotsuba-clover-01-02-02.png" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:CardviewViewModel/>
@@ -47,7 +47,7 @@
             <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
         </Grid.Background>
        
-        <DataGrid ItemsSource="{Binding thanksCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39" Grid.ColumnSpan="2" >
+        <DataGrid ItemsSource="{Binding thanksCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,68" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}"  IsReadOnly = "True"/>
                 <DataGridTextColumn Header="From" Binding="{Binding From.Name}"  IsReadOnly = "True"/>
@@ -69,14 +69,14 @@
                             <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
                             <!--ここに選択ボタンが押されたらcommandで
                             　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　MessageViewに遷移するようにする？-->
-                            <Button Content="選択" Command="{Binding DataContext.MessageViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <Button  VerticalAlignment="Center" Content="選択" Command="{Binding DataContext.MessageViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="閉じる" Margin="375,289,375,0" VerticalAlignment="Top" Command="{Binding CloseCommand}"/>
+        <Button Content="閉じる" Margin="375,268,375,0" VerticalAlignment="Top" Command="{Binding CloseCommand}"/>
 
 
 
