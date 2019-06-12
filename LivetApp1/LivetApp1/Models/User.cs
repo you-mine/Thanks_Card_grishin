@@ -188,5 +188,13 @@ namespace LivetApp1.Models
             return await rest.PutUserAsync(this);
         }
         #endregion
+
+        #region ユーザーネーム重複確認
+        public async Task<string> ExistUser()
+        {
+            IRestService rest = new RestService();
+            return await rest.UserNameExist(this.UserName);
+        }
+        #endregion
     }
 }

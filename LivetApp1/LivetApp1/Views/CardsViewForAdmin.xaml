@@ -6,13 +6,13 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="CardsViewForAdmin" Height="350" Width="525">
-    
+        Title="CardsViewForAdmin" Height="350" Width="858.5">
+
     <Window.DataContext>
         <vm:CardsViewForAdminViewModel/>
     </Window.DataContext>
-    
-     <i:Interaction.Triggers>
+
+    <i:Interaction.Triggers>
 
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
             <l:WindowInteractionMessageAction/>
@@ -23,9 +23,9 @@
         </l:InteractionMessageTrigger>
 
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
-    	<!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
-    	<!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています --> 
-        
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
         <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
         <i:EventTrigger EventName="ContentRendered">
             <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
@@ -44,10 +44,10 @@
         <DataGrid ItemsSource="{Binding AdminCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="名前" Binding="{Binding To.Name}" />
-               <!-- <DataGridTextColumn Header="From" Binding="{Binding From.Name}" /> -->
-               <!-- <DataGridTextColumn Header="カードID" Binding="{Binding Id}" /> -->
+                <!-- <DataGridTextColumn Header="From" Binding="{Binding From.Name}" /> -->
+                <!-- <DataGridTextColumn Header="カードID" Binding="{Binding Id}" /> -->
                 <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
-                <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+                <DataGridTextColumn Width="400" Header="本文" Binding="{Binding Body}"  />
                 <DataGridTextColumn Header="感謝度" Binding="{Binding ThanksCount}"  />
                 <DataGridTemplateColumn Header="管理者確認済">
                     <DataGridTemplateColumn.CellTemplate>
@@ -71,7 +71,7 @@
                 <DataGridTextColumn/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="閉じる" HorizontalAlignment="Left" Margin="431,285,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="閉じる"  Margin="375,289,375,0" VerticalAlignment="Top" Command="{Binding CloseCommand}"/>
 
 
         <Grid.Background>
