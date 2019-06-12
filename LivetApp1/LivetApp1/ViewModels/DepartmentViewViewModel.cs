@@ -58,8 +58,11 @@ namespace LivetApp1.ViewModels
 
         public async void Select(Department parameter)
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.EditDepartment), new EditDepartmentViewModel(parameter,"put"), TransitionMode.Modal, "Edit");
             Messenger.Raise(message);
+            window.Show();
             this.Departments = await service.GetDepartmentsAsync();
         }
 
@@ -83,8 +86,11 @@ namespace LivetApp1.ViewModels
 
         public async void Post()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.EditDepartment), new EditDepartmentViewModel(new Department(), "post"), TransitionMode.Modal, "Edit");
             Messenger.Raise(message);
+            window.Show();
             this.Departments = await service.GetDepartmentsAsync();
         }
 
