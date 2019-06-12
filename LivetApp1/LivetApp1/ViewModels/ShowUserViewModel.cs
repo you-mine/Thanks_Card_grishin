@@ -64,8 +64,11 @@ namespace LivetApp1.ViewModels
 
         public void EditUserPut(User parameter)
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.EditUser), new EditUserViewModel(parameter, "Put"), TransitionMode.Modal, "EditUserPut");
             Messenger.Raise(message);
+            window.Show();
         }
         #endregion
 
