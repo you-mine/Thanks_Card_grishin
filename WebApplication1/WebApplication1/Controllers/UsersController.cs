@@ -53,6 +53,13 @@ namespace WebApplication1.Controllers
                 return BadRequest();
             }
 
+            //ユーザー名かコードが重複していないかの確認処理。　重複していた場合BadRequestを返す。　
+            List<User> Exists =_context.Users.Where(x => x.Id != id && (x.UserName == user.UserName || x.CD == user.CD)).ToList();
+            if(Exists.Count > 0)
+            {
+                return BadRequest();
+            }
+
             _context.Entry(user).State = EntityState.Modified;
 
             try
@@ -76,10 +83,18 @@ namespace WebApplication1.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<IActionResult> PostUser(User user)
         {
+            List<User> Exists = _context.Users.Where(x => x.UserName == user.UserName || x.CD == user.CD).ToList();
+            if (Exists.Count > 0)
+
+            {
+                return BadRequest();
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }

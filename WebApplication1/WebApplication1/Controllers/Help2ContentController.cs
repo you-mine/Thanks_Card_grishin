@@ -45,6 +45,12 @@ namespace WebApplication1.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHelp2Content(int id, Help2Content help2Content)
         {
+            List<Help2Content> Exist = _context.help2Content.Where(x => x.Id != id && help2Content.CD == x.CD).ToList();
+            if(Exist.Count > 0)
+            {
+                return BadRequest();
+            }
+
             if (id != help2Content.Id)
             {
                 return BadRequest();
@@ -75,6 +81,11 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<ActionResult<Help2Content>> PostHelp2Content(Help2Content help2Content)
         {
+            List<Help2Content> Exist = _context.help2Content.Where(x => help2Content.CD == x.CD).ToList();
+            if (Exist.Count > 0)
+            {
+                return BadRequest();
+            }
             _context.help2Content.Add(help2Content);
             await _context.SaveChangesAsync();
 

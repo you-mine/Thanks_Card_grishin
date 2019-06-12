@@ -260,31 +260,6 @@ namespace LivetApp1.Services
         }
         #endregion
 
-        #region ユーザーネーム重複確認
-        public async Task<string> UserNameExist(string UserName)
-        {
-            string Exist = "";
-            try
-            {
-                var response = await Client.GetAsync(this.BaseUrl + "/api/UserNameExists/"+UserName);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    Exist = JsonConvert.DeserializeObject<string>(responseContent);
-                }
-            }
-            catch (Exception e)
-            {
-                // TODO
-                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
-            }
-
-            return Exist;
-        }
-        #endregion
-
-
         #region ランキング取得
         public async Task<List<Ranking>> GetRankings()
         {

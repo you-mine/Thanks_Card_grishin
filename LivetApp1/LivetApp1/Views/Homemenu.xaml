@@ -15,7 +15,7 @@
     <i:Interaction.Triggers>
 
         <l:InteractionMessageTrigger MessageKey="Ranking" Messenger="{Binding Messenger}">
-            <l:TransitionInteractionMessageAction/>
+            <l:TransitionInteractionMessageAction  Mode="Modal"  InvokeActionOnlyWhenWindowIsActive="False" />
         </l:InteractionMessageTrigger>
 
         <l:InteractionMessageTrigger MessageKey="Cardview" Messenger="{Binding Messenger}">

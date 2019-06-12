@@ -144,18 +144,26 @@ namespace LivetApp1.ViewModels
 
         public async void SendAsync()
         {
-            string  a = await this.User.ExistUser();
-
-            string process =await service.EditUserAsync(User);
-            if (process == "success")
+            string Error = InputCheck();
+            if (string.IsNullOrEmpty(Error))
             {
-                MessageBox.Show("データ更新に成功しました。", "情報");
-                Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+                string process = await service.EditUserAsync(User);
+                if (process == "success")
+                {
+                    MessageBox.Show("データ更新に成功しました。", "情報");
+                    Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+                }
+                else
+                {
+                    MessageBox.Show("データ更新に失敗しました。ユーザー名またはユーザーCDが重複しています。", "エラー");
+                }
             }
             else
             {
-                MessageBox.Show("データ更新に失敗しました。正しい値を入力してください", "エラー");
+                MessageBox.Show(Error);
             }
+
+          
         }
 
         
@@ -184,6 +192,37 @@ namespace LivetApp1.ViewModels
         {
             IRestService service = new RestService();
             this.Departments = await service.GetDepartmentsAsync();
+        }
+
+
+        private string InputCheck()
+        {
+            string error = "";
+            if (string.IsNullOrEmpty(User.CD))
+            {
+                error += "ユーザーCDを入力してください。\n";
+            }
+            if (string.IsNullOrEmpty(User.UserName))
+            {
+                error += "ユーザー名（ID）を入力してください。\n";
+            }
+            if (string.IsNullOrEmpty(User.Password))
+            {
+                error += "パスワードを入力してください。\n";
+            }
+            if (string.IsNullOrEmpty(User.Name))
+            {
+                error += "氏名を入力してください。\n";
+            }
+            if (string.IsNullOrEmpty(User.Hurigana))
+            {
+                error += "ふりがなを入力してください。\n";
+            }
+            if (User.Department == null)
+            {
+                error += "所属部署を選択してください。\n";
+            }
+            return error;
         }
 
     }

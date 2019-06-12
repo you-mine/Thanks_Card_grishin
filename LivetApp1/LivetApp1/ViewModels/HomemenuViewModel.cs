@@ -42,8 +42,11 @@ namespace LivetApp1.ViewModels
 
         public void Ranking()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.Ranking), new RankingViewModel(), TransitionMode.Modal, "Ranking");
             Messenger.Raise(message);
+            window.Show();
         }
 
 

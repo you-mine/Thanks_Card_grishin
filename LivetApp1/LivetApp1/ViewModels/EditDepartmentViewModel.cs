@@ -85,7 +85,7 @@ namespace LivetApp1.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show("データ更新に失敗しました。", "エラー！");
+                    MessageBox.Show("CDが重複している為データが更新できませんでした。", "エラー！");
                 }
             }
             else
