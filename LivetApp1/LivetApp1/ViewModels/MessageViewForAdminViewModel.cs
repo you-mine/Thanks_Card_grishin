@@ -101,7 +101,14 @@ namespace LivetApp1.ViewModels
         }
         #endregion
 
+        public MessageViewForAdminViewModel()
+        {
 
+        }
+        public MessageViewForAdminViewModel(ThanksCard thanksCard)
+        {
+            this.thanksCard = thanksCard;
+        }
 
         //public MessageViewViewModel(ThanksCard thanksCard)
         //{

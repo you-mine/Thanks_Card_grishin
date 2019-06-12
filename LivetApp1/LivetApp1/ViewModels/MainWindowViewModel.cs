@@ -69,8 +69,11 @@ namespace LivetApp1.ViewModels
                 SessionService session = SessionService.Instance;
                 session.IsAuthorized = true;
                 session.AuthorizedUser = Authrized;
+                var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+                window.Hide();
                 var message = new TransitionMessage(typeof(Views.Homemenu), new HomemenuViewModel(), TransitionMode.Modal, "Homemenu");
                 Messenger.Raise(message);
+                window.Show();
             }
             else
             {

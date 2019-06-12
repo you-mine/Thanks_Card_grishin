@@ -29,7 +29,7 @@
         </i:EventTrigger>
 
         <l:InteractionMessageTrigger MessageKey="Edit" Messenger="{Binding Messenger}">
-            <l:TransitionInteractionMessageAction/>
+            <l:TransitionInteractionMessageAction  Mode="Modal"  InvokeActionOnlyWhenWindowIsActive="False" />
         </l:InteractionMessageTrigger>
 
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">

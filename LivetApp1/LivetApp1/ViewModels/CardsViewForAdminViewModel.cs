@@ -96,6 +96,7 @@ namespace LivetApp1.ViewModels
 
         public void MessageViewForAdmin(ThanksCard parameter)
         {
+
             var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
             window.Hide();
             var message = new TransitionMessage(typeof(Views.MessageViewForAdmin), new MessageViewForAdminViewModel(parameter), TransitionMode.Modal, "MessageViewForAdmin");

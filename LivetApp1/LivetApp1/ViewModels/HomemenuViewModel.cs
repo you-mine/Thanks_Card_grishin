@@ -75,8 +75,11 @@ namespace LivetApp1.ViewModels
 
         public void Cardview()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.Cardview), new CardviewViewModel(), TransitionMode.Modal, "Cardview");
             Messenger.Raise(message);
+            window.Show();
             Initialize();
         }
 
@@ -108,8 +111,11 @@ namespace LivetApp1.ViewModels
             bool IsAdmin = Services.SessionService.Instance.AuthorizedUser.IsAdmin;
             if (IsAdmin)
             {
+                var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+                window.Hide();
                 var message = new TransitionMessage(typeof(Views.AdminMenu), new AdminMenuViewModel(), TransitionMode.Modal, "AdminMenu");
                 Messenger.Raise(message);
+                window.Show();
                 Initialize();
             }
             else
@@ -172,8 +178,11 @@ namespace LivetApp1.ViewModels
 
         public void CreateCrad()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.CreateCard), new CreateCardViewModel(), TransitionMode.Modal, "CreateCard");
             Messenger.Raise(message);
+            window.Show();
             Initialize();
         }
         #endregion
@@ -196,8 +205,11 @@ namespace LivetApp1.ViewModels
 
         public void CreateCard2()
         {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.CreateCard2), new CreateCard2ViewModel(), TransitionMode.Modal, "CreateCard2");
             Messenger.Raise(message);
+            window.Show();
             Initialize();
         }
 
