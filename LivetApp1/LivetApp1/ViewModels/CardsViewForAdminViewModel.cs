@@ -13,7 +13,7 @@ using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
 using LivetApp1.Services;
-
+using System.Windows;
 
 namespace LivetApp1.ViewModels
 {
@@ -96,8 +96,12 @@ namespace LivetApp1.ViewModels
 
         public void MessageViewForAdmin(ThanksCard parameter)
         {
+
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault((w) => w.IsActive);
+            window.Hide();
             var message = new TransitionMessage(typeof(Views.MessageViewForAdmin), new MessageViewForAdminViewModel(parameter), TransitionMode.Modal, "MessageViewForAdmin");
             Messenger.Raise(message);
+            window.Show();
         }
 
         public async void Initialize()

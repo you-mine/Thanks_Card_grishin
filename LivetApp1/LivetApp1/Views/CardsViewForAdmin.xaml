@@ -19,7 +19,7 @@
         </l:InteractionMessageTrigger>
 
         <l:InteractionMessageTrigger MessageKey="MessageViewForAdmin" Messenger="{Binding Messenger}">
-            <l:TransitionInteractionMessageAction/>
+            <l:TransitionInteractionMessageAction  Mode="Modal"  InvokeActionOnlyWhenWindowIsActive="False" />
         </l:InteractionMessageTrigger>
 
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
