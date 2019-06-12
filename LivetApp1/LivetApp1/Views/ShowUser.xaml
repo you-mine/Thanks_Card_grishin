@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="ShowUser" Height="385.526" Width="470" ResizeMode="NoResize">
+        Title="ユーザー情報一覧画面" Height="385.526" Width="470" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen">
     
     <Window.DataContext>
         <vm:ShowUserViewModel/>
@@ -47,7 +47,7 @@
     
 
     <Grid>
-        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39">
+        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,64">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="CD" Binding="{Binding CD}" />
                 <DataGridTextColumn IsReadOnly="True" Header="部" Binding="{Binding Department.DepartmentName}" />
@@ -69,7 +69,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                            <Button Content="編集" Command="{Binding DataContext.EditUserPutCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <Button VerticalAlignment="Center" Content="編集" Command="{Binding DataContext.EditUserPutCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -78,15 +78,15 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
-                            <Button Content="削除" Command="{Binding DataContext.DeleteUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <Button  VerticalAlignment="Center" Content="削除" Command="{Binding DataContext.DeleteUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="ユーザーの追加" HorizontalAlignment="Left" Margin="21,325,0,0" VerticalAlignment="Top" Width="86" Command="{Binding EditUserAddCommand}"/>
-        <Button Content="閉じる" HorizontalAlignment="Left" Margin="361,325,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="ユーザーの追加" HorizontalAlignment="Left" Margin="29,298,0,0" VerticalAlignment="Top" Width="136" Command="{Binding EditUserAddCommand}"/>
+        <Button Content="閉じる" HorizontalAlignment="Left" Margin="357,298,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
 
         <Grid.Background>
             <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>

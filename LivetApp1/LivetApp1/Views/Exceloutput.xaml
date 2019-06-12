@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="Exceloutput" Height="350" Width="525" ResizeMode="NoResize">
+        Title="Excel出力画面" Height="350" Width="525" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:ExceloutputViewModel/>
@@ -44,7 +44,7 @@
         <Label Content="期間" HorizontalAlignment="Left" Margin="80,44,0,0" VerticalAlignment="Top"/>
         <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="80,139,0,0" TextWrapping="Wrap" Text="{Binding SavePath}" VerticalAlignment="Top" Width="342"/>
         <Label Content="保存先" HorizontalAlignment="Left" Margin="80,113,0,0" VerticalAlignment="Top"/>
-        <Button Content="参照" HorizontalAlignment="Left" Margin="427,139,0,0" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding SelectSavePathCommand}"/>
+        <Button Content="参照" HorizontalAlignment="Left" Margin="427,139,0,0" VerticalAlignment="Top" Width="75" Height="32" Command="{Binding SelectSavePathCommand}"/>
         <Button FontSize="20" Content="報告書生成" HorizontalAlignment="Left" Margin="177,205,0,0" VerticalAlignment="Top" Width="162" Height="61" Command="{Binding ExecuteCommand}"  />
         <Button Content="閉じる" HorizontalAlignment="Left" Margin="422,266,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
 

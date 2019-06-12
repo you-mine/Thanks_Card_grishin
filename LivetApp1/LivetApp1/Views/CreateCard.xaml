@@ -6,13 +6,13 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="カード作成画面" Height="380" Width="745" ResizeMode="NoResize " Icon="../Resources/mm.jpg">
+        Title="カード作成画面" Height="380" Width="745" ResizeMode="NoResize " Icon="../Resources/mm.jpg"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:CreateCardViewModel/>
     </Window.DataContext>
 
-    
+
     <i:Interaction.Triggers>
 
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
@@ -41,23 +41,23 @@
     </i:Interaction.Triggers>
 
     <Canvas>
-        
-        <TextBox Height="20" TextWrapping="Wrap" Text="{Binding ThanksCard.Title}"  Width="167" Margin="86,42,486,289"/>
-        <TextBox AcceptsReturn="True" Height="140" Width="275" TextWrapping="Wrap" Text="{Binding ThanksCard.Body}" Canvas.Left="52" Canvas.Top="109"/>
-        <Label Content="本文"  Height="24" Margin="52,80,631,247"   Width="55" />
-        <Label Content="感謝カード作成"  Height="27"   Width="255" Background="Aqua" Canvas.Left="52" Canvas.Top="10"/>
-        <Button Content="閉じる"  Width="55" Margin="650,306,33,22" Click="Button_Click" Command="{Binding CloseCommand}"/>
-        <Button Content="送信"  Width="55" Margin="568,307,115,22" Command="{Binding SendCommand}" />
-        <Label Content="{Binding ThanksCard.From.Name}" Margin="76,270,486,0"  Height="24"/>
-        <Label Content="タイトル"  Height="24" Margin="32,38,658,289"   Width="49" />
-        <Label Content="From/"  Margin="37,270,647,50" />
-       
 
-        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,79"
-            Height="200" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="301" IsReadOnly="True">
-            
+        <TextBox Height="26" TextWrapping="Wrap" Text="{Binding ThanksCard.Title}"  Width="167" Canvas.Left="76" Canvas.Top="85"/>
+        <TextBox AcceptsReturn="True" Height="98" Width="275" TextWrapping="Wrap" Text="{Binding ThanksCard.Body}" Canvas.Left="52" Canvas.Top="151"/>
+        <Label Content="本文"  Height="24"   Width="55" Canvas.Left="52" Canvas.Top="125" />
+        <Label FontSize="18" Content="感謝カード作成"  Height="33"   Width="275" Background="Aqua" Canvas.Left="52" Canvas.Top="24"/>
+        <Button Content="閉じる"  Width="70" Click="Button_Click" Command="{Binding CloseCommand}" Canvas.Left="617" Canvas.Top="295"/>
+        <Button Content="送信"  Width="76" Command="{Binding SendCommand}" Canvas.Left="500" Canvas.Top="295" RenderTransformOrigin="0.289,0.531" />
+        <Label Content="{Binding ThanksCard.From.Name}" Margin="76,270,486,0"  Height="24"/>
+        <Label Content="タイトル"  Height="24"   Width="49" Canvas.Left="29" Canvas.Top="85" />
+        <Label Content="From/"  Margin="37,270,647,50" />
+
+
+        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False"
+           FontSize="15" Height="200" SelectionChanged="DataGrid_SelectionChanged" HorizontalAlignment="Left" Width="308" IsReadOnly="True" Canvas.Left="386" Canvas.Top="70">
+
             <DataGrid.Columns>
-                
+
 
                 <DataGridTextColumn Header="氏名" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="部署" Binding="{Binding Department.DepartmentName}" />
@@ -66,13 +66,13 @@
                 <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="選択" Command="{Binding DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                            <Button VerticalAlignment="Center" Content="選択" Command="{Binding DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="感謝カードを送る人を選択してください" Canvas.Left="386" Canvas.Top="42"/>
+        <Label FontSize="12" Content="感謝カードを送る人を選択してください" Canvas.Left="386" Canvas.Top="43" Height="27" Width="201"/>
 
         <Canvas.Background>
             <ImageBrush ImageSource="../Resources/_6529-19.jpg"/>
