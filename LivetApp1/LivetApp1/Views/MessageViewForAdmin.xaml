@@ -42,8 +42,8 @@
         <Label Content="本文：" Canvas.Left="42" Canvas.Top="118"/>
 
         <TextBox IsEnabled="False" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.From.Name}" Canvas.Top="38" Width="120"/>
-        <TextBox IsEnabled="True" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.To.Name}" Canvas.Top="64" Width="120"/>
-        <TextBox IsEnabled="True" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.Title}" Canvas.Top="90" Width="120"/>
+        <TextBox IsEnabled="False" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.To.Name}" Canvas.Top="64" Width="120"/>
+        <TextBox IsEnabled="False" Height="23" Canvas.Left="112" TextWrapping="Wrap" Text="{Binding thanksCard.Title}" Canvas.Top="90" Width="120"/>
         <TextBox IsEnabled="False" Height="128" Canvas.Left="42" TextWrapping="Wrap" Text="{Binding thanksCard.Body}" Canvas.Top="144" Width="443"/>
         <CheckBox Content="管理者チェック" Canvas.Left="441" Canvas.Top="420" IsChecked="{Binding thanksCard.IsReadedAdmin}" RenderTransformOrigin="4.114,5" />
         <Button Content="閉じる" Canvas.Left="225" Canvas.Top="405" Width="75" Command="{Binding CloseCommand}" RenderTransformOrigin="0.5,0.5"  >

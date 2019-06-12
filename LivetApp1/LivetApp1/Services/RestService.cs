@@ -52,7 +52,7 @@ namespace LivetApp1.Services
         #endregion
 
         #region カード作成
-        public async Task<ThanksCard> CreateCardAsync(ThanksCard thanksCard)
+        public async Task<string> CreateCardAsync(ThanksCard thanksCard)
         {
             var jObject = JsonConvert.SerializeObject(thanksCard);
 
@@ -60,16 +60,13 @@ namespace LivetApp1.Services
             var content = new StringContent(jObject);
             //Adding header of the contenttype
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            ThanksCard responseThanksCard = null;
             try
             {
                 var response = await Client.PostAsync(this.BaseUrl + "/api/ThanksCard", content);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    responseThanksCard = JsonConvert.DeserializeObject<ThanksCard>(responseContent);
+                    return "success";
                 }
             }
             catch (Exception e)
@@ -77,7 +74,7 @@ namespace LivetApp1.Services
                 // TODO
                 System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
             }
-            return responseThanksCard;
+            return "fail";
         }
         #endregion
 
@@ -262,6 +259,31 @@ namespace LivetApp1.Services
             return "failed";
         }
         #endregion
+
+        #region ユーザーネーム重複確認
+        public async Task<string> UserNameExist(string UserName)
+        {
+            string Exist = "";
+            try
+            {
+                var response = await Client.GetAsync(this.BaseUrl + "/api/UserNameExists/"+UserName);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    Exist = JsonConvert.DeserializeObject<string>(responseContent);
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO
+                System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
+            }
+
+            return Exist;
+        }
+        #endregion
+
 
         #region ランキング取得
         public async Task<List<Ranking>> GetRankings()

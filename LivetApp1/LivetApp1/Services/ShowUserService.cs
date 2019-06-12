@@ -23,10 +23,6 @@ namespace LivetApp1.Services
 
         public async Task<List<User>> ShowUserAsync()
         {
-            //POSTで送るもののJson変換と思われるため、触らない。
-            //var jObject = JsonConvert.SerializeObject(user);
-
-            //ResponseがListでこないかなーっていうクソみたいな希望
             List<User> responseUser = null;
             try
             {
@@ -43,7 +39,7 @@ namespace LivetApp1.Services
                 // TODO
                 System.Diagnostics.Debug.WriteLine("Exception in RestService.LogonAsync: " + e);
             }
-            return responseUser;
+            return responseUser.Where(x => x.Id != SessionService.Instance.AuthorizedUser.Id).ToList();
         }
     }
 }

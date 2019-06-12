@@ -13,6 +13,7 @@ using Livet.Messaging.Windows;
 
 using LivetApp1.Models;
 using LivetApp1.Services;
+using System.Windows;
 
 namespace LivetApp1.ViewModels
 {
@@ -104,7 +105,7 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-          #region SelectCommand
+        #region SelectCommand
         private ListenerCommand<User> _SelectCommand;
 
         public ListenerCommand<User> SelectCommand
@@ -126,7 +127,6 @@ namespace LivetApp1.ViewModels
 
 
         #endregion
-
 
         #region Help1
 
@@ -181,26 +181,37 @@ namespace LivetApp1.ViewModels
             }
         }
 
-
-        
-       
-
-
         public async void SendAsync()
         {
-            ThanksCard.ThanksCount = 1;
-           // ThanksCard.Body =
-            ThanksCard.FromId = ThanksCard.From.Id;
-            ThanksCard.ToId = ThanksCard.To.Id;
-            ThanksCard.PostDate = DateTime.Now.Date;
-            ThanksCard.From = null;
-            ThanksCard.To = null;
-            var PostedThanksCard = await this.ThanksCard.CreateCard2Async();
-            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
+            string error = Inputcheck();
+            if (string.IsNullOrEmpty(error))
+            {
+                ThanksCard.ThanksCount = 1;
+                ThanksCard.Body = Message1 + "で" + Message2 + "の" + Message3 + "をしてくれてありがとうございました。";
+                ThanksCard.FromId = ThanksCard.From.Id;
+                ThanksCard.ToId = ThanksCard.To.Id;
+                ThanksCard.PostDate = DateTime.Now.Date;
+                ThanksCard.From = null;
+                ThanksCard.To = null;
+                var result = await this.ThanksCard.CreateCard();
+                if(result == "success")
+                {
+                    MessageBox.Show("感謝カードを送信しました。");
+                }
+                else
+                {
+                    MessageBox.Show("感謝カードの送信に失敗しました。");
+                }
+                Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
+            }
+            else
+            {
+                MessageBox.Show(error, "エラー");
+            }
+
         }
 
         #endregion
-
 
         #region ThanksCard
         private ThanksCard _ThanksCard;
@@ -324,6 +335,41 @@ namespace LivetApp1.ViewModels
             this.Help2 = await servise.Get();
             servise = new PlaceContentService();
             this.Place = await servise.Get();
+        }
+        
+        private string Inputcheck()
+        {
+            string error = "";
+                if (string.IsNullOrEmpty(ThanksCard.Title))
+                {
+                    error += "タイトルを入力してください\n";
+                }
+                else if (ThanksCard.Title.Length > 20)
+                {
+                    error += "タイトルが長すぎます。20文字以内で入力してください。\n";
+                }
+
+            if (string.IsNullOrEmpty(Message1))
+            {
+                error += "場所を入力してください\n";
+            }
+
+            if (string.IsNullOrEmpty(Message2))
+            {
+                error += "内容1を入力してください\n";
+            }
+
+            if (string.IsNullOrEmpty(Message3))
+            {
+                error += "内容2を入力してください\n";
+            }
+
+            if(ThanksCard.To == null)
+            {
+                error += "宛先を選択してください\n";
+            }
+
+            return error;
         }
     }
 }

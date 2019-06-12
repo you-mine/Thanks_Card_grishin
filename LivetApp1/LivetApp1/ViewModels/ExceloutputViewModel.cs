@@ -105,11 +105,6 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-
-
-
-
-
         #region SelectSavePathCommand
 
         private ViewModelCommand _SelectSavePathCommand;
@@ -155,17 +150,29 @@ namespace LivetApp1.ViewModels
 
         public async void Execute()
         {
-            ThanksCards = await service.GetCardsForReport(this.Term);
-            if (ThanksCards != null)
+            string error = InputCheck();
+            if (string.IsNullOrEmpty(error))
             {
-                IXLWorkbook book = new XLWorkbook();
-                MakeReport(book);
-                book.SaveAs(SavePath);
-                
+                ThanksCards = await service.GetCardsForReport(this.Term);
+                if (ThanksCards.Count != 0)
+                {
+                    IXLWorkbook book = new XLWorkbook();
+                    MakeReport(book);
+                    try { book.SaveAs(SavePath);
+                        MessageBox.Show("報告書の出力が完了しました。");
+                        SavePath = "";
+                        }
+                    catch { MessageBox.Show("保存に失敗しました。保存先のファイルを閉じてください"); }
+
+                }
+                else
+                {
+                    MessageBox.Show("選択された範囲内に代表事例はありませんでした。", "情報");
+                }
             }
             else
             {
-                MessageBox.Show("選択された範囲内に代表事例はありませんでした。", "情報");
+                MessageBox.Show(error);
             }
         }
 
@@ -177,11 +184,12 @@ namespace LivetApp1.ViewModels
             int Contentcounter = 0;
             int CellIndex = 4;
             IXLWorksheet sheet = book.AddWorksheet("Index");
-            sheet.Range("B2", "C2").Merge().SetValue("感謝カード代表事例一覧（" + Term.Term1.Date + "～" + Term.Term2.Date + ")")
+            sheet.Range("B2", "C2").Merge().SetValue("感謝カード代表事例一覧（" + Term.Term1.ToShortDateString() + "～" + Term.Term2.ToShortDateString() + ")")
                 .Style
                 .Border.SetOutsideBorder(XLBorderStyleValues.Thin);
 
             sheet.Column("C").Width = 32.75;
+            sheet.Column("B").Width = 18;
 
             sheet.Cell("B4").SetValue("項目番号").Style
                 .Border.SetOutsideBorder(XLBorderStyleValues.Thick);
@@ -217,11 +225,12 @@ namespace LivetApp1.ViewModels
                 .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
                 .Fill.SetBackgroundColor(XLColor.LightSteelBlue);
 
-            wt.Range("C3", "H3").Merge().SetValue("感謝カード" + wt.Name + "（" + Term.Term1.Date + "～" + Term.Term2.Date + ")")
-                .Style
+            wt.Range("C3", "H3").Merge().Style
                 .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
                 .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
                 .Fill.SetBackgroundColor(XLColor.LightSlateGray);
+
+            wt.Cell("C3").SetValue("感謝カード" + wt.Name + "（" + Term.Term1.ToShortDateString() + "～" + Term.Term2.ToShortDateString() + ")");
 
             wt.Range("E5", "G5").Merge().SetValue(t.From.Name)
                 .Style
@@ -236,10 +245,17 @@ namespace LivetApp1.ViewModels
                 .Fill.SetBackgroundColor(XLColor.Lavender)
                 .Border.SetOutsideBorder(XLBorderStyleValues.Thin);
 
-            wt.Range("C12", "H20").Merge().SetValue(t.Body).Style
-                .Fill.SetBackgroundColor(XLColor.Lavender)
-                .Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+            wt.Cell("C12").SetValue(t.Body).Style
+                .Alignment.SetVertical(XLAlignmentVerticalValues.Top)
+                .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
 
+            wt.Range("C12", "H20").Merge().Style
+                .Fill.SetBackgroundColor(XLColor.Lavender)
+                .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
+                .Alignment.SetWrapText(true);
+
+            
+            
             wt.Cell("D5").SetValue("From").Style
                 .Border.SetOutsideBorder(XLBorderStyleValues.Thin)
                 .Fill.SetBackgroundColor(XLColor.LightSlateGray);
@@ -254,6 +270,16 @@ namespace LivetApp1.ViewModels
 
             wt.Cell("C11").SetValue("本文");
 
+        }
+
+        private string InputCheck()
+        {
+            string error = "";
+            if (string.IsNullOrEmpty(SavePath))
+            {
+                error += "保存先を選択してください\n";
+            }
+            return error;
         }
 
         public void Initialize()

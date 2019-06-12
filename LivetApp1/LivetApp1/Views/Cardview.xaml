@@ -6,13 +6,14 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="Cardview" Height="350" Width="525" Icon="../Resources/_yotsuba-clover-01-02-02.png">
+        Title="Cardview" Height="350" Width="858.5" Icon="../Resources/_yotsuba-clover-01-02-02.png">
 
     <Window.DataContext>
         <vm:CardviewViewModel/>
     </Window.DataContext>
 
-    <i:Interaction.Triggers>             <!--ここ！ここ！ここ！ここ！-->
+    <i:Interaction.Triggers>
+        <!--ここ！ここ！ここ！ここ！-->
         <l:InteractionMessageTrigger MessageKey="MessageView" Messenger="{Binding Messenger}">
             <l:TransitionInteractionMessageAction/>
         </l:InteractionMessageTrigger>
@@ -20,7 +21,7 @@
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
             <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
-        
+
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
         <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
         <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
@@ -41,17 +42,18 @@
 
     <Grid>
 
+
         <Grid.Background>
             <ImageBrush ImageSource="../Resources/11happa_green_honbun.jpg"/>
         </Grid.Background>
-
-        <DataGrid ItemsSource="{Binding thanksCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39" >
+       
+        <DataGrid ItemsSource="{Binding thanksCards}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,39" Grid.ColumnSpan="2" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}"  IsReadOnly = "True"/>
                 <DataGridTextColumn Header="From" Binding="{Binding From.Name}"  IsReadOnly = "True"/>
                 <DataGridTextColumn Header="カードID" Binding="{Binding Id}"  IsReadOnly = "True" />
                 <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  IsReadOnly = "True" />
-                <DataGridTextColumn Header="本文" Binding="{Binding Body}"   IsReadOnly = "True"/>
+                <DataGridTextColumn Width="400" Header="本文" Binding="{Binding Body}"   IsReadOnly = "True"/>
                 <DataGridTemplateColumn Header="既読">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -60,22 +62,23 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
                 <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->        <!--ここに選択ボタンが押されたらcommandで
+                            <!-- CommandParameter に {Binding} とだけ記述すると、UserMstViewModel.Users の要素、つまり User モデルを指定したことになる。-->
+                            <!--ここに選択ボタンが押されたらcommandで
                             　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　MessageViewに遷移するようにする？-->
                             <Button Content="選択" Command="{Binding DataContext.MessageViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-               
+
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="閉じる" HorizontalAlignment="Left" Margin="431,285,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="閉じる" Margin="375,289,375,0" VerticalAlignment="Top" Command="{Binding CloseCommand}"/>
 
-        
-        
+
+
     </Grid>
 </Window>

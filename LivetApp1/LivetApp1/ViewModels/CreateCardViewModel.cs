@@ -132,8 +132,12 @@ namespace LivetApp1.ViewModels
                 ThanksCard.PostDate = DateTime.Now.Date;
                 ThanksCard.From = null;
                 ThanksCard.To = null;
-                var PostedThanksCard = await this.ThanksCard.CreateCard2Async();
-                MessageBox.Show("カードを送信しました");
+                var result = await this.ThanksCard.CreateCard();
+                if(result == "success")
+                {
+                    MessageBox.Show("感謝カードを送信しました");
+                }
+                
                 Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Authorized"));
             }
             else
