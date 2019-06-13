@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="ユーザー情報一覧画面" Height="385.526" Width="470" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen">
+        Title="ユーザー情報一覧画面" Height="385.526" Width="858.5" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen">
     
     <Window.DataContext>
         <vm:ShowUserViewModel/>

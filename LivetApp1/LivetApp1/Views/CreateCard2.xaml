@@ -63,7 +63,7 @@
 
         <Label Content="{Binding ThanksCard.From.Name}"  Margin="80,259,571,62" Background="{x:Null}"/>
         <Label Content="をしてくれてありがとうございました。" HorizontalAlignment="Left" Margin="132,219,0,0" VerticalAlignment="Top" Width="167"/>
-        <DataGrid IsReadOnly="True"  ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="386,62,0,80"  HorizontalAlignment="Left" Width="301" SelectionChanged="DataGrid_SelectionChanged">
+        <DataGrid IsReadOnly="True" FontSize="15"  ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="368,62,0,80"   HorizontalAlignment="Left" Width="319" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="氏名" Binding="{Binding Name}" />
@@ -86,6 +86,7 @@
         <Button Content="送信" HorizontalAlignment="Left" Margin="515,294,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding SendCommand}" RenderTransformOrigin="0.6,0.219" Click="Button_Click_1"/>
         <Label Content="で" HorizontalAlignment="Left" Margin="211,127,0,0" VerticalAlignment="Top" Width="27"/>
         <Label Content="の" HorizontalAlignment="Left" Margin="211,174,0,0" VerticalAlignment="Top" Width="32"/>
+        <Label FontSize="12" Content="感謝カードを送る人を選択してください" Margin="389,35,157,287"/>
 
 
 
