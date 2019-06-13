@@ -119,6 +119,14 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
+                        <DataGridTemplateColumn Header="既読">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsReaded}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
@@ -129,6 +137,15 @@
                         <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
                         <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
                         <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+
+                        <DataGridTemplateColumn Header="既読">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsReaded}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
