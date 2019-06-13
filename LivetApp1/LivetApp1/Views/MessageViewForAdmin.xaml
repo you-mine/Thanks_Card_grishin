@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:LivetApp1.Views"
         xmlns:vm="clr-namespace:LivetApp1.ViewModels"
-        Title="メッセージ詳細（管理者向け）" Height="492" Width="555"  WindowStartupLocation="CenterScreen">
+        Title="メッセージ詳細（管理者向け）" ResizeMode="NoResize "  Height="492" Width="555"  WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:MessageViewForAdminViewModel/>

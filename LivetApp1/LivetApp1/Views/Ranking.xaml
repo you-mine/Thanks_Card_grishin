@@ -38,7 +38,7 @@
     
 
     <Grid>
-        <DataGrid IsEnabled="False" ItemsSource="{Binding Ranking}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="260" Margin="56,19,0,0" VerticalAlignment="Top" Width="173">
+        <DataGrid IsEnabled="False" ItemsSource="{Binding Ranking}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="255" Margin="38,24,0,0" VerticalAlignment="Top" Width="214">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="順位" Binding="{Binding Rank}" />
                 <DataGridTextColumn Header="名前" Binding="{Binding Name}" />
