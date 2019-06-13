@@ -206,6 +206,32 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
+        #region ChangeCommand
+
+        private ViewModelCommand _ChangeCommand;
+
+        public ViewModelCommand ChangeCommand
+        {
+            get
+            {
+                if (_ChangeCommand == null)
+                {
+                    _ChangeCommand = new ViewModelCommand(Change);
+                }
+                return _ChangeCommand;
+            }
+        }
+
+        public void Change()
+        {
+            var message = new TransitionMessage(typeof(Views.ChangePassword), new ChangePasswordViewModel(), TransitionMode.Modal, "Change");
+            Messenger.Raise(message);
+        }
+
+
+
+        #endregion
+
         #region Cardsプロパティ
 
         private List<ThanksCard> _Cards;
@@ -221,6 +247,31 @@ namespace LivetApp1.ViewModels
                 _Cards = value;
                 RaisePropertyChanged();
             }
+        }
+
+        #endregion
+
+        #region MessageView
+        private ListenerCommand<ThanksCard> _MessageViewCommand;
+
+        public ListenerCommand<ThanksCard> MessageViewCommand
+        {
+            get
+            {
+                if (_MessageViewCommand == null)
+                {
+                    _MessageViewCommand = new ListenerCommand<ThanksCard>(MessageView);
+                }
+                return _MessageViewCommand;
+            }
+        }
+
+        public void MessageView(ThanksCard parameter)
+        {
+
+            var message = new TransitionMessage(typeof(Views.MessageView), new MessageViewViewModel(parameter), TransitionMode.Modal, "MessageView");
+            Messenger.Raise(message);
+            Initialize();
         }
 
         #endregion
@@ -282,7 +333,7 @@ namespace LivetApp1.ViewModels
 
         #endregion
 
-
+        #region 一番の感謝度
         private ViewModelCommand _MostthanksCommand;
 
         public ViewModelCommand MostthanksCommand
@@ -320,6 +371,8 @@ namespace LivetApp1.ViewModels
 
         }
 
+        #endregion
+
 
 
 
@@ -334,7 +387,7 @@ namespace LivetApp1.ViewModels
 
             To = Cards.Where(x => x.ToId == AuthorizedUser.Id).ToList();
             
-            RepresentativeCards = Cards.Where(x => x.IsRepresentative == true).ToList();
+            RepresentativeCards = Cards.Where(x => x.IsRepresentative == true && (x.PostDate > DateTime.Now.AddDays(-DateTime.Now.Day + 1).Date && x.PostDate < DateTime.Now.AddMonths(1).AddDays(-DateTime.Now.Day).Date)).ToList();
 
         }
     }

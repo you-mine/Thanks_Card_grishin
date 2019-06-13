@@ -34,10 +34,17 @@
             <l:TransitionInteractionMessageAction  Mode="Modal"  InvokeActionOnlyWhenWindowIsActive="False" />
         </l:InteractionMessageTrigger>
 
+        <l:InteractionMessageTrigger MessageKey="Change" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction  Mode="Modal"  InvokeActionOnlyWhenWindowIsActive="False" />
+        </l:InteractionMessageTrigger>
+
         <l:InteractionMessageTrigger MessageKey="Logout" Messenger="{Binding Messenger}">
             <l:WindowInteractionMessageAction/>
         </l:InteractionMessageTrigger>
 
+        <l:InteractionMessageTrigger MessageKey="MessageView" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction />
+        </l:InteractionMessageTrigger>
 
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
         <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
@@ -71,6 +78,7 @@
         <Button Content="管理者向けメニュー" HorizontalAlignment="Left" Margin="36,282,0,0" VerticalAlignment="Top" Width="145"  Command="{Binding AdminMenuCommand}" Height="32"/>
         <Button Content="ログアウト" HorizontalAlignment="Left" Margin="57,335,0,0" VerticalAlignment="Top" Width="96" Command="{Binding LogoutCommand }" Height="29" RenderTransformOrigin="0.552,1.36"/>
         <Button Content="あなたを最も感謝しているユーザー" HorizontalAlignment="Left" Margin="0,382,0,0" VerticalAlignment="Top" Width="231" Command="{Binding MostthanksCommand }" Height="29" RenderTransformOrigin="0.552,1.36"/>
+        <Button Content="パスワードの変更" HorizontalAlignment="Left" Margin="57,574,0,0" VerticalAlignment="Top" Width="130" Command="{Binding ChangeCommand}" Height="29" RenderTransformOrigin="0.552,1.36"/>
 
 
         <Label FontSize="23" Background="Honeydew" Content="今月の代表事例" HorizontalAlignment="Left" Margin="210,16,0,0" VerticalAlignment="Top" Height="46" Width="176"/>
@@ -80,6 +88,15 @@
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
                 <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
                 <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  VerticalAlignment="Center" Content="選択" Command="{Binding DataContext.MessageViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
             </DataGrid.Columns>
         </DataGrid>
 
@@ -93,6 +110,15 @@
                         <DataGridTextColumn Header="From" Binding="{Binding From.Name}" />
                         <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
                         <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+
+                        <DataGridTemplateColumn Header="">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button  VerticalAlignment="Center" Content="選択" Command="{Binding DataContext.MessageViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
@@ -115,10 +141,19 @@
                 <DataGridTextColumn Header="To" Binding="{Binding To.Name}" />
                 <DataGridTextColumn Header="タイトル" Binding="{Binding Title}"  />
                 <DataGridTextColumn Header="本文" Binding="{Binding Body}"  />
+
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  VerticalAlignment="Center" Content="選択" Command="{Binding DataContext.MessageViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
+            
         </DataGrid>
 
         <Image Source="../Resources/bird2_R.png1.png" Margin="55,369,786,23"/>
-
+        
     </Grid>
 </Window>

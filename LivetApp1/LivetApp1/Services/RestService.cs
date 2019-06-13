@@ -106,6 +106,8 @@ namespace LivetApp1.Services
         #region カード更新
         public async Task<ThanksCard> PutCard(ThanksCard thanksCard)
         {
+            User To = thanksCard.To;
+            User From = thanksCard.From;
             thanksCard.ToId = thanksCard.To.Id;
             thanksCard.FromId = thanksCard.From.Id;
             thanksCard.To = null;
@@ -132,6 +134,8 @@ namespace LivetApp1.Services
             {
                 System.Diagnostics.Debug.WriteLine("Exception in RestService.PutUserAsync: " + e);
             }
+            thanksCard.To = To;
+            thanksCard.From = From;
             return responseThanksCard;
         }
         #endregion
